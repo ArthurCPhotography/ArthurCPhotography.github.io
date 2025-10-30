@@ -57,6 +57,26 @@
     .lightbox:target {
       display: flex;
     }
+    /* Section À propos / Contact */
+    #about {
+      padding: 60px 20px;
+      background-color: #1a1a1a;
+      text-align: center;
+    }
+    #about h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    #about p {
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      color: #ccc;
+      font-size: 1.1em;
+    }
+    #about a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
     footer {
       background: #000;
       color: #777;
@@ -72,6 +92,7 @@
     <p>Photographe — Nature, Voyage & Urbain</p>
   </header>
 
+  <!-- Galerie photo -->
   <section class="gallery">
     <a href="#img1"><img src="Photo1.jpg" alt="Photo 1"></a>
     <a href="#img2"><img src="Photo2.jpg" alt="Photo 2"></a>
@@ -84,6 +105,20 @@
   <div id="img2" class="lightbox"><a href="#"><img src="Photo2.jpg" alt="Photo 2"></a></div>
   <div id="img3" class="lightbox"><a href="#"><img src="Photo3.jpg" alt="Photo 3"></a></div>
   <div id="img4" class="lightbox"><a href="#"><img src="Photo4.jpg" alt="Photo 4"></a></div>
+
+  <!-- Section À propos / Contact -->
+  <section id="about">
+    <h2>À propos de moi</h2>
+    <p>
+      Je suis Arthur C, photographe passionné par la nature, le voyage et l’urbain.
+      Je capture des moments uniques et partage ma vision à travers mes images.
+    </p>
+
+    <h2>Contact</h2>
+    <p>Vous pouvez me contacter via email ou sur mes réseaux sociaux :</p>
+    <p>📧 <a href="mailto:tonemail@example.com">tonemail@example.com</a></p>
+    <p>📸 <a href="https://www.instagram.com/ArthurCPhotography" target="_blank">Instagram</a></p>
+  </section>
 
   <footer>
     © 2025 Arthur C Photography — Tous droits réservés
