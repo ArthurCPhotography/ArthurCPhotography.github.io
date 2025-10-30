@@ -39,12 +39,12 @@ header {
 h1 { font-size: 2.5em; margin: 0; }
 p { color: #555; font-size: 1.1em; }
 
-/* --- Galerie pêle-mêle --- */
+/* --- Galerie verticale --- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 25px;
-  padding: 40px 60px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  padding: 40px 80px;
   position: relative;
 }
 .photo {
@@ -52,7 +52,7 @@ p { color: #555; font-size: 1.1em; }
   overflow: hidden;
   border-radius: 14px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-  transform: translateY(40px);
+  transform: translateY(50px);
   opacity: 0;
   transition: transform 0.8s ease, opacity 0.8s ease, box-shadow 0.3s;
 }
@@ -75,19 +75,20 @@ p { color: #555; font-size: 1.1em; }
   transform: scale(1.05);
 }
 
-/* --- Décalages créatifs --- */
-.photo:nth-child(2n) { transform: translateY(60px); }
-.photo:nth-child(3n) { transform: translateY(-40px); }
-.photo:nth-child(5n) { transform: translateX(25px); }
-.photo:nth-child(7n) { transform: translateX(-25px); }
+/* --- Décalages verticaux légers --- */
+.photo:nth-child(2n) { margin-top: 60px; }
+.photo:nth-child(3n) { margin-top: -30px; }
+.photo:nth-child(5n) { margin-left: 40px; }
+.photo:nth-child(7n) { margin-right: 40px; }
 
 /* --- Responsive --- */
-@media (max-width: 800px) {
+@media (max-width: 900px) {
   .gallery {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     padding: 30px;
+    gap: 30px;
   }
-  .photo:nth-child(n) { transform: none !important; }
+  .photo:nth-child(n) { margin: 0 !important; }
 }
 
 /* --- Pied de page --- */
@@ -120,8 +121,6 @@ footer {
   <div class="photo"><img src="images/animaux/Photo1.jpg" alt="Animaux 1"></div>
   <div class="photo"><img src="images/paysage/Photo2.jpg" alt="Paysage 2"></div>
   <div class="photo"><img src="images/urbain/Photo2.jpg" alt="Urbain 2"></div>
-  <div class="photo"><img src="images/portrait/Photo2.jpg" alt="Portrait 2"></div>
-  <div class="photo"><img src="images/animaux/Photo2.jpg" alt="Animaux 2"></div>
 </section>
 
 <footer>
