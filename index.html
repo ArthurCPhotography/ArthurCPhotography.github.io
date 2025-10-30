@@ -12,8 +12,33 @@
       color: white;
       text-align: center;
     }
+
+    /* Menu fixe */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #000;
+      display: flex;
+      justify-content: center;
+      padding: 15px 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #1e90ff;
+    }
+
     header {
-      padding: 60px 20px;
+      padding: 100px 20px 60px; /* marge pour le menu fixe */
     }
     h1 {
       font-size: 2.5em;
@@ -23,6 +48,7 @@
       color: #aaa;
       font-size: 1.2em;
     }
+
     .gallery {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -38,6 +64,7 @@
     .gallery img:hover {
       transform: scale(1.05);
     }
+
     /* Lightbox overlay */
     .lightbox {
       position: fixed;
@@ -57,6 +84,7 @@
     .lightbox:target {
       display: flex;
     }
+
     /* Section À propos / Contact */
     #about {
       padding: 60px 20px;
@@ -77,15 +105,32 @@
       color: #1e90ff;
       text-decoration: none;
     }
+
     footer {
       background: #000;
       color: #777;
       padding: 15px;
       font-size: 0.9em;
     }
+
+    /* Espacement pour le menu fixe */
+    section, .gallery {
+      margin-top: 20px;
+    }
+
+    /* Scroll smooth */
+    html {
+      scroll-behavior: smooth;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Menu fixe -->
+  <nav>
+    <a href="#gallery">Galerie</a>
+    <a href="#about">À propos / Contact</a>
+  </nav>
 
   <header>
     <h1>Arthur C Photography</h1>
@@ -93,7 +138,7 @@
   </header>
 
   <!-- Galerie photo -->
-  <section class="gallery">
+  <section id="gallery" class="gallery">
     <a href="#img1"><img src="Photo1.jpg" alt="Photo 1"></a>
     <a href="#img2"><img src="Photo2.jpg" alt="Photo 2"></a>
     <a href="#img3"><img src="Photo3.jpg" alt="Photo 3"></a>
