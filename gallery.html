@@ -10,42 +10,61 @@ body {
   font-family:'Poppins',sans-serif;
   background:#fff;
   color:#222;
-  text-align:center;
 }
 nav {
   position:fixed; top:0; left:0; width:100%;
   background:#f8f8f8; display:flex; justify-content:center;
-  padding:15px 0; box-shadow:0 2px 10px rgba(0,0,0,0.1); z-index:1000;
+  padding:15px 0; box-shadow:0 2px 10px rgba(0,0,0,0.1);
+  z-index:1000;
 }
-nav a { color:#222; text-decoration:none; margin:0 20px; font-weight:bold; transition: color 0.3s; }
+nav a {
+  color:#222; text-decoration:none; margin:0 20px; font-weight:bold;
+  transition:color 0.3s;
+}
 nav a:hover { color:#1e90ff; }
 
-header { padding:120px 20px 60px; }
+header {
+  padding:120px 20px 40px;
+  text-align:center;
+}
 h1 { font-size:2.5em; margin:0; }
-p { font-size:1.2em; color:#555; }
+p { font-size:1.1em; color:#555; }
 
-.theme-grid {
+/* --- Sections catégories --- */
+.category {
+  margin:60px 20px;
+}
+.category h2 {
+  font-size:1.8em;
+  margin-bottom:20px;
+  border-left: 4px solid #1e90ff;
+  padding-left:10px;
+}
+.category-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
   gap:20px;
-  padding:20px;
 }
-
-.theme-card {
+.category-grid img {
+  width:100%;
   border-radius:12px;
-  overflow:hidden;
   box-shadow:0 4px 15px rgba(0,0,0,0.1);
-  cursor:pointer;
   transition: transform 0.3s, box-shadow 0.3s;
-  text-decoration:none;
-  color:#222;
+  cursor:pointer;
 }
-.theme-card:hover { transform:scale(1.03); box-shadow:0 6px 20px rgba(0,0,0,0.15); }
-.theme-card img { width:100%; display:block; }
-.theme-card h3 { margin:10px 0; font-size:1.2em; }
+.category-grid img:hover {
+  transform: scale(1.03);
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+}
 
-footer { background:#f0f0f0; color:#777; padding:20px; font-size:0.9em; }
-html { scroll-behavior: smooth; }
+/* --- Footer --- */
+footer {
+  background:#f0f0f0;
+  color:#777;
+  padding:20px;
+  font-size:0.9em;
+  text-align:center;
+}
 </style>
 </head>
 <body>
@@ -57,27 +76,48 @@ html { scroll-behavior: smooth; }
 </nav>
 
 <header>
-  <h1>Galerie par thème</h1>
-  <p>Cliquez sur un thème pour voir toutes les photos</p>
+  <h1>Galerie</h1>
+  <p>Découvrez mes différents thèmes photographiques</p>
 </header>
 
-<section class="theme-grid">
-  <a href="gallery/paysage.html" class="theme-card">
-    <img src="images/paysage/Photo1.jpg" alt="Paysage">
-    <h3>Paysage</h3>
-  </a>
-  <a href="gallery/urbain.html" class="theme-card">
-    <img src="images/urbain/Photo1.jpg" alt="Urbain">
-    <h3>Urbain</h3>
-  </a>
-  <a href="gallery/portrait.html" class="theme-card">
-    <img src="images/portrait/Photo1.jpg" alt="Portrait">
-    <h3>Portrait</h3>
-  </a>
-  <a href="gallery/animaux.html" class="theme-card">
-    <img src="images/animaux/Photo1.jpg" alt="Animaux">
-    <h3>Animaux</h3>
-  </a>
+<!-- --- Catégorie Paysage --- -->
+<section class="category">
+  <h2>Paysage</h2>
+  <div class="category-grid">
+    <a href="gallery/paysage.html"><img src="images/paysage/Photo1.jpg" alt="Paysage 1"></a>
+    <a href="gallery/paysage.html"><img src="images/paysage/Photo2.jpg" alt="Paysage 2"></a>
+    <a href="gallery/paysage.html"><img src="images/paysage/Photo3.jpg" alt="Paysage 3"></a>
+  </div>
+</section>
+
+<!-- --- Catégorie Urbain --- -->
+<section class="category">
+  <h2>Urbain</h2>
+  <div class="category-grid">
+    <a href="gallery/urbain.html"><img src="images/urbain/Photo1.jpg" alt="Urbain 1"></a>
+    <a href="gallery/urbain.html"><img src="images/urbain/Photo2.jpg" alt="Urbain 2"></a>
+    <a href="gallery/urbain.html"><img src="images/urbain/Photo3.jpg" alt="Urbain 3"></a>
+  </div>
+</section>
+
+<!-- --- Catégorie Portrait --- -->
+<section class="category">
+  <h2>Portrait</h2>
+  <div class="category-grid">
+    <a href="gallery/portrait.html"><img src="images/portrait/Photo1.jpg" alt="Portrait 1"></a>
+    <a href="gallery/portrait.html"><img src="images/portrait/Photo2.jpg" alt="Portrait 2"></a>
+    <a href="gallery/portrait.html"><img src="images/portrait/Photo3.jpg" alt="Portrait 3"></a>
+  </div>
+</section>
+
+<!-- --- Catégorie Animaux --- -->
+<section class="category">
+  <h2>Animaux</h2>
+  <div class="category-grid">
+    <a href="gallery/animaux.html"><img src="images/animaux/Photo1.jpg" alt="Animaux 1"></a>
+    <a href="gallery/animaux.html"><img src="images/animaux/Photo2.jpg" alt="Animaux 2"></a>
+    <a href="gallery/animaux.html"><img src="images/animaux/Photo3.jpg" alt="Animaux 3"></a>
+  </div>
 </section>
 
 <footer>
