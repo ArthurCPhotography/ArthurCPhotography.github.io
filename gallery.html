@@ -30,29 +30,27 @@ header {
 h1 { font-size:2.5em; margin:0; }
 p { font-size:1.1em; color:#555; }
 
-/* --- Sections catégories --- */
+/* --- Catégories --- */
 .category {
   margin:60px 20px;
+  text-align: center;
 }
 .category h2 {
   font-size:1.8em;
   margin-bottom:20px;
-  border-left: 4px solid #1e90ff;
+  border-left: 4px solid #aaa; /* bande grise */
   padding-left:10px;
+  display:inline-block;
 }
-.category-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-}
-.category-grid img {
-  width:100%;
+.category img {
+  width:60%;
+  max-width:400px;
   border-radius:12px;
   box-shadow:0 4px 15px rgba(0,0,0,0.1);
   transition: transform 0.3s, box-shadow 0.3s;
   cursor:pointer;
 }
-.category-grid img:hover {
+.category img:hover {
   transform: scale(1.03);
   box-shadow:0 6px 20px rgba(0,0,0,0.15);
 }
@@ -83,41 +81,25 @@ footer {
 <!-- --- Catégorie Paysage --- -->
 <section class="category">
   <h2>Paysage</h2>
-  <div class="category-grid">
-    <a href="gallery/paysage.html"><img src="images/paysage/Photo1.jpg" alt="Paysage 1"></a>
-    <a href="gallery/paysage.html"><img src="images/paysage/Photo2.jpg" alt="Paysage 2"></a>
-    <a href="gallery/paysage.html"><img src="images/paysage/Photo3.jpg" alt="Paysage 3"></a>
-  </div>
+  <a href="gallery/paysage.html"><img src="images/paysage/Photo1.jpg" alt="Paysage"></a>
 </section>
 
 <!-- --- Catégorie Urbain --- -->
 <section class="category">
   <h2>Urbain</h2>
-  <div class="category-grid">
-    <a href="gallery/urbain.html"><img src="images/urbain/Photo1.jpg" alt="Urbain 1"></a>
-    <a href="gallery/urbain.html"><img src="images/urbain/Photo2.jpg" alt="Urbain 2"></a>
-    <a href="gallery/urbain.html"><img src="images/urbain/Photo3.jpg" alt="Urbain 3"></a>
-  </div>
+  <a href="gallery/urbain.html"><img src="images/urbain/Photo1.jpg" alt="Urbain"></a>
 </section>
 
 <!-- --- Catégorie Portrait --- -->
 <section class="category">
   <h2>Portrait</h2>
-  <div class="category-grid">
-    <a href="gallery/portrait.html"><img src="images/portrait/Photo1.jpg" alt="Portrait 1"></a>
-    <a href="gallery/portrait.html"><img src="images/portrait/Photo2.jpg" alt="Portrait 2"></a>
-    <a href="gallery/portrait.html"><img src="images/portrait/Photo3.jpg" alt="Portrait 3"></a>
-  </div>
+  <a href="gallery/portrait.html"><img src="images/portrait/Photo1.jpg" alt="Portrait"></a>
 </section>
 
 <!-- --- Catégorie Animaux --- -->
 <section class="category">
   <h2>Animaux</h2>
-  <div class="category-grid">
-    <a href="gallery/animaux.html"><img src="images/animaux/Photo1.jpg" alt="Animaux 1"></a>
-    <a href="gallery/animaux.html"><img src="images/animaux/Photo2.jpg" alt="Animaux 2"></a>
-    <a href="gallery/animaux.html"><img src="images/animaux/Photo3.jpg" alt="Animaux 3"></a>
-  </div>
+  <a href="gallery/animaux.html"><img src="images/animaux/Photo1.jpg" alt="Animaux"></a>
 </section>
 
 <footer>
