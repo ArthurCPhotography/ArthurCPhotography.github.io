@@ -40,15 +40,12 @@ header {
   padding: 100px 20px 40px;
   text-align: center;
 }
-h1 {
-  font-size: 2.2em;
-  margin-bottom: 40px;
-}
+h1 { font-size: 2.2em; margin-bottom: 40px; }
 
 /* --- Catégories --- */
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
   padding: 40px;
 }
@@ -62,7 +59,7 @@ h1 {
 }
 .category img {
   width: 100%;
-  height: 220px;
+  aspect-ratio: 1 / 1; /* Force un carré parfait */
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
