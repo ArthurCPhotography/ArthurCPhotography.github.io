@@ -3,65 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galerie - Arthur C Photography</title>
+<title>Galerie — Arthur C Photography</title>
 <style>
 body {
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:#fff;
-  color:#222;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #222;
 }
+
 nav {
-  position:fixed; top:0; left:0; width:100%;
-  background:#f8f8f8; display:flex; justify-content:center;
-  padding:15px 0; box-shadow:0 2px 10px rgba(0,0,0,0.1);
-  z-index:1000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #f8f8f8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  z-index: 1000;
 }
 nav a {
-  color:#222; text-decoration:none; margin:0 20px; font-weight:bold;
-  transition:color 0.3s;
+  color: #222;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: bold;
 }
-nav a:hover { color:#1e90ff; }
+nav a:hover {
+  color: #1e90ff;
+}
 
 header {
-  padding:120px 20px 40px;
-  text-align:center;
+  padding: 100px 20px 40px;
+  text-align: center;
 }
-h1 { font-size:2.5em; margin:0; }
-p { font-size:1.1em; color:#555; }
+h1 {
+  font-size: 2.2em;
+}
 
-/* --- Catégories --- */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding: 40px;
+}
 .category {
-  margin:60px 20px;
+  position: relative;
   text-align: center;
 }
 .category h2 {
-  font-size:1.8em;
-  margin-bottom:20px;
-  border-left: 4px solid #aaa; /* bande grise */
-  padding-left:10px;
-  display:inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  font-size: 1.6em;
 }
 .category img {
-  width:60%;
-  max-width:400px;
-  border-radius:12px;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  cursor:pointer;
+  width: 100%;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .category img:hover {
   transform: scale(1.03);
-  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
 }
 
-/* --- Footer --- */
 footer {
-  background:#f0f0f0;
-  color:#777;
-  padding:20px;
-  font-size:0.9em;
-  text-align:center;
+  background: #f0f0f0;
+  color: #777;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9em;
 }
 </style>
 </head>
@@ -74,32 +89,26 @@ footer {
 </nav>
 
 <header>
-  <h1>Galerie</h1>
-  <p>Découvrez mes différents thèmes photographiques</p>
+  <h1>Galerie par Thème</h1>
 </header>
 
-<!-- --- Catégorie Paysage --- -->
-<section class="category">
-  <h2>Paysage</h2>
-  <a href="gallery/paysage.html"><img src="images/paysage/Photo1.jpg" alt="Paysage"></a>
-</section>
-
-<!-- --- Catégorie Urbain --- -->
-<section class="category">
-  <h2>Urbain</h2>
-  <a href="gallery/urbain.html"><img src="images/urbain/Photo1.jpg" alt="Urbain"></a>
-</section>
-
-<!-- --- Catégorie Portrait --- -->
-<section class="category">
-  <h2>Portrait</h2>
-  <a href="gallery/portrait.html"><img src="images/portrait/Photo1.jpg" alt="Portrait"></a>
-</section>
-
-<!-- --- Catégorie Animaux --- -->
-<section class="category">
-  <h2>Animaux</h2>
-  <a href="gallery/animaux.html"><img src="images/animaux/Photo1.jpg" alt="Animaux"></a>
+<section class="categories">
+  <div class="category">
+    <h2>Paysage</h2>
+    <a href="gallery/paysage.html"><img src="images/paysage/Photo1-paysage.jpg" alt="Paysage"></a>
+  </div>
+  <div class="category">
+    <h2>Urbain</h2>
+    <a href="gallery/urbain.html"><img src="images/urbain/Photo1-urbain.jpg" alt="Urbain"></a>
+  </div>
+  <div class="category">
+    <h2>Portrait</h2>
+    <a href="gallery/portrait.html"><img src="images/portrait/Photo1-portrait.jpg" alt="Portrait"></a>
+  </div>
+  <div class="category">
+    <h2>Animaux</h2>
+    <a href="gallery/animaux.html"><img src="images/animaux/Photo1-animaux.jpg" alt="Animaux"></a>
+  </div>
 </section>
 
 <footer>
