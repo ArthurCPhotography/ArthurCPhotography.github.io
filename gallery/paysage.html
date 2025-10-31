@@ -58,6 +58,7 @@ h1 { font-size: 2.2em; margin-bottom: 30px; }
   text-align: center;
   max-width: 80%;
 }
+/* Bouton fermeture */
 .lightbox a.close {
   position: absolute;
   top: 20px;
@@ -66,10 +67,13 @@ h1 { font-size: 2.2em; margin-bottom: 30px; }
   font-size: 2em;
   text-decoration: none;
   font-weight: bold;
+  z-index: 1000;
 }
+
 .lightbox:target {
   display: flex;
 }
+
 footer { background: #f0f0f0; color: #777; text-align: center; padding: 20px; font-size: 0.9em; }
 </style>
 </head>
@@ -86,24 +90,36 @@ footer { background: #f0f0f0; color: #777; text-align: center; padding: 20px; fo
 </header>
 
 <section class="gallery">
-  <!-- Première photo avec lightbox améliorée -->
   <a href="#img1"><img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1"></a>
   <a href="#img2"><img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2"></a>
   <a href="#img3"><img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3"></a>
   <a href="#img4"><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></a>
 </section>
 
-<!-- Lightbox de test pour la première photo -->
+<!-- Lightbox avec fermeture et description -->
 <div id="img1" class="lightbox">
   <a href="#" class="close">&times;</a>
   <img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1">
-  <p class="description">Description de la photo : un magnifique coucher de soleil sur les montagnes.</p>
+  <p class="description">Un magnifique coucher de soleil sur les montagnes.</p>
 </div>
 
-<!-- Lightbox normales pour les autres photos -->
-<div id="img2" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2"></div>
-<div id="img3" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3"></div>
-<div id="img4" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></div>
+<div id="img2" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2">
+  <p class="description">Lac paisible entouré de forêts verdoyantes.</p>
+</div>
+
+<div id="img3" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3">
+  <p class="description">Chaîne de montagnes sous un ciel dramatique.</p>
+</div>
+
+<div id="img4" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4">
+  <p class="description">Prairie en fleurs au lever du soleil.</p>
+</div>
 
 <footer>
   © 2025 Arthur C Photography — Tous droits réservés
