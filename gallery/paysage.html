@@ -11,13 +11,65 @@ nav a { color: #222; text-decoration: none; margin: 0 20px; font-weight: bold; }
 nav a:hover { color: #1e90ff; }
 header { padding: 100px 20px 40px; text-align: center; }
 h1 { font-size: 2.2em; margin-bottom: 30px; }
-.gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; padding: 40px; }
-.gallery a img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-.gallery a img:hover { transform: scale(1.03); box-shadow: 0 6px 25px rgba(0,0,0,0.2); }
-/* Lightbox */
-.lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 999; }
-.lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; }
-.lightbox:target { display: flex; }
+
+/* --- Galerie --- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 40px;
+}
+.gallery a img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.gallery a img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+}
+
+/* --- Lightbox --- */
+.lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 999;
+  padding: 20px;
+  box-sizing: border-box;
+}
+.lightbox img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.lightbox p.description {
+  color: #fff;
+  font-size: 1em;
+  text-align: center;
+  max-width: 80%;
+}
+.lightbox a.close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  color: #fff;
+  font-size: 2em;
+  text-decoration: none;
+  font-weight: bold;
+}
+.lightbox:target {
+  display: flex;
+}
 footer { background: #f0f0f0; color: #777; text-align: center; padding: 20px; font-size: 0.9em; }
 </style>
 </head>
@@ -34,16 +86,24 @@ footer { background: #f0f0f0; color: #777; text-align: center; padding: 20px; fo
 </header>
 
 <section class="gallery">
+  <!-- Première photo avec lightbox améliorée -->
   <a href="#img1"><img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1"></a>
   <a href="#img2"><img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2"></a>
   <a href="#img3"><img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3"></a>
   <a href="#img4"><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></a>
 </section>
 
-<div id="img1" class="lightbox"><a href="#"><img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1"></a></div>
-<div id="img2" class="lightbox"><a href="#"><img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2"></a></div>
-<div id="img3" class="lightbox"><a href="#"><img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3"></a></div>
-<div id="img4" class="lightbox"><a href="#"><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></a></div>
+<!-- Lightbox de test pour la première photo -->
+<div id="img1" class="lightbox">
+  <a href="#" class="close">&times;</a>
+  <img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1">
+  <p class="description">Description de la photo : un magnifique coucher de soleil sur les montagnes.</p>
+</div>
+
+<!-- Lightbox normales pour les autres photos -->
+<div id="img2" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2"></div>
+<div id="img3" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3"></div>
+<div id="img4" class="lightbox"><a href="#"></a><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></div>
 
 <footer>
   © 2025 Arthur C Photography — Tous droits réservés
