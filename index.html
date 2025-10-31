@@ -10,10 +10,10 @@ header { padding: 80px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* Galerie en quinconce */
+/* Galerie 3 colonnes en quinconce */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px 40px;
 }
@@ -36,9 +36,10 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Décalage quinconce */
-.gallery a:nth-child(odd) { margin-top: 0; }
-.gallery a:nth-child(even) { margin-top: 40px; }
+/* Quinconce avec 3 colonnes et plus d'écart vertical */
+.gallery a:nth-child(3n+1) { margin-top: 0; }      /* 1ère colonne */
+.gallery a:nth-child(3n+2) { margin-top: 60px; }   /* 2ème colonne */
+.gallery a:nth-child(3n+3) { margin-top: 120px; }  /* 3ème colonne */
 
 /* Footer */
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; }
