@@ -47,6 +47,9 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 
 /* Première image pleine largeur */
+.gallery a:first-child {
+  grid-column: 1 / -1; /* occupe toute la largeur */
+}
 .gallery a:first-child img {
   width: 100%;
   border-radius: 12px;
@@ -80,6 +83,24 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 /* Footer */
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
+
+/* Responsive */
+@media (max-width: 1024px) { /* Tablette */
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .gallery a:nth-child(2) { margin-top: 60px; }
+  .gallery a:nth-child(3) { margin-top: 120px; }
+  .gallery a:nth-child(4) { margin-top: 60px; }
+}
+
+@media (max-width: 768px) { /* Mobile */
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+  .gallery a:nth-child(n) { margin-top: 0; } /* plus de quinconce sur mobile */
+  .gallery a:first-child img { height: 250px; } /* hauteur réduite pour mobile */
+}
 </style>
 </head>
 <body>
