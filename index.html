@@ -6,11 +6,34 @@
 <title>Arthur C Photography</title>
 <style>
 body { margin: 0; font-family: 'Poppins', sans-serif; background: #fff; color: #222; text-align: center; }
-header { padding: 80px 20px 40px; }
+
+/* Barre de menu fixe */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #f8f8f8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  z-index: 1000;
+}
+nav a {
+  color: #222;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: bold;
+}
+nav a:hover { color: #1e90ff; }
+
+header {
+  padding: 100px 20px 40px; /* espace pour le menu */
+}
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* Galerie 3 colonnes en quinconce */
+/* Galerie */
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -18,42 +41,55 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   padding: 20px 40px;
 }
 
-.gallery a {
-  display: block;
-  position: relative;
+/* Première image pleine largeur */
+.gallery a:first-child {
+  grid-column: 1 / -1;
 }
-
-.gallery a img {
+.gallery a:first-child img {
   width: 100%;
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  object-fit: cover;
+  height: 400px; /* hauteur fixe pour la grande image */
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* Effet hover */
-.gallery a img:hover {
+/* Images suivantes quinconce */
+.gallery a:not(:first-child) img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.gallery a:not(:first-child) img:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Quinconce avec 3 colonnes et plus d'écart vertical */
-.gallery a:nth-child(3n+1) { margin-top: 0; }      /* 1ère colonne */
-.gallery a:nth-child(3n+2) { margin-top: 60px; }   /* 2ème colonne */
-.gallery a:nth-child(3n+3) { margin-top: 120px; }  /* 3ème colonne */
+/* Quinconce pour 3 dernières images */
+.gallery a:nth-child(2) { margin-top: 60px; }
+.gallery a:nth-child(3) { margin-top: 120px; }
+.gallery a:nth-child(4) { margin-top: 60px; }
 
 /* Footer */
-footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; }
+footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 </style>
 </head>
 <body>
 
+<nav>
+<a href="index.html">Accueil</a>
+<a href="gallery.html">Galerie</a>
+<a href="about.html">À propos</a>
+</nav>
+
 <header>
-  <h1>Arthur C Photography</h1>
-  <p>Photographe — Nature, Voyage & Urbain</p>
+<h1>Arthur C Photography</h1>
+<p>Photographe — Nature, Voyage & Urbain</p>
 </header>
 
 <section class="gallery">
-  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
+  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a> <!-- image paysage pleine largeur -->
   <a href="#"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
   <a href="#"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
   <a href="#"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
