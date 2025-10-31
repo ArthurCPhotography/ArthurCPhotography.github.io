@@ -66,12 +66,15 @@ h1 { font-size: 2.2em; margin-bottom: 30px; }
   position: fixed;
   top: 20px;
   right: 30px;
-  color: #fff;
-  font-size: 2em;
+  color: #000;              /* noir */
+  font-size: 1.5em;
   text-decoration: none;
   font-weight: bold;
   z-index: 2000;
   display: none;
+  background: rgba(255,255,255,0.8); /* léger fond pour contraste */
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 /* Affiche bouton uniquement quand lightbox ciblée */
@@ -105,30 +108,30 @@ footer { background: #f0f0f0; color: #777; text-align: center; padding: 20px; fo
   <a href="#img4"><img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4"></a>
 </section>
 
-<!-- Lightbox avec bouton indépendant et description -->
+<!-- Lightbox avec description -->
 <div id="img1" class="lightbox">
   <img src="../images/paysage/Photo1-paysage.jpg" alt="Paysage 1">
   <p class="description">Un magnifique coucher de soleil sur les montagnes.</p>
 </div>
-<a href="#" class="close-lightbox">&times;</a>
+<a href="#" class="close-lightbox">&times; Fermer l'image</a>
 
 <div id="img2" class="lightbox">
   <img src="../images/paysage/Photo2-paysage.jpg" alt="Paysage 2">
   <p class="description">Lac paisible entouré de forêts verdoyantes.</p>
 </div>
-<a href="#" class="close-lightbox">&times;</a>
+<a href="#" class="close-lightbox">&times; Fermer l'image</a>
 
 <div id="img3" class="lightbox">
   <img src="../images/paysage/Photo3-paysage.jpg" alt="Paysage 3">
   <p class="description">Chaîne de montagnes sous un ciel dramatique.</p>
 </div>
-<a href="#" class="close-lightbox">&times;</a>
+<a href="#" class="close-lightbox">&times; Fermer l'image</a>
 
 <div id="img4" class="lightbox">
   <img src="../images/paysage/Photo4-paysage.jpg" alt="Paysage 4">
   <p class="description">Prairie en fleurs au lever du soleil.</p>
 </div>
-<a href="#" class="close-lightbox">&times;</a>
+<a href="#" class="close-lightbox">&times; Fermer l'image</a>
 
 <footer>
   © 2025 Arthur C Photography — Tous droits réservés
