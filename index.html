@@ -29,6 +29,7 @@ nav a {
   text-decoration: none;
   margin: 0 20px;
   font-weight: bold;
+  transition: color 0.3s;
 }
 nav a:hover {
   color: #1e90ff;
@@ -41,28 +42,29 @@ header {
 }
 h1 {
   font-size: 2.5em;
+  margin-bottom: 10px;
 }
 p {
   font-size: 1.1em;
   color: #555;
 }
 
-/* --- Galerie pêle-mêle --- */
+/* --- Galerie pêle-mêle rééquilibrée --- */
 .gallery {
-  column-count: 3;
-  column-gap: 15px;
-  padding: 20px;
+  column-count: 2;
+  column-gap: 20px;
+  padding: 20px 40px;
 }
 .gallery img {
   width: 100%;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  border-radius: 12px;
+  margin-bottom: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 .gallery img:hover {
   transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
 
 /* --- Footer --- */
