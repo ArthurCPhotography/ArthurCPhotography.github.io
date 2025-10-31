@@ -41,16 +41,23 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   padding: 20px 40px;
 }
 
-/* Première image pleine largeur */
-.gallery a:first-child {
-  grid-column: 1 / -1;
+.gallery a {
+  display: block;
+  position: relative;
 }
+
+/* Première image pleine largeur */
 .gallery a:first-child img {
   width: 100%;
   border-radius: 12px;
   object-fit: cover;
   height: 400px; /* hauteur fixe pour la grande image */
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.gallery a:first-child img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
 /* Images suivantes quinconce */
@@ -89,10 +96,13 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 </header>
 
 <section class="gallery">
-  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a> <!-- image paysage pleine largeur -->
-  <a href="#"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
-  <a href="#"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
-  <a href="#"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
+  <!-- Première image paysage pleine largeur, sans lien pour éviter scroll en haut -->
+  <img src="images/index/Photo1-index.jpg" alt="Photo 1">
+
+  <!-- Les 3 autres images en quinconce -->
+  <img src="images/index/Photo2-index.jpg" alt="Photo 2">
+  <img src="images/index/Photo3-index.jpg" alt="Photo 3">
+  <img src="images/index/Photo4-index.jpg" alt="Photo 4">
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
