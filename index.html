@@ -48,7 +48,8 @@
   nav a:hover { color: #1e90ff; }
 
   /* Survol bleu de Galerie 2 quand le menu s'ouvre */
-  nav li:hover > a.no-click {
+  nav li:hover > a.no-click,
+  nav li.active > a.no-click {
     color: #1e90ff;
   }
 
@@ -71,7 +72,8 @@
     z-index: 1001;
     white-space: nowrap;
   }
-  nav li:hover ul {
+  nav li:hover ul,
+  nav li.active ul {
     opacity: 1;
     transform: translate(-50%, 0);
     pointer-events: auto;
@@ -173,7 +175,7 @@
   <ul>
     <li><a href="index.html">Accueil</a></li>
     <li><a href="gallery.html">Galerie</a></li>
-    <li>
+    <li class="mobile-dropdown">
       <a class="no-click">Galerie 2 ▾</a>
       <ul>
         <li><a href="gallery/animaux.html">Animaux</a></li>
@@ -199,6 +201,18 @@
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
+
+<script>
+  // Gestion du menu déroulant sur mobile (clic)
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileDropdown = document.querySelector('.mobile-dropdown > a');
+    mobileDropdown.addEventListener('click', function(e) {
+      e.preventDefault();
+      const parentLi = this.parentElement;
+      parentLi.classList.toggle('active');
+    });
+  });
+</script>
 
 </body>
 </html>
