@@ -100,16 +100,28 @@ footer {
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+  <a href="../images/animaux/Photo1-animaux.JPG" 
+     data-fancybox="gallery-animaux" 
+     data-caption="Lion dans la savane" 
+     data-src="../images/animaux/Photo1-animaux.JPG">
     <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant">
+  <a href="../images/animaux/Photo2-animaux.JPG" 
+     data-fancybox="gallery-animaux" 
+     data-caption="Éléphant" 
+     data-src="../images/animaux/Photo2-animaux.JPG">
     <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
   </a>
-  <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe">
+  <a href="../images/animaux/Photo3-animaux.jpg" 
+     data-fancybox="gallery-animaux" 
+     data-caption="Girafe" 
+     data-src="../images/animaux/Photo3-animaux.jpg">
     <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
   </a>
-  <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.jpg" 
+     data-fancybox="gallery-animaux" 
+     data-caption="Zèbre" 
+     data-src="../images/animaux/Photo4-animaux.jpg">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
 </section>
@@ -120,16 +132,17 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
-  Toolbar: { display: ["close"] },   // seul bouton fermer
+  Toolbar: { display: ["close"] },   // bouton fermer
   Carousel: {
-    Navigation: true,                // flèches activées
-    infinite: true                   // navigation continue
+    Navigation: true,                // flèches
+    infinite: true,                  // navigation continue
+    preload: 2                        // précharge 2 images avant et après
   },
   dragToClose: true,
   animated: true,
   on: {
     ready: (fancybox) => {
-      // roulette souris pour passer à l'image suivante/précédente
+      // roulette souris pour naviguer
       fancybox.Carousel.container.addEventListener("wheel", (e) => {
         e.preventDefault();
         if (e.deltaY > 0) {
