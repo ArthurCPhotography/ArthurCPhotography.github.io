@@ -14,7 +14,6 @@ body {
   font-family: 'Poppins', sans-serif;
   background: #fff;
   color: #222;
-  text-align: center;
 }
 
 /* ----- MENU ----- */
@@ -41,11 +40,11 @@ nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px
 nav a:hover { color: #1e90ff; }
 
 /* ----- HEADER ----- */
-header { padding: 100px 20px 40px; }
+header { padding: 100px 20px 40px; text-align: center; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE MOSAÏQUE STYLE COURDESSES ----- */
+/* ----- GALERIE MOSAÏQUE ----- */
 .gallery {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -72,15 +71,15 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   transform: scale(1.05);
 }
 
-/* --- Définition des positions type Courdesses --- */
-.img1 { grid-column: span 6; grid-row: span 2; } /* image large horizontale */
-.img2 { grid-column: span 3; grid-row: span 2; } /* image portrait */
-.img3 { grid-column: span 3; grid-row: span 1; }
+/* Classes pour définir taille et proportion */
+.img1 { grid-column: span 6; grid-row: span 2; }  /* grande horizontale */
+.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
+.img3 { grid-column: span 3; grid-row: span 2; }
 .img4 { grid-column: span 4; grid-row: span 1; }
 .img5 { grid-column: span 4; grid-row: span 2; }
 .img6 { grid-column: span 4; grid-row: span 1; }
-/* ajouter autant que nécessaire pour 8-12 images */
 
+/* ----- FOOTER ----- */
 footer {
   background: #f0f0f0;
   color: #777;
@@ -89,12 +88,12 @@ footer {
   margin-top: 40px;
 }
 
-/* RESPONSIVE */
+/* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
   .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
   .img1 { grid-column: span 6; grid-row: span 2; }
-  .img2 { grid-column: span 3; grid-row: span 2; }
-  .img3 { grid-column: span 3; grid-row: span 1; }
+  .img2 { grid-column: span 3; grid-row: span 3; }
+  .img3 { grid-column: span 3; grid-row: span 2; }
 }
 @media (max-width: 600px) {
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
@@ -144,7 +143,7 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
-  Toolbar: { display: ["close"] },
+  Toolbar: { display: ["close"] },  // seul bouton fermer
   loop: true,
   dragToClose: true,
   animated: true
