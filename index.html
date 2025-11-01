@@ -45,9 +45,7 @@
     padding: 8px 12px;
     display: block;
   }
-  nav a:hover, nav li.open > a {
-    color: #1e90ff; /* survol bleu pour Galerie 2 */
-  }
+  nav a:hover { color: #1e90ff; }
 
   /* ----- SOUS-MENU ----- */
   nav li ul {
@@ -74,6 +72,10 @@
     pointer-events: auto;
   }
 
+  /* ✅ Ligne entière cliquable et texte centré */
+  nav li ul li {
+    width: 100%;
+  }
   nav li ul li a {
     display: block;
     width: 100%;
@@ -88,7 +90,12 @@
     color: #000;
   }
 
-  .no-click { cursor: default; pointer-events: none; }
+  /* Désactivation du clic sur Galerie 2 */
+  .no-click {
+    cursor: default;
+    pointer-events: none;
+    color: #1e90ff; /* bleu sur survol du menu */
+  }
 
   /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
@@ -102,7 +109,7 @@
     gap: 20px;
     padding: 20px 40px;
   }
-  .gallery a { display: block; position: relative; pointer-events: none; } /* désactive le lien */
+  .gallery a { display: block; position: relative; }
 
   /* Première image pleine largeur */
   .gallery a:first-child { grid-column: 1 / -1; }
@@ -154,13 +161,12 @@
     .gallery { grid-template-columns: 1fr; }
     .gallery a:nth-child(n) { margin-top: 0; }
     .gallery a:first-child img { height: 250px; }
+
+    /* Centrer menu mobile */
+    nav ul { justify-content: center; flex-wrap: wrap; }
     nav li { margin: 0 10px; }
-    /* sous-menu clic mobile */
-    nav li ul {
-      top: 100%;
-      left: 0;
-      transform: translate(0, -8px);
-    }
+    /* Sous-menu mobile sur clic */
+    nav li ul { position: static; transform: none; opacity: 1; pointer-events: auto; margin-top: 4px; }
   }
 </style>
 </head>
@@ -171,7 +177,7 @@
   <ul>
     <li><a href="index.html">Accueil</a></li>
     <li><a href="gallery.html">Galerie</a></li>
-    <li id="gal2">
+    <li>
       <a class="no-click">Galerie 2 ▾</a>
       <ul>
         <li><a href="gallery/animaux.html">Animaux</a></li>
@@ -190,21 +196,13 @@
 </header>
 
 <section class="gallery">
-  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
-  <a href="#"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
-  <a href="#"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
-  <a href="#"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
+  <img src="images/index/Photo1-index.jpg" alt="Photo 1">
+  <img src="images/index/Photo2-index.jpg" alt="Photo 2">
+  <img src="images/index/Photo3-index.jpg" alt="Photo 3">
+  <img src="images/index/Photo4-index.jpg" alt="Photo 4">
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
-
-<script>
-  // menu déroulant mobile par clic
-  const gal2 = document.getElementById('gal2');
-  gal2.addEventListener('click', () => {
-    gal2.classList.toggle('open');
-  });
-</script>
 
 </body>
 </html>
