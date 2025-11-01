@@ -47,7 +47,7 @@ nav a:hover {
   color: #1e90ff;
 }
 
-/* ----- SOUS-MENU ----- */
+/* ----- SOUS-MENU AVEC ANIMATION OUVERTE/FERMÉE ----- */
 nav li ul {
   position: absolute;
   top: 100%;
@@ -56,12 +56,17 @@ nav li ul {
   padding: 10px 0;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  display: none;
   min-width: 160px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 1001;
 }
 nav li:hover ul {
-  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 nav li ul li {
   margin: 0;
@@ -131,7 +136,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 .gallery a:nth-child(3) { margin-top: 120px; }
 .gallery a:nth-child(4) { margin-top: 60px; }
 
-/* FOOTER */
+/* ----- FOOTER ----- */
 footer { 
   background: #f0f0f0; 
   color: #777; 
@@ -140,7 +145,7 @@ footer {
   margin-top: 40px; 
 }
 
-/* RESPONSIVE */
+/* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
 }
