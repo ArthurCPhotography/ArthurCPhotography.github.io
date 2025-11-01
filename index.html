@@ -5,9 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Arthur C Photography</title>
 <style>
-body { margin: 0; font-family: 'Poppins', sans-serif; background: #fff; color: #222; text-align: center; }
+body { 
+  margin: 0; 
+  font-family: 'Poppins', sans-serif; 
+  background: #fff; 
+  color: #222; 
+  text-align: center; 
+}
 
-/* Barre de menu fixe */
+/* ----- MENU FIXE ----- */
 nav {
   position: fixed;
   top: 0;
@@ -19,21 +25,65 @@ nav {
   padding: 15px 0;
   z-index: 1000;
 }
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+nav li {
+  position: relative;
+  margin: 0 20px;
+}
 nav a {
   color: #222;
   text-decoration: none;
-  margin: 0 20px;
   font-weight: bold;
+  padding: 8px 12px;
+  display: block;
 }
-nav a:hover { color: #1e90ff; }
+nav a:hover {
+  color: #1e90ff;
+}
 
+/* ----- SOUS-MENU ----- */
+nav li ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #f8f8f8;
+  padding: 10px 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: none;
+  min-width: 160px;
+  z-index: 1001;
+}
+nav li:hover ul {
+  display: block;
+}
+nav li ul li {
+  margin: 0;
+}
+nav li ul li a {
+  padding: 10px 15px;
+  font-weight: normal;
+}
+nav li ul li a:hover {
+  background: #eaeaea;
+  color: #000;
+  border-radius: 4px;
+}
+
+/* ----- HEADER ----- */
 header {
-  padding: 100px 20px 40px; /* espace pour le menu */
+  padding: 100px 20px 40px;
 }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* Galerie */
+/* ----- GALERIE ----- */
 .gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -48,7 +98,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 /* Première image pleine largeur */
 .gallery a:first-child {
-  grid-column: 1 / -1; /* occupe toute la largeur */
+  grid-column: 1 / -1;
 }
 .gallery a:first-child img {
   width: 100%;
@@ -76,51 +126,58 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Quinconce pour 3 dernières images */
+/* Quinconce */
 .gallery a:nth-child(2) { margin-top: 60px; }
 .gallery a:nth-child(3) { margin-top: 120px; }
 .gallery a:nth-child(4) { margin-top: 60px; }
 
-/* Footer */
-footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
-
-/* Responsive */
-@media (max-width: 1024px) { /* Tablette */
-  .gallery {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .gallery a:nth-child(2) { margin-top: 60px; }
-  .gallery a:nth-child(3) { margin-top: 120px; }
-  .gallery a:nth-child(4) { margin-top: 60px; }
+/* FOOTER */
+footer { 
+  background: #f0f0f0; 
+  color: #777; 
+  padding: 20px; 
+  font-size: 0.9em; 
+  margin-top: 40px; 
 }
 
-@media (max-width: 768px) { /* Mobile */
-  .gallery {
-    grid-template-columns: 1fr;
-  }
-  .gallery a:nth-child(n) { margin-top: 0; } /* plus de quinconce sur mobile */
-  .gallery a:first-child img { height: 250px; } /* hauteur réduite pour mobile */
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .gallery { grid-template-columns: 1fr; }
+  .gallery a:nth-child(n) { margin-top: 0; }
+  .gallery a:first-child img { height: 250px; }
 }
 </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
-<a href="index.html">Accueil</a>
-<a href="gallery.html">Galerie</a>
-<a href="about.html">À propos</a>
+  <ul>
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="gallery.html">Galerie</a></li>
+    <li>
+      <a href="#">Galerie 2 ▾</a>
+      <ul>
+        <li><a href="gallery/animaux.html">Animaux</a></li>
+        <li><a href="gallery/paysage.html">Paysage</a></li>
+        <li><a href="gallery/portrait.html">Portrait</a></li>
+        <li><a href="gallery/urbain.html">Urbain</a></li>
+      </ul>
+    </li>
+    <li><a href="about.html">À propos</a></li>
+  </ul>
 </nav>
 
 <header>
-<h1>Arthur C Photography</h1>
-<p>Photographe — Nature, Voyage & Urbain</p>
+  <h1>Arthur C Photography</h1>
+  <p>Photographe — Nature, Voyage & Urbain</p>
 </header>
 
 <section class="gallery">
-  <!-- Première image paysage pleine largeur -->
   <a href="javascript:void(0)"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
-
-  <!-- Les 3 autres images en quinconce -->
   <a href="javascript:void(0)"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
   <a href="javascript:void(0)"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
   <a href="javascript:void(0)"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
