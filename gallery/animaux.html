@@ -65,12 +65,12 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 
 /* --- TAILLES ALÉATOIRES --- */
-.img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
-.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
-.img3 { grid-column: span 3; grid-row: span 2; }  /* paysage plus petit */
-.img4 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
-.img5 { grid-column: span 4; grid-row: span 2; }  /* paysage moyen */
-.img6 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
+.img1 { grid-column: span 6; grid-row: span 2; }
+.img2 { grid-column: span 3; grid-row: span 3; }
+.img3 { grid-column: span 3; grid-row: span 2; }
+.img4 { grid-column: span 4; grid-row: span 1; }
+.img5 { grid-column: span 4; grid-row: span 2; }
+.img6 { grid-column: span 4; grid-row: span 1; }
 
 /* ----- FOOTER ----- */
 footer {
@@ -146,13 +146,13 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
   dragToClose: true,
-  animated: true,
-  showClass: "fancybox-zoomIn",
-  hideClass: "fancybox-mosaicOut",
+  animated: false,         // désactive animations d'ouverture/fermeture zoom
+  showClass: "fancybox-fadeIn",
+  hideClass: "fancybox-fadeOut fancybox-mosaicOut", // fondu + mosaïque
   speed: 400,
   on: {
     closing: (fancybox) => {
-      const slide = fancybox.getSlide(); // slide active uniquement
+      const slide = fancybox.getSlide();
       slide.$el.style.setProperty('--dx', (Math.random()*200-100) + 'px');
       slide.$el.style.setProperty('--dy', (Math.random()*200-100) + 'px');
     }
