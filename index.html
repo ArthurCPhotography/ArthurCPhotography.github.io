@@ -71,7 +71,6 @@
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
-
   nav li ul li {
     width: 100%;
   }
@@ -88,8 +87,6 @@
     background: #eaeaea;
     color: #000;
   }
-
-  /* Désactivation du clic sur Galerie 2 */
   .no-click {
     cursor: default;
     pointer-events: none;
@@ -109,37 +106,26 @@
   }
   .gallery div { display: block; position: relative; }
 
+  .gallery div img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .gallery div img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
+
   /* Première image pleine largeur */
-  .gallery div:first-child img {
-    width: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-    height: 400px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .gallery div:first-child img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  }
+  .gallery .full-width { grid-column: 1 / -1; }
+  .gallery .full-width img { height: 400px; }
 
-  /* Images suivantes quinconce */
-  .gallery div:not(:first-child) img {
-    width: 100%;
-    border-radius: 12px;
-    object-fit: cover;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .gallery div:not(:first-child) img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  }
-
-  /* Quinconce */
-  .gallery div:nth-child(2) { margin-top: 60px; }
-  .gallery div:nth-child(3) { margin-top: 120px; }
-  .gallery div:nth-child(4) { margin-top: 60px; }
+  /* Quinconce pour les 3 autres */
+  .gallery div:not(.full-width):nth-child(2) { margin-top: 60px; }
+  .gallery div:not(.full-width):nth-child(3) { margin-top: 120px; }
+  .gallery div:not(.full-width):nth-child(4) { margin-top: 60px; }
 
   /* ----- FOOTER ----- */
   footer {
@@ -153,11 +139,12 @@
   /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) {
     .gallery { grid-template-columns: repeat(2, 1fr); }
+    .gallery div:not(.full-width) { margin-top: 40px; }
   }
   @media (max-width: 768px) {
     .gallery { grid-template-columns: 1fr; }
-    .gallery div:nth-child(n) { margin-top: 0; }
-    .gallery div:first-child img { height: 250px; }
+    .gallery div:not(.full-width) { margin-top: 20px; }
+    .gallery .full-width img { height: 250px; }
     nav li { margin: 0 10px; }
   }
 </style>
@@ -187,8 +174,9 @@
   <p>Photographe — Nature, Voyage & Urbain</p>
 </header>
 
+<!-- GALERIE INDEX -->
 <section class="gallery">
-  <div><img src="images/index/Photo1-index.jpg" alt="Photo 1"></div>
+  <div class="full-width"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></div>
   <div><img src="images/index/Photo2-index.jpg" alt="Photo 2"></div>
   <div><img src="images/index/Photo3-index.jpg" alt="Photo 3"></div>
   <div><img src="images/index/Photo4-index.jpg" alt="Photo 4"></div>
