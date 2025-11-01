@@ -57,7 +57,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 .gallery img {
   width: 100%;
-  height: auto;          /* garde la proportion naturelle */
+  height: auto;
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
@@ -122,14 +122,14 @@ footer {
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },   // seul bouton fermer
   Carousel: {
-    Navigation: true,
-    infinite: true
+    Navigation: true,                // flèches activées
+    infinite: true                   // navigation continue
   },
   dragToClose: true,
   animated: true,
   on: {
     ready: (fancybox) => {
-      // Roulette de souris pour passer à l'image suivante/précédente
+      // roulette souris pour passer à l'image suivante/précédente
       fancybox.Carousel.container.addEventListener("wheel", (e) => {
         e.preventDefault();
         if (e.deltaY > 0) {
