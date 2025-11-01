@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galerie Animaux - Arthur C Photography</title>
 
+<!-- CSS Fancybox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
 <style>
@@ -130,12 +131,16 @@ footer {
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
   dragToClose: true,
-  animated: true
+  animated: true,
+  showClass: "fancybox-zoomIn",
+  hideClass: "fancybox-zoomOut",
+  speed: 400
 });
 </script>
 
