@@ -41,7 +41,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 .gallery {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: 150px;
+  grid-auto-rows: 100px;
   gap: 10px;
   padding: 20px 40px;
 }
@@ -63,14 +63,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   transform: scale(1.05);
 }
 
-/* --- TAILLES ALÉATOIRES --- */
-.img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
-.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
-.img3 { grid-column: span 3; grid-row: span 2; }  /* paysage plus petit */
-.img4 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
-.img5 { grid-column: span 4; grid-row: span 2; }  /* portrait / paysage moyen */
-.img6 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
-
 /* ----- FOOTER ----- */
 footer {
   background: #f0f0f0;
@@ -82,16 +74,12 @@ footer {
 
 /* ----- RESPONSIVE TABLETTE ----- */
 @media (max-width: 1024px) {
-  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
-  .img2, .img5 { grid-row: span 2; } /* Portraits plus grands */
-  .img1, .img3, .img4, .img6 { grid-row: span 1; }
+  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 80px; }
 }
 
 /* ----- RESPONSIVE MOBILE ----- */
 @media (max-width: 600px) {
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
-  .img2, .img5 { grid-row: span 2; } /* Portraits plus grands */
-  .img1, .img3, .img4, .img6 { grid-row: span 1; }
 }
 </style>
 </head>
@@ -110,23 +98,23 @@ footer {
   <p>Photographe — Nature & Faune</p>
 </header>
 
-<section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" class="img1" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+<section class="gallery" id="gallery">
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane" data-orientation="landscape">
     <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" class="img2" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
+  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau" data-orientation="portrait">
     <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
   </a>
-  <a href="../images/animaux/Photo3-animaux.jpg" class="img3" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane">
+  <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane" data-orientation="landscape">
     <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
   </a>
-  <a href="../images/animaux/Photo4-animaux.jpg" class="img4" data-fancybox="gallery-animaux" data-caption="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre" data-orientation="landscape">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
-  <a href="../images/animaux/Photo5-animaux.jpg" class="img5" data-fancybox="gallery-animaux" data-caption="Léopard">
+  <a href="../images/animaux/Photo5-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Léopard" data-orientation="portrait">
     <img src="../images/animaux/Photo5-animaux.jpg" alt="Léopard">
   </a>
-  <a href="../images/animaux/Photo6-animaux.jpg" class="img6" data-fancybox="gallery-animaux" data-caption="Flamant rose">
+  <a href="../images/animaux/Photo6-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Flamant rose" data-orientation="landscape">
     <img src="../images/animaux/Photo6-animaux.jpg" alt="Flamant rose">
   </a>
 </section>
@@ -135,11 +123,25 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
+// Initialisation Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
   dragToClose: true,
   animated: true
+});
+
+// Génération aléatoire des tailles
+const galleryItems = document.querySelectorAll('#gallery a');
+galleryItems.forEach(item => {
+  const orientation = item.dataset.orientation;
+  // largeur aléatoire (1 à 4 colonnes)
+  const colSpan = Math.floor(Math.random() * 4) + 1;
+  // hauteur aléatoire (1 à 3 lignes)
+  let rowSpan = Math.floor(Math.random() * 2) + 1;
+  if (orientation === 'portrait') rowSpan = 2; // Portrait toujours plus haut
+  item.style.gridColumn = `span ${colSpan}`;
+  item.style.gridRow = `span ${rowSpan}`;
 });
 </script>
 
