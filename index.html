@@ -47,6 +47,11 @@
   }
   nav a:hover { color: #1e90ff; }
 
+  /* Survol bleu de Galerie 2 quand le menu s'ouvre */
+  nav li:hover > a.no-click {
+    color: #1e90ff;
+  }
+
   /* ----- SOUS-MENU ----- */
   nav li ul {
     position: absolute;
@@ -71,6 +76,7 @@
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
+
   nav li ul li {
     width: 100%;
   }
@@ -87,6 +93,8 @@
     background: #eaeaea;
     color: #000;
   }
+
+  /* Désactivation du clic sur Galerie 2 */
   .no-click {
     cursor: default;
     pointer-events: none;
@@ -104,28 +112,40 @@
     gap: 20px;
     padding: 20px 40px;
   }
-  .gallery div { display: block; position: relative; }
+  .gallery a { display: block; position: relative; }
 
-  .gallery div img {
+  /* Première image pleine largeur */
+  .gallery a:first-child img {
     width: 100%;
     border-radius: 12px;
     object-fit: cover;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    height: 400px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .gallery div img:hover {
+  .gallery a:first-child img:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
 
-  /* Première image pleine largeur */
-  .gallery .full-width { grid-column: 1 / -1; }
-  .gallery .full-width img { height: 400px; }
+  /* Images suivantes quinconce */
+  .gallery a:not(:first-child) img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    height: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .gallery a:not(:first-child) img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  }
 
-  /* Quinconce pour les 3 autres */
-  .gallery div:not(.full-width):nth-child(2) { margin-top: 60px; }
-  .gallery div:not(.full-width):nth-child(3) { margin-top: 120px; }
-  .gallery div:not(.full-width):nth-child(4) { margin-top: 60px; }
+  /* Quinconce */
+  .gallery a:nth-child(2) { margin-top: 60px; }
+  .gallery a:nth-child(3) { margin-top: 120px; }
+  .gallery a:nth-child(4) { margin-top: 60px; }
 
   /* ----- FOOTER ----- */
   footer {
@@ -139,12 +159,12 @@
   /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) {
     .gallery { grid-template-columns: repeat(2, 1fr); }
-    .gallery div:not(.full-width) { margin-top: 40px; }
   }
   @media (max-width: 768px) {
     .gallery { grid-template-columns: 1fr; }
-    .gallery div:not(.full-width) { margin-top: 20px; }
-    .gallery .full-width img { height: 250px; }
+    .gallery a:nth-child(n) { margin-top: 0; }
+    .gallery a:first-child img { height: 250px; }
+    .gallery a:not(:first-child) img { height: 180px; }
     nav li { margin: 0 10px; }
   }
 </style>
@@ -174,12 +194,11 @@
   <p>Photographe — Nature, Voyage & Urbain</p>
 </header>
 
-<!-- GALERIE INDEX -->
 <section class="gallery">
-  <div class="full-width"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></div>
-  <div><img src="images/index/Photo2-index.jpg" alt="Photo 2"></div>
-  <div><img src="images/index/Photo3-index.jpg" alt="Photo 3"></div>
-  <div><img src="images/index/Photo4-index.jpg" alt="Photo 4"></div>
+  <a><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
+  <a><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
+  <a><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
+  <a><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
