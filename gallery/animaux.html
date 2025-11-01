@@ -47,7 +47,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 /* ----- GALERIE MOSAÏQUE ----- */
 .gallery {
   column-count: 4;       /* 4 colonnes */
-  column-gap: 15px;
+  column-gap: 15px;      /* espace entre colonnes */
   padding: 20px 40px;
 }
 .gallery a {
@@ -57,7 +57,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 .gallery img {
   width: 100%;
-  height: auto;
+  height: auto;          /* garde la proportion naturelle */
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
@@ -100,19 +100,18 @@ footer {
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux-highres.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
-    <img src="../images/animaux/Photo1-animaux-thumb.JPG" alt="Lion">
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+    <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux-highres.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant">
-    <img src="../images/animaux/Photo2-animaux-thumb.JPG" alt="Éléphant">
+  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant">
+    <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
   </a>
-  <a href="../images/animaux/Photo3-animaux-highres.jpg" data-fancybox="gallery-animaux" data-caption="Girafe">
-    <img src="../images/animaux/Photo3-animaux-thumb.jpg" alt="Girafe">
+  <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe">
+    <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
   </a>
-  <a href="../images/animaux/Photo4-animaux-highres.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
-    <img src="../images/animaux/Photo4-animaux-thumb.jpg" alt="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
+    <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
-  <!-- Ajoute d'autres images si nécessaire -->
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
@@ -124,8 +123,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },   // seul bouton fermer
   Carousel: {
     Navigation: true,
-    infinite: true,
-    preload: 2   // précharge les 2 prochaines images
+    infinite: true
   },
   dragToClose: true,
   animated: true,
