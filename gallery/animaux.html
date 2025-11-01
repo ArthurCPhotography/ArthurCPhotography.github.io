@@ -27,15 +27,88 @@ nav {
   padding: 15px 0;
   z-index: 1000;
 }
-nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
-nav li { margin: 0 20px; }
-nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
-nav a:hover { color: #1e90ff; }
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+nav li {
+  position: relative;
+  margin: 0 20px;
+}
+nav a {
+  color: #222;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 8px 12px;
+  display: block;
+  transition: color 0.3s ease;
+}
+nav a:hover {
+  color: #1e90ff;
+}
+
+/* ----- SOUS-MENU ----- */
+nav li ul {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -8px);
+  background: #f8f8f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease, transform 0.28s ease;
+  z-index: 1001;
+  white-space: nowrap;
+}
+nav li:hover ul {
+  opacity: 1;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+
+/* Texte centré dans le sous-menu */
+nav li ul li a {
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  text-align: center;
+  font-weight: normal;
+  color: #222;
+  border-radius: 6px;
+}
+nav li ul li a:hover {
+  background: #eaeaea;
+  color: #000;
+}
+
+/* Couleur bleue quand le menu est ouvert */
+nav li.active > a {
+  color: #1e90ff;
+}
 
 /* ----- HEADER ----- */
-header { padding: 100px 20px 40px; text-align: center; }
-h1 { font-size: 2.5em; margin-bottom: 10px; }
-p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
+header {
+  padding: 100px 20px 40px;
+  text-align: center;
+}
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+p {
+  color: #555;
+  font-size: 1.2em;
+  margin-bottom: 40px;
+}
 
 /* ----- GALERIE MOSAÏQUE ----- */
 .gallery {
@@ -64,13 +137,12 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 
 /* --- TAILLES ALÉATOIRES --- */
-/* Portraits toujours plus grands en hauteur */
-.img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
-.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
-.img3 { grid-column: span 3; grid-row: span 3; }  /* portrait */
-.img4 { grid-column: span 5; grid-row: span 2; }  /* paysage moyen */
-.img5 { grid-column: span 3; grid-row: span 2; }  /* paysage */
-.img6 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
+.img1 { grid-column: span 6; grid-row: span 3; }
+.img2 { grid-column: span 3; grid-row: span 3; }
+.img3 { grid-column: span 3; grid-row: span 3; }
+.img4 { grid-column: span 5; grid-row: span 3; }
+.img5 { grid-column: span 3; grid-row: span 2; }
+.img6 { grid-column: span 4; grid-row: span 3; }
 
 /* ----- FOOTER ----- */
 footer {
@@ -83,17 +155,49 @@ footer {
 
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
-  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
+  .gallery {
+    grid-template-columns: repeat(6, 1fr);
+    grid-auto-rows: 120px;
+  }
 }
 
 @media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; grid-auto-rows: 150px; padding: 20px; }
-  
-  /* Tous les paysages prennent 1 ligne */
-  .img1, .img3, .img4, .img5, .img6 { grid-row: span 1; grid-column: span 1; }
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: 150px;
+    padding: 20px;
+  }
+  .img1, .img3, .img4, .img5, .img6 {
+    grid-row: span 1;
+    grid-column: span 1;
+  }
+  .img2 {
+    grid-row: span 2;
+    grid-column: span 1;
+  }
 
-  /* Portraits plus grands */
-  .img2 { grid-row: span 2; grid-column: span 1; } /* double hauteur sur mobile */
+  /* Centrage du menu mobile */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  nav li {
+    margin: 10px 0;
+  }
+
+  nav li ul {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  nav li.active ul {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 </style>
 </head>
@@ -102,7 +206,15 @@ footer {
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
-    <li><a href="../gallery.html">Galerie</a></li>
+    <li>
+      <a href="#" class="menu-toggle">Galerie ▾</a>
+      <ul>
+        <li><a href="../gallery/animaux.html">Animaux</a></li>
+        <li><a href="../gallery/paysage.html">Paysage</a></li>
+        <li><a href="../gallery/portrait.html">Portrait</a></li>
+        <li><a href="../gallery/urbain.html">Urbain</a></li>
+      </ul>
+    </li>
     <li><a href="../about.html">À propos</a></li>
   </ul>
 </nav>
@@ -142,6 +254,21 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   loop: true,
   dragToClose: true,
   animated: true
+});
+
+/* ----- SCRIPT MENU MOBILE ----- */
+const menuToggle = document.querySelector('.menu-toggle');
+const galleryMenu = menuToggle.parentElement;
+
+menuToggle.addEventListener('click', (e) => {
+  e.preventDefault();
+  galleryMenu.classList.toggle('active');
+});
+
+document.addEventListener('click', (e) => {
+  if (!galleryMenu.contains(e.target)) {
+    galleryMenu.classList.remove('active');
+  }
 });
 </script>
 
