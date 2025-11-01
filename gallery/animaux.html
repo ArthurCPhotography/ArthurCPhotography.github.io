@@ -65,7 +65,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 
 /* --- TAILLES ALÉATOIRES --- */
-/* Portraits toujours plus grands en hauteur */
 .img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
 .img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
 .img3 { grid-column: span 3; grid-row: span 2; }  /* paysage plus petit */
@@ -89,6 +88,22 @@ footer {
 @media (max-width: 600px) {
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
   .gallery a { grid-column: span 2; grid-row: span 1; }
+}
+
+/* ----- ANIMATION ÉCLATEMENT ----- */
+@keyframes explodeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2) rotate(45deg);
+  }
+}
+
+.fancybox-explodeOut {
+  animation: explodeOut 0.5s forwards;
 }
 </style>
 </head>
@@ -139,7 +154,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   dragToClose: true,
   animated: true,
   showClass: "fancybox-zoomIn",
-  hideClass: "fancybox-zoomOut",
+  hideClass: "fancybox-explodeOut",
   speed: 400
 });
 </script>
