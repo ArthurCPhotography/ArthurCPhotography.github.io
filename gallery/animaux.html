@@ -48,14 +48,15 @@
   /* ----- GALERIE ----- */
   .gallery {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
     gap: 20px;
     padding: 20px 40px;
   }
   .gallery a img {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    height: 250px;
+    object-fit: cover;            /* recadrage intelligent */
+    object-position: center top;  /* sujet centré sur le haut */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -75,9 +76,13 @@
   }
 
   /* ----- RESPONSIVE ----- */
-  @media (max-width: 768px) {
-    .gallery { grid-template-columns: 1fr; }
+  @media (max-width: 1024px) {
+    .gallery { grid-template-columns: repeat(2, 1fr); }
     .gallery a img { height: 250px; }
+  }
+  @media (max-width: 600px) {
+    .gallery { grid-template-columns: 1fr; }
+    .gallery a img { height: 200px; }
     nav li { margin: 0 10px; }
   }
 </style>
@@ -99,11 +104,11 @@
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
-    <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
+  <a href="../images/animaux/Photo1-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+    <img src="../images/animaux/Photo1-animaux.jpg" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
-    <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
+  <a href="../images/animaux/Photo2-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
+    <img src="../images/animaux/Photo2-animaux.jpg" alt="Éléphant">
   </a>
   <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane">
     <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
