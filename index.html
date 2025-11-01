@@ -72,7 +72,6 @@
     pointer-events: auto;
   }
 
-  /* ✅ Ligne entière cliquable et texte centré */
   nav li ul li {
     width: 100%;
   }
@@ -108,10 +107,10 @@
     gap: 20px;
     padding: 20px 40px;
   }
-  .gallery a { display: block; position: relative; }
+  .gallery div { display: block; position: relative; }
 
   /* Première image pleine largeur */
-  .gallery a:first-child img {
+  .gallery div:first-child img {
     width: 100%;
     border-radius: 12px;
     object-fit: cover;
@@ -119,28 +118,28 @@
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  .gallery a:first-child img:hover {
+  .gallery div:first-child img:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
 
   /* Images suivantes quinconce */
-  .gallery a:not(:first-child) img {
+  .gallery div:not(:first-child) img {
     width: 100%;
     border-radius: 12px;
     object-fit: cover;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
-  .gallery a:not(:first-child) img:hover {
+  .gallery div:not(:first-child) img:hover {
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
 
   /* Quinconce */
-  .gallery a:nth-child(2) { margin-top: 60px; }
-  .gallery a:nth-child(3) { margin-top: 120px; }
-  .gallery a:nth-child(4) { margin-top: 60px; }
+  .gallery div:nth-child(2) { margin-top: 60px; }
+  .gallery div:nth-child(3) { margin-top: 120px; }
+  .gallery div:nth-child(4) { margin-top: 60px; }
 
   /* ----- FOOTER ----- */
   footer {
@@ -157,8 +156,8 @@
   }
   @media (max-width: 768px) {
     .gallery { grid-template-columns: 1fr; }
-    .gallery a:nth-child(n) { margin-top: 0; }
-    .gallery a:first-child img { height: 250px; }
+    .gallery div:nth-child(n) { margin-top: 0; }
+    .gallery div:first-child img { height: 250px; }
     nav li { margin: 0 10px; }
   }
 </style>
@@ -189,10 +188,10 @@
 </header>
 
 <section class="gallery">
-  <img src="images/index/Photo1-index.jpg" alt="Photo 1">
-  <img src="images/index/Photo2-index.jpg" alt="Photo 2">
-  <img src="images/index/Photo3-index.jpg" alt="Photo 3">
-  <img src="images/index/Photo4-index.jpg" alt="Photo 4">
+  <div><img src="images/index/Photo1-index.jpg" alt="Photo 1"></div>
+  <div><img src="images/index/Photo2-index.jpg" alt="Photo 2"></div>
+  <div><img src="images/index/Photo3-index.jpg" alt="Photo 3"></div>
+  <div><img src="images/index/Photo4-index.jpg" alt="Photo 4"></div>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
