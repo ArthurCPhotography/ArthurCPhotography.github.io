@@ -152,11 +152,9 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   speed: 400,
   on: {
     closing: (fancybox) => {
-      // pour chaque image, définir une translation aléatoire pour l'effet mosaïque
-      fancybox.Carousel.slides.forEach((slide) => {
-        slide.$el.style.setProperty('--dx', (Math.random()*200-100) + 'px');
-        slide.$el.style.setProperty('--dy', (Math.random()*200-100) + 'px');
-      });
+      const slide = fancybox.getSlide(); // slide active uniquement
+      slide.$el.style.setProperty('--dx', (Math.random()*200-100) + 'px');
+      slide.$el.style.setProperty('--dy', (Math.random()*200-100) + 'px');
     }
   }
 });
