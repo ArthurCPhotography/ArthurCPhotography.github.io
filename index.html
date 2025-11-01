@@ -211,10 +211,10 @@
 </header>
 
 <section class="gallery">
-  <img src="images/index/Photo1-index.jpg" alt="Photo 1">
-  <img src="images/index/Photo2-index.jpg" alt="Photo 2">
-  <img src="images/index/Photo3-index.jpg" alt="Photo 3">
-  <img src="images/index/Photo4-index.jpg" alt="Photo 4">
+  <a><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
+  <a><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
+  <a><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
+  <a><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
@@ -225,9 +225,9 @@
   const submenu = galerie2.nextElementSibling;
 
   galerie2.addEventListener('click', (e) => {
-    e.stopPropagation(); // empêche fermeture immédiate
+    e.stopPropagation();
     submenu.classList.toggle('show');
-    galerie2.classList.toggle('active');
+    galerie2.classList.toggle('active'); // texte bleu
   });
 
   // Fermer le menu si on clique ailleurs
