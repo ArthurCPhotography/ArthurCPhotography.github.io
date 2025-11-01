@@ -66,13 +66,14 @@
     z-index: 1001;
     white-space: nowrap;
   }
+  /* Hover PC */
   nav li:hover ul {
     opacity: 1;
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
 
-  /* Ligne entière cliquable et texte centré */
+  /* ✅ Ligne entière cliquable et texte centré */
   nav li ul li {
     width: 100%;
   }
@@ -81,7 +82,7 @@
     width: 100%;
     padding: 10px 16px;
     font-weight: normal;
-    text-align: center; /* texte centré */
+    text-align: center;
     color: #222;
     border-radius: 6px;
   }
@@ -95,6 +96,10 @@
     cursor: default;
     pointer-events: none;
   }
+
+  /* Texte bleu sur PC et mobile */
+  nav li:hover > a.no-click { color: #1e90ff; } /* PC */
+  .no-click.active { color: #1e90ff; }          /* Mobile */
 
   /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
@@ -160,28 +165,8 @@
     .gallery { grid-template-columns: 1fr; }
     .gallery a:nth-child(n) { margin-top: 0; }
     .gallery a:first-child img { height: 250px; }
-
-    /* Centrer menu mobile et sous-menu */
-    nav ul { justify-content: center; flex-wrap: wrap; }
     nav li { margin: 0 10px; }
-    nav li ul { 
-      position: absolute;
-      top: 100%;
-      left: 0;
-      transform: none;
-      opacity: 0;
-      pointer-events: none;
-      background: #f8f8f8;
-      width: 100%;
-      border-radius: 0;
-      flex-direction: column;
-    }
-    nav li ul.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .no-click.active { color: #1e90ff; }
-    nav li ul li a { text-align: center; }
+    nav li ul { left: 50%; transform: translate(-50%, 0); } /* centrer sur mobile */
   }
 </style>
 </head>
@@ -211,32 +196,30 @@
 </header>
 
 <section class="gallery">
-  <a><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
-  <a><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
-  <a><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
-  <a><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
+  <a><img src="images/index/Photo1-index.JPG" alt="Photo 1"></a>
+  <a><img src="images/index/Photo2-index.JPG" alt="Photo 2"></a>
+  <a><img src="images/index/Photo3-index.JPG" alt="Photo 3"></a>
+  <a><img src="images/index/Photo4-index.JPG" alt="Photo 4"></a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script>
-  // Menu déroulant mobile
-  const galerie2 = document.querySelector('.no-click');
-  const submenu = galerie2.nextElementSibling;
+const galerie2 = document.querySelector('.no-click');
+const submenu = galerie2.nextElementSibling;
 
-  galerie2.addEventListener('click', (e) => {
-    e.stopPropagation();
-    submenu.classList.toggle('show');
-    galerie2.classList.toggle('active'); // texte bleu
-  });
+galerie2.addEventListener('click', (e) => {
+  e.stopPropagation();
+  submenu.classList.toggle('show');
+  galerie2.classList.toggle('active'); // texte bleu mobile
+});
 
-  // Fermer le menu si on clique ailleurs
-  document.addEventListener('click', (e) => {
-    if (!submenu.contains(e.target) && !galerie2.contains(e.target)) {
-      submenu.classList.remove('show');
-      galerie2.classList.remove('active');
-    }
-  });
+document.addEventListener('click', (e) => {
+  if (!submenu.contains(e.target) && !galerie2.contains(e.target)) {
+    submenu.classList.remove('show');
+    galerie2.classList.remove('active');
+  }
+});
 </script>
 
 </body>
