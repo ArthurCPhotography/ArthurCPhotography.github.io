@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galerie Animaux - Arthur C Photography</title>
 
-<!-- CSS Fancybox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
 <style>
@@ -65,12 +64,13 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 }
 
 /* --- TAILLES ALÉATOIRES --- */
-.img1 { grid-column: span 6; grid-row: span 2; }
-.img2 { grid-column: span 3; grid-row: span 3; }
-.img3 { grid-column: span 3; grid-row: span 2; }
-.img4 { grid-column: span 4; grid-row: span 1; }
-.img5 { grid-column: span 4; grid-row: span 2; }
-.img6 { grid-column: span 4; grid-row: span 1; }
+/* Portraits toujours plus grands en hauteur */
+.img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
+.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
+.img3 { grid-column: span 3; grid-row: span 2; }  /* paysage plus petit */
+.img4 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
+.img5 { grid-column: span 4; grid-row: span 2; }  /* paysage moyen */
+.img6 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
 
 /* ----- FOOTER ----- */
 footer {
@@ -88,16 +88,6 @@ footer {
 @media (max-width: 600px) {
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
   .gallery a { grid-column: span 2; grid-row: span 1; }
-}
-
-/* ----- ANIMATION ÉCLATEMENT MOSAÏQUE ----- */
-@keyframes mosaicExplode {
-  0% { transform: translate(0,0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity: 0; }
-}
-
-.fancybox-mosaicOut {
-  animation: mosaicExplode 0.6s forwards;
 }
 </style>
 </head>
@@ -140,23 +130,12 @@ footer {
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
   dragToClose: true,
-  animated: false,         // désactive animations d'ouverture/fermeture zoom
-  showClass: "fancybox-fadeIn",
-  hideClass: "fancybox-fadeOut fancybox-mosaicOut", // fondu + mosaïque
-  speed: 400,
-  on: {
-    closing: (fancybox) => {
-      const slide = fancybox.getSlide();
-      slide.$el.style.setProperty('--dx', (Math.random()*200-100) + 'px');
-      slide.$el.style.setProperty('--dy', (Math.random()*200-100) + 'px');
-    }
-  }
+  animated: true
 });
 </script>
 
