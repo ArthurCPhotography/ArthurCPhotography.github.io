@@ -165,24 +165,24 @@
 </header>
 
 <section class="gallery">
-  <!-- Exemples : tu peux ajouter class="square" sur img pour portrait -->
-  <a href="images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
-    <img src="images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
+  <!-- Exemples : ajoute class="square" sur img pour portrait -->
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
+    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
   </a>
-  <a href="images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
-    <img src="images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne" class="square">
+  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
+    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne" class="square">
   </a>
-  <a href="images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran">
-    <img src="images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" class="square">
+  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran">
+    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" class="square">
   </a>
-  <a href="images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre">
-    <img src="images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre">
+    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
   </a>
-  <a href="images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène">
-    <img src="images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
+  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène">
+    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
   </a>
-  <a href="images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin">
-    <img src="images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
+  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin">
+    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
   </a>
 </section>
 
@@ -204,7 +204,7 @@ const submenu = galerie.nextElementSibling;
 galerie.addEventListener('click', (e) => {
   e.stopPropagation();
   submenu.classList.toggle('show');
-  galerie.classList.toggle('active'); // texte bleu mobile
+  galerie.classList.toggle('active');
 });
 
 document.addEventListener('click', (e) => {
