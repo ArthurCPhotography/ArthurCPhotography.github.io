@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Galerie Animaux - Arthur C Photography</title>
 
-<!-- CSS Fancybox -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
 <style>
@@ -28,14 +27,8 @@ nav {
   padding: 15px 0;
   z-index: 1000;
 }
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-}
-nav li { position: relative; margin: 0 20px; }
+nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
+nav li { margin: 0 20px; }
 nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
 nav a:hover { color: #1e90ff; }
 
@@ -70,9 +63,14 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   transform: scale(1.05);
 }
 
-/* Portrait / Paysage */
-.portrait { grid-row: span 3; grid-column: span 3; }
-.paysage { grid-row: span 2; grid-column: span 6; }
+/* --- TAILLES ALÉATOIRES --- */
+/* Portraits toujours plus grands en hauteur */
+.img1 { grid-column: span 6; grid-row: span 2; }  /* paysage large */
+.img2 { grid-column: span 3; grid-row: span 3; }  /* portrait */
+.img3 { grid-column: span 3; grid-row: span 2; }  /* paysage plus petit */
+.img4 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
+.img5 { grid-column: span 4; grid-row: span 2; }  /* paysage moyen */
+.img6 { grid-column: span 4; grid-row: span 1; }  /* paysage petit */
 
 /* ----- FOOTER ----- */
 footer {
@@ -86,8 +84,6 @@ footer {
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
   .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
-  .portrait { grid-column: span 3; grid-row: span 3; }
-  .paysage { grid-column: span 6; grid-row: span 2; }
 }
 @media (max-width: 600px) {
   .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
@@ -111,46 +107,30 @@ footer {
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+  <a href="../images/animaux/Photo1-animaux.JPG" class="img1" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
     <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
+  <a href="../images/animaux/Photo2-animaux.JPG" class="img2" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
     <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
   </a>
-  <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane">
+  <a href="../images/animaux/Photo3-animaux.jpg" class="img3" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane">
     <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
   </a>
-  <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.jpg" class="img4" data-fancybox="gallery-animaux" data-caption="Zèbre">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
-  <a href="../images/animaux/Photo5-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Léopard">
+  <a href="../images/animaux/Photo5-animaux.jpg" class="img5" data-fancybox="gallery-animaux" data-caption="Léopard">
     <img src="../images/animaux/Photo5-animaux.jpg" alt="Léopard">
   </a>
-  <a href="../images/animaux/Photo6-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Flamant rose">
+  <a href="../images/animaux/Photo6-animaux.jpg" class="img6" data-fancybox="gallery-animaux" data-caption="Flamant rose">
     <img src="../images/animaux/Photo6-animaux.jpg" alt="Flamant rose">
   </a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
-<!-- JS Fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-
 <script>
-// Détection portrait/paysage automatique
-const images = document.querySelectorAll('.gallery img');
-
-images.forEach(img => {
-  img.onload = () => {
-    if(img.naturalHeight > img.naturalWidth){
-      img.parentElement.classList.add('portrait');
-    } else {
-      img.parentElement.classList.add('paysage');
-    }
-  };
-});
-
-// Initialisation Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
