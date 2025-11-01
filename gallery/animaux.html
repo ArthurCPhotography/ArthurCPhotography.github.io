@@ -9,82 +9,101 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #fff;
-    color: #222;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #222;
+  text-align: center;
+}
 
-  /* ----- MENU ----- */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #f8f8f8;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-    z-index: 1000;
-  }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-  nav li { position: relative; margin: 0 20px; }
-  nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
-  nav a:hover { color: #1e90ff; }
+/* ----- MENU ----- */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #f8f8f8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  z-index: 1000;
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+nav li { position: relative; margin: 0 20px; }
+nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
+nav a:hover { color: #1e90ff; }
 
-  /* ----- HEADER ----- */
-  header { padding: 100px 20px 40px; }
-  h1 { font-size: 2.5em; margin-bottom: 10px; }
-  p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
+/* ----- HEADER ----- */
+header { padding: 100px 20px 40px; }
+h1 { font-size: 2.5em; margin-bottom: 10px; }
+p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE ----- */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 20px 40px;
-  }
-  .gallery a img {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .gallery a img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-  }
+/* ----- GALERIE MOSAÏQUE STYLE COURDESSES ----- */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: 150px;
+  gap: 10px;
+  padding: 20px 40px;
+}
 
-  /* ----- FOOTER ----- */
-  footer {
-    background: #f0f0f0;
-    color: #777;
-    padding: 20px;
-    font-size: 0.9em;
-    margin-top: 40px;
-  }
+.gallery a {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
 
-  /* ----- RESPONSIVE ----- */
-  @media (max-width: 768px) {
-    .gallery { grid-template-columns: 1fr; }
-    .gallery a img { height: 250px; }
-    nav li { margin: 0 10px; }
-  }
+.gallery a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery a img:hover {
+  transform: scale(1.05);
+}
+
+/* --- Définition des positions type Courdesses --- */
+.img1 { grid-column: span 6; grid-row: span 2; } /* image large horizontale */
+.img2 { grid-column: span 3; grid-row: span 2; } /* image portrait */
+.img3 { grid-column: span 3; grid-row: span 1; }
+.img4 { grid-column: span 4; grid-row: span 1; }
+.img5 { grid-column: span 4; grid-row: span 2; }
+.img6 { grid-column: span 4; grid-row: span 1; }
+/* ajouter autant que nécessaire pour 8-12 images */
+
+footer {
+  background: #f0f0f0;
+  color: #777;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
+  .img1 { grid-column: span 6; grid-row: span 2; }
+  .img2 { grid-column: span 3; grid-row: span 2; }
+  .img3 { grid-column: span 3; grid-row: span 1; }
+}
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 100px; }
+  .gallery a { grid-column: span 2; grid-row: span 1; }
+}
 </style>
 </head>
 <body>
 
-<!-- MENU -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
@@ -99,17 +118,23 @@
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
+  <a href="../images/animaux/Photo1-animaux.JPG" class="img1" data-fancybox="gallery-animaux" data-caption="Lion dans la savane">
     <img src="../images/animaux/Photo1-animaux.JPG" alt="Lion">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Éléphant près de l’eau">
+  <a href="../images/animaux/Photo2-animaux.JPG" class="img2" data-fancybox="gallery-animaux" data-caption="Éléphant">
     <img src="../images/animaux/Photo2-animaux.JPG" alt="Éléphant">
   </a>
-  <a href="../images/animaux/Photo3-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Girafe dans la savane">
+  <a href="../images/animaux/Photo3-animaux.jpg" class="img3" data-fancybox="gallery-animaux" data-caption="Girafe">
     <img src="../images/animaux/Photo3-animaux.jpg" alt="Girafe">
   </a>
-  <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.jpg" class="img4" data-fancybox="gallery-animaux" data-caption="Zèbre">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
+  </a>
+  <a href="../images/animaux/Photo5-animaux.jpg" class="img5" data-fancybox="gallery-animaux" data-caption="Léopard">
+    <img src="../images/animaux/Photo5-animaux.jpg" alt="Léopard">
+  </a>
+  <a href="../images/animaux/Photo6-animaux.jpg" class="img6" data-fancybox="gallery-animaux" data-caption="Flamant rose">
+    <img src="../images/animaux/Photo6-animaux.jpg" alt="Flamant rose">
   </a>
 </section>
 
@@ -117,17 +142,13 @@
 
 <!-- JS Fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-
-<!-- Initialisation Fancybox -->
 <script>
-  Fancybox.bind("[data-fancybox='gallery-animaux']", {
-    Toolbar: {
-      display: ["close"] // ne garder que le bouton fermer
-    },
-    loop: true,
-    dragToClose: true,
-    animated: true
-  });
+Fancybox.bind("[data-fancybox='gallery-animaux']", {
+  Toolbar: { display: ["close"] },
+  loop: true,
+  dragToClose: true,
+  animated: true
+});
 </script>
 
 </body>
