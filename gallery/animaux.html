@@ -90,20 +90,14 @@ footer {
   .gallery a { grid-column: span 2; grid-row: span 1; }
 }
 
-/* ----- ANIMATION ÉCLATEMENT ----- */
-@keyframes explodeOut {
-  0% {
-    opacity: 1;
-    transform: scale(1) rotate(0deg);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(2) rotate(45deg);
-  }
+/* ----- ANIMATION ÉCLATEMENT MOSAÏQUE ----- */
+@keyframes mosaicExplode {
+  0% { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.5); opacity: 0; }
 }
 
-.fancybox-explodeOut {
-  animation: explodeOut 0.5s forwards;
+.fancybox-mosaicOut {
+  animation: mosaicExplode 0.6s forwards;
 }
 </style>
 </head>
@@ -154,8 +148,17 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   dragToClose: true,
   animated: true,
   showClass: "fancybox-zoomIn",
-  hideClass: "fancybox-explodeOut",
-  speed: 400
+  hideClass: "fancybox-mosaicOut",
+  speed: 400,
+  on: {
+    closing: (fancybox) => {
+      // pour chaque image, définir une translation aléatoire pour l'effet mosaïque
+      fancybox.Carousel.slides.forEach((slide) => {
+        slide.$el.style.setProperty('--dx', (Math.random()*200-100) + 'px');
+        slide.$el.style.setProperty('--dy', (Math.random()*200-100) + 'px');
+      });
+    }
+  }
 });
 </script>
 
