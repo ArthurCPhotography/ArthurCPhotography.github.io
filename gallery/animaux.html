@@ -9,82 +9,77 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #fff;
-    color: #222;
-    text-align: center;
-  }
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #fff;
+  color: #222;
+}
 
-  /* ----- MENU ----- */
-  nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: #f8f8f8;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: center;
-    padding: 15px 0;
-    z-index: 1000;
-  }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
-  nav li { position: relative; margin: 0 20px; }
-  nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
-  nav a:hover { color: #1e90ff; }
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #f8f8f8;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  z-index: 1000;
+}
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+nav li { margin: 0 20px; }
+nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
+nav a:hover { color: #1e90ff; }
 
-  /* ----- HEADER ----- */
-  header { padding: 100px 20px 40px; }
-  h1 { font-size: 2.5em; margin-bottom: 10px; }
-  p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
+header { padding: 100px 20px 40px; text-align: center; }
+h1 { font-size: 2.5em; margin-bottom: 10px; }
+p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE ----- */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
-    gap: 10px;
-    padding: 20px 40px;
-  }
-  .gallery a img {
-    width: 100%;
-    aspect-ratio: 1/1;       /* carré parfait */
-    object-fit: cover;       /* recadrage pour remplir le carré */
-    border-radius: 12px;
-    transition: transform 0.3s ease;
-  }
-  .gallery a img:hover {
-    transform: scale(1.03);
-  }
+/* Grille uniforme 4 colonnes */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  padding: 20px 40px;
+}
+.gallery a img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+.gallery a img:hover {
+  transform: scale(1.03);
+}
 
-  /* ----- FOOTER ----- */
-  footer {
-    background: #f0f0f0;
-    color: #777;
-    padding: 20px;
-    font-size: 0.9em;
-    margin-top: 40px;
-  }
+footer {
+  background: #f0f0f0;
+  color: #777;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
 
-  /* ----- RESPONSIVE ----- */
-  @media (max-width: 1024px) {
-    .gallery { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .gallery { grid-template-columns: 1fr; }
-    nav li { margin: 0 10px; }
-  }
+/* Responsive */
+@media (max-width: 1024px) {
+  .gallery { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .gallery { grid-template-columns: 1fr; }
+  nav li { margin: 0 10px; }
+}
 </style>
 </head>
 <body>
 
-<!-- MENU -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
@@ -115,15 +110,14 @@
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
-<!-- JS Fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-  Fancybox.bind("[data-fancybox='gallery-animaux']", {
-    Toolbar: true,
-    loop: true,
-    dragToClose: true,
-    animated: true
-  });
+Fancybox.bind("[data-fancybox='gallery-animaux']", {
+  Toolbar: true,
+  loop: true,
+  dragToClose: true,
+  animated: true
+});
 </script>
 
 </body>
