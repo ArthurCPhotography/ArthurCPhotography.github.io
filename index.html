@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Arthur C Photography</title>
 <style>
-  /* reset box-sizing */
   *, *::before, *::after { box-sizing: border-box; }
 
   body {
@@ -48,49 +47,33 @@
   }
   nav a:hover { color: #1e90ff; }
 
-  /* ----- SOUS-MENU CENTRÉ, ADAPTÉ AU TEXTE (PAS D'ESPACE EN TROP) ----- */
+  /* ----- SOUS-MENU ----- */
   nav li ul {
     position: absolute;
     top: 100%;
     left: 50%;
-
-    /* centre horizontalement par rapport au parent */
     transform: translate(-50%, -8px);
-
     background: #f8f8f8;
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    overflow: visible; /* on veut que le contenu définisse la largeur */
     display: flex;
     flex-direction: column;
-
-    /* crucial : s'adapte à la largeur du contenu */
-    width: -moz-fit-content;
-    width: fit-content;        /* moderne */
-    max-width: calc(100vw - 40px); /* sécurité mobile */
-    padding: 6px 6px;         /* petit padding autour des items */
+    width: fit-content;
+    padding: 6px 6px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.28s ease, transform 0.28s ease;
     z-index: 1001;
-    white-space: nowrap; /* empêche retour à la ligne */
+    white-space: nowrap;
   }
-
-  /* ouverture au hover (avec glissement et fondu) */
   nav li:hover ul {
     opacity: 1;
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
-
-  nav li ul li {
-    width: auto; /* largeur commandée par le contenu */
-  }
-
-  /* Liens du sous-menu : petit padding horizontal seulement */
   nav li ul li a {
     display: block;
-    padding: 8px 12px; /* padding léger, contrôle l'espace latéral */
+    padding: 8px 12px;
     font-weight: normal;
     text-align: left;
     color: #222;
@@ -98,6 +81,12 @@
   nav li ul li a:hover {
     background: #eaeaea;
     color: #000;
+  }
+
+  /* Désactivation du clic sur Galerie 2 */
+  .no-click {
+    cursor: default;
+    pointer-events: none;
   }
 
   /* ----- HEADER ----- */
@@ -165,8 +154,6 @@
     .gallery a:nth-child(n) { margin-top: 0; }
     .gallery a:first-child img { height: 250px; }
     nav li { margin: 0 10px; }
-    /* Sur mobile on aligne le sous-menu sur la gauche du lien pour rester lisible */
-    nav li ul { left: 50%; transform: translate(-50%, -6px); }
   }
 </style>
 </head>
@@ -178,7 +165,7 @@
     <li><a href="index.html">Accueil</a></li>
     <li><a href="gallery.html">Galerie</a></li>
     <li>
-      <a href="#" aria-haspopup="true" aria-expanded="false">Galerie 2 ▾</a>
+      <a class="no-click">Galerie 2 ▾</a>
       <ul>
         <li><a href="gallery/animaux.html">Animaux</a></li>
         <li><a href="gallery/paysage.html">Paysage</a></li>
@@ -196,10 +183,10 @@
 </header>
 
 <section class="gallery">
-  <a href="javascript:void(0)"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
-  <a href="javascript:void(0)"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
-  <a href="javascript:void(0)"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
-  <a href="javascript:void(0)"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
+  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
+  <a href="#"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
+  <a href="#"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
+  <a href="#"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
