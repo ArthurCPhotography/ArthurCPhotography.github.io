@@ -57,11 +57,11 @@ nav li ul {
   left: 50%;
   transform: translate(-50%, -8px);
   background: #f8f8f8;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
   display: flex;
   flex-direction: column;
-  min-width: 160px;
+  min-width: 180px; /* largeur harmonisée avec l’index */
   padding: 6px 0;
   opacity: 0;
   pointer-events: none;
@@ -70,6 +70,7 @@ nav li ul {
   white-space: nowrap;
   text-align: center;
 }
+
 nav li:hover ul {
   opacity: 1;
   transform: translate(-50%, 0);
@@ -79,15 +80,18 @@ nav li:hover ul {
 nav li ul li {
   width: 100%;
 }
+
 nav li ul li a {
   display: block;
   width: 100%;
-  padding: 10px 16px;
+  padding: 10px 20px;
   font-weight: normal;
   color: #222;
-  border-radius: 6px;
+  border-radius: 0;
   text-align: center;
+  transition: background 0.3s ease, color 0.3s ease;
 }
+
 nav li ul li a:hover {
   background: #eaeaea;
   color: #000;
@@ -140,12 +144,12 @@ p {
 }
 
 /* --- TAILLES ALÉATOIRES --- */
-.img1 { grid-column: span 6; grid-row: span 3; }
+.img1 { grid-column: span 6; grid-row: span 2; }
 .img2 { grid-column: span 3; grid-row: span 3; }
 .img3 { grid-column: span 3; grid-row: span 3; }
-.img4 { grid-column: span 5; grid-row: span 3; }
+.img4 { grid-column: span 5; grid-row: span 2; }
 .img5 { grid-column: span 3; grid-row: span 2; }
-.img6 { grid-column: span 4; grid-row: span 3; }
+.img6 { grid-column: span 4; grid-row: span 1; }
 
 /* ----- FOOTER ----- */
 footer {
@@ -198,6 +202,7 @@ footer {
     background: #f8f8f8;
     opacity: 0;
     pointer-events: none;
+    width: 100%;
   }
 
   nav li.active ul {
@@ -208,6 +213,7 @@ footer {
   nav li ul li a {
     text-align: center;
     display: block;
+    width: 100%;
   }
 }
 </style>
