@@ -112,7 +112,6 @@ footer {
   <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
-  <!-- Ajoute d'autres images si nécessaire -->
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
@@ -121,10 +120,26 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
-  Toolbar: true,
-  loop: true,
+  Toolbar: { display: ["close"] },   // seul bouton fermer
+  Carousel: {
+    Navigation: true,
+    infinite: true
+  },
   dragToClose: true,
-  animated: true
+  animated: true,
+  on: {
+    ready: (fancybox) => {
+      // Roulette de souris pour passer à l'image suivante/précédente
+      fancybox.Carousel.container.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+          fancybox.Carousel.next();
+        } else {
+          fancybox.Carousel.prev();
+        }
+      }, { passive: false });
+    }
+  }
 });
 </script>
 
