@@ -45,12 +45,8 @@
     padding: 8px 12px;
     display: block;
   }
-  nav a:hover { color: #1e90ff; }
-
-  /* Survol bleu de Galerie 2 quand le menu s'ouvre */
-  nav li:hover > a.no-click,
-  nav li.active > a.no-click {
-    color: #1e90ff;
+  nav a:hover, nav li.open > a {
+    color: #1e90ff; /* survol bleu pour Galerie 2 */
   }
 
   /* ----- SOUS-MENU ----- */
@@ -72,16 +68,12 @@
     z-index: 1001;
     white-space: nowrap;
   }
-  nav li:hover ul,
-  nav li.active ul {
+  nav li:hover ul {
     opacity: 1;
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
 
-  nav li ul li {
-    width: 100%;
-  }
   nav li ul li a {
     display: block;
     width: 100%;
@@ -96,11 +88,7 @@
     color: #000;
   }
 
-  /* Désactivation du clic sur Galerie 2 */
-  .no-click {
-    cursor: default;
-    pointer-events: none;
-  }
+  .no-click { cursor: default; pointer-events: none; }
 
   /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
@@ -114,12 +102,10 @@
     gap: 20px;
     padding: 20px 40px;
   }
-  .gallery a { display: block; position: relative; }
+  .gallery a { display: block; position: relative; pointer-events: none; } /* désactive le lien */
 
-  /* Première image pleine largeur sur la ligne 1 */
-  .gallery a:first-child {
-    grid-column: 1 / -1;
-  }
+  /* Première image pleine largeur */
+  .gallery a:first-child { grid-column: 1 / -1; }
   .gallery a:first-child img {
     width: 100%;
     border-radius: 12px;
@@ -133,12 +119,11 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
 
-  /* Les 3 images suivantes sur la ligne 2 */
+  /* Images suivantes quinconce */
   .gallery a:not(:first-child) img {
     width: 100%;
     border-radius: 12px;
     object-fit: cover;
-    height: 200px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   }
@@ -146,6 +131,11 @@
     transform: scale(1.03);
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
   }
+
+  /* Quinconce */
+  .gallery a:nth-child(2) { margin-top: 60px; }
+  .gallery a:nth-child(3) { margin-top: 120px; }
+  .gallery a:nth-child(4) { margin-top: 60px; }
 
   /* ----- FOOTER ----- */
   footer {
@@ -162,9 +152,15 @@
   }
   @media (max-width: 768px) {
     .gallery { grid-template-columns: 1fr; }
+    .gallery a:nth-child(n) { margin-top: 0; }
     .gallery a:first-child img { height: 250px; }
-    .gallery a:not(:first-child) img { height: 180px; }
     nav li { margin: 0 10px; }
+    /* sous-menu clic mobile */
+    nav li ul {
+      top: 100%;
+      left: 0;
+      transform: translate(0, -8px);
+    }
   }
 </style>
 </head>
@@ -175,7 +171,7 @@
   <ul>
     <li><a href="index.html">Accueil</a></li>
     <li><a href="gallery.html">Galerie</a></li>
-    <li class="mobile-dropdown">
+    <li id="gal2">
       <a class="no-click">Galerie 2 ▾</a>
       <ul>
         <li><a href="gallery/animaux.html">Animaux</a></li>
@@ -194,23 +190,19 @@
 </header>
 
 <section class="gallery">
-  <a><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
-  <a><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
-  <a><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
-  <a><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
+  <a href="#"><img src="images/index/Photo1-index.jpg" alt="Photo 1"></a>
+  <a href="#"><img src="images/index/Photo2-index.jpg" alt="Photo 2"></a>
+  <a href="#"><img src="images/index/Photo3-index.jpg" alt="Photo 3"></a>
+  <a href="#"><img src="images/index/Photo4-index.jpg" alt="Photo 4"></a>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script>
-  // Gestion du menu déroulant sur mobile (clic)
-  document.addEventListener('DOMContentLoaded', function() {
-    const mobileDropdown = document.querySelector('.mobile-dropdown > a');
-    mobileDropdown.addEventListener('click', function(e) {
-      e.preventDefault();
-      const parentLi = this.parentElement;
-      parentLi.classList.toggle('active');
-    });
+  // menu déroulant mobile par clic
+  const gal2 = document.getElementById('gal2');
+  gal2.addEventListener('click', () => {
+    gal2.classList.toggle('open');
   });
 </script>
 
