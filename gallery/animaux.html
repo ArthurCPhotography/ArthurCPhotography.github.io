@@ -37,10 +37,7 @@
     display: flex;
     align-items: center;
   }
-  nav li {
-    position: relative;
-    margin: 0 20px;
-  }
+  nav li { position: relative; margin: 0 20px; }
   nav a {
     color: #222;
     text-decoration: none;
@@ -90,17 +87,12 @@
   }
 
   /* Désactivation du clic sur Galerie */
-  .no-click {
-    cursor: default;
-    pointer-events: none;
-  }
+  .no-click { cursor: default; pointer-events: none; }
   nav li:hover > a.no-click { color: #1e90ff; } /* PC */
   .no-click.active { color: #1e90ff; }          /* Mobile */
 
   /* ----- HEADER ----- */
-  header {
-    padding: 100px 20px 40px;
-  }
+  header { padding: 100px 20px 40px; }
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
@@ -146,14 +138,14 @@
 </head>
 <body>
 
-<!-- NAVIGATION REMPLACÉE -->
+<!-- NAVIGATION OPTIMISÉE -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
     <li>
       <a class="no-click">Galerie ▾</a>
       <ul>
-        <li><a href="aérien.html">Aérien</a></li>
+        <li><a href="aérien.html">Aérien</a></li> <!-- ton ajout -->
         <li><a href="animaux.html">Animaux</a></li>
         <li><a href="paysage.html">Paysage</a></li>
         <li><a href="portrait.html">Portrait</a></li>
@@ -170,23 +162,23 @@
 </header>
 
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" class="img1" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle">
-    <img src="../images/animaux/Photo1-animaux.JPG" alt="Cygne">
+  <a href="../images/animaux/Photo1-animaux.JPG" class="img1" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" loading="lazy">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" class="img2" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle">
-    <img src="../images/animaux/Photo2-animaux.JPG" alt="Cygne">
+  <a href="../images/animaux/Photo2-animaux.JPG" class="img2" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne" loading="lazy">
   </a>
-  <a href="../images/animaux/Photo3-animaux.JPG" class="img3" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle">
-    <img src="../images/animaux/Photo3-animaux.JPG" alt="Cormoran">
+  <a href="../images/animaux/Photo3-animaux.JPG" class="img3" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" loading="lazy">
   </a>
-  <a href="../images/animaux/Photo4-animaux.JPG" class="img4" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger">
-    <img src="../images/animaux/Photo4-animaux.JPG" alt="Zèbre">
+  <a href="../images/animaux/Photo4-animaux.JPG" class="img4" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" loading="lazy">
   </a>
-  <a href="../images/animaux/Photo5-animaux.JPG" class="img5" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger">
-    <img src="../images/animaux/Photo5-animaux.JPG" alt="Hyène">
+  <a href="../images/animaux/Photo5-animaux.JPG" class="img5" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" loading="lazy">
   </a>
-  <a href="../images/animaux/Photo6-animaux.JPG" class="img6" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger">
-    <img src="../images/animaux/Photo6-animaux.JPG" alt="Babouin">
+  <a href="../images/animaux/Photo6-animaux.JPG" class="img6" data-fancybox="gallery-animaux">
+    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" loading="lazy">
   </a>
 </section>
 
