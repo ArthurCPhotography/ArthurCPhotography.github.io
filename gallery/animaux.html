@@ -121,7 +121,9 @@
 <!-- Initialisation Fancybox -->
 <script>
   Fancybox.bind("[data-fancybox='gallery-animaux']", {
-    Toolbar: true,
+    Toolbar: {
+      display: ["close"] // ne garder que le bouton fermer
+    },
     loop: true,
     dragToClose: true,
     animated: true
