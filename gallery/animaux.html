@@ -83,6 +83,7 @@
   }
   nav li ul li a:hover { background: #eaeaea; color: #000; }
 
+  /* Désactivation du clic sur Galerie */
   .no-click { cursor: default; pointer-events: none; }
   nav li:hover > a.no-click { color: #1e90ff; } /* PC */
   .no-click.active { color: #1e90ff; }          /* Mobile */
@@ -92,11 +93,10 @@
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE UNIFORME ----- */
+  /* ----- GALERIE 4 COLONNES ----- */
   .gallery {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 images par ligne */
-    grid-auto-rows: 250px; /* hauteur uniforme */
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 20px 40px;
   }
@@ -105,12 +105,20 @@
     overflow: hidden;
     border-radius: 12px;
   }
+
+  /* Images rectangulaires (paysage) */
   .gallery img {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
+  /* Images carrées (portrait) */
+  .gallery img.square {
+    height: 100%;
+    object-fit: cover;
+  }
+
   .gallery img:hover { transform: scale(1.05); }
 
   /* ----- FOOTER ----- */
@@ -124,10 +132,10 @@
 
   /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) {
-    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 600px) {
-    .gallery { grid-template-columns: 1fr; grid-auto-rows: 180px; padding: 20px; }
+    .gallery { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -156,25 +164,25 @@
   <p>Photographe — Nature & Faune</p>
 </header>
 
-<!-- GALERIE -->
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne - Grand Est">
-    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Photo1-animaux" loading="lazy">
+  <!-- Exemples : tu peux ajouter class="square" sur img pour portrait -->
+  <a href="images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
+    <img src="images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
   </a>
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne - Grand Est">
-    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Photo2-animaux" loading="lazy">
+  <a href="images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne">
+    <img src="images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne" class="square">
   </a>
-  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran - Grand Est">
-    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Photo3-animaux" loading="lazy">
+  <a href="images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran">
+    <img src="images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" class="square">
   </a>
-  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre - Afrique du Sud">
-    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Photo4-animaux" loading="lazy">
+  <a href="images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre">
+    <img src="images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
   </a>
-  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène - Afrique du Sud">
-    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Photo5-animaux" loading="lazy">
+  <a href="images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène">
+    <img src="images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
   </a>
-  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin - Afrique du Sud">
-    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Photo6-animaux" loading="lazy">
+  <a href="images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin">
+    <img src="images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
   </a>
 </section>
 
@@ -182,18 +190,14 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox avec captions
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
   dragToClose: true,
-  animated: true,
-  caption: function(fancybox, carousel, slide) {
-    return slide.$trigger.dataset.caption || '';
-  }
+  animated: true
 });
 
-// Menu déroulant mobile
+// Script pour le menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 
