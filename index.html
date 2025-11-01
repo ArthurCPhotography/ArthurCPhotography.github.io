@@ -47,11 +47,12 @@ nav a:hover {
   color: #1e90ff;
 }
 
-/* ----- SOUS-MENU (VERTICAL) AVEC EFFET DE GLISSEMENT ----- */
+/* ----- SOUS-MENU CENTRÉ ET VERTICAL ----- */
 nav li ul {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 50%;
+  transform: translate(-50%, -10px);
   background: #f8f8f8;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -60,14 +61,13 @@ nav li ul {
   display: flex;
   flex-direction: column;
   opacity: 0;
-  transform: translateY(-10px);
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 1001;
 }
 nav li:hover ul {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
   pointer-events: auto;
 }
 nav li ul li {
@@ -81,7 +81,6 @@ nav li ul li a {
 nav li ul li a:hover {
   background: #eaeaea;
   color: #000;
-  border-radius: 0;
 }
 
 /* ----- HEADER ----- */
