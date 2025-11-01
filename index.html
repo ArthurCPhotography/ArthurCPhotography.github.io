@@ -47,23 +47,25 @@ nav a:hover {
   color: #1e90ff;
 }
 
-/* ----- SOUS-MENU CENTRÉ ET VERTICAL ----- */
+/* ----- SOUS-MENU CENTRÉ ET ADAPTÉ AU TEXTE ----- */
 nav li ul {
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translate(-50%, -10px);
   background: #f8f8f8;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   overflow: hidden;
-  min-width: 180px;
   display: flex;
   flex-direction: column;
   opacity: 0;
   pointer-events: none;
+  transform: translate(-50%, -10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   z-index: 1001;
+  width: max-content; /* largeur selon texte */
+  min-width: 120px; /* largeur mini */
+  padding: 5px 0;
 }
 nav li:hover ul {
   opacity: 1;
@@ -72,9 +74,10 @@ nav li:hover ul {
 }
 nav li ul li {
   width: 100%;
+  white-space: nowrap;
 }
 nav li ul li a {
-  padding: 10px 15px;
+  padding: 10px 18px;
   font-weight: normal;
   text-align: left;
 }
