@@ -81,12 +81,8 @@
     color: #222;
     border-radius: 6px;
   }
-  nav li ul li a:hover {
-    background: #eaeaea;
-    color: #000;
-  }
+  nav li ul li a:hover { background: #eaeaea; color: #000; }
 
-  /* Désactivation du clic sur Galerie */
   .no-click { cursor: default; pointer-events: none; }
   nav li:hover > a.no-click { color: #1e90ff; } /* PC */
   .no-click.active { color: #1e90ff; }          /* Mobile */
@@ -96,25 +92,26 @@
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE MOSAÏQUE ----- */
+  /* ----- GALERIE UNIFORME ----- */
   .gallery {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 150px;
+    grid-template-columns: repeat(4, 1fr); /* 4 images par ligne */
+    grid-auto-rows: 250px; /* hauteur uniforme */
     gap: 10px;
     padding: 20px 40px;
   }
-  .gallery a { display: block; overflow: hidden; border-radius: 12px; }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+  .gallery a {
+    display: block;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
   .gallery img:hover { transform: scale(1.05); }
-
-  /* --- TAILLES ALÉATOIRES --- */
-  .img1 { grid-column: span 6; grid-row: span 2; }
-  .img2 { grid-column: span 3; grid-row: span 3; }
-  .img3 { grid-column: span 3; grid-row: span 3; }
-  .img4 { grid-column: span 5; grid-row: span 2; }
-  .img5 { grid-column: span 3; grid-row: span 2; }
-  .img6 { grid-column: span 4; grid-row: span 1; }
 
   /* ----- FOOTER ----- */
   footer {
@@ -127,25 +124,23 @@
 
   /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) {
-    .gallery { grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; }
+    .gallery { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
   }
   @media (max-width: 600px) {
-    .gallery { grid-template-columns: 1fr; grid-auto-rows: 150px; padding: 20px; }
-    .img1, .img3, .img4, .img5, .img6 { grid-row: span 1; grid-column: span 1; }
-    .img2 { grid-row: span 2; grid-column: span 1; }
+    .gallery { grid-template-columns: 1fr; grid-auto-rows: 180px; padding: 20px; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION OPTIMISÉE -->
+<!-- NAVIGATION -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
     <li>
       <a class="no-click">Galerie ▾</a>
       <ul>
-        <li><a href="aérien.html">Aérien</a></li> <!-- ton ajout -->
+        <li><a href="aérien.html">Aérien</a></li>
         <li><a href="animaux.html">Animaux</a></li>
         <li><a href="paysage.html">Paysage</a></li>
         <li><a href="portrait.html">Portrait</a></li>
@@ -161,6 +156,7 @@
   <p>Photographe — Nature & Faune</p>
 </header>
 
+<!-- GALERIE -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne - Grand Est">
     <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Photo1-animaux" loading="lazy">
@@ -182,7 +178,11 @@
   </a>
 </section>
 
+<footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
+// Fancybox avec captions
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   loop: true,
@@ -192,21 +192,8 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
     return slide.$trigger.dataset.caption || '';
   }
 });
-</script>
 
-
-<footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
-
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-<script>
-Fancybox.bind("[data-fancybox='gallery-animaux']", {
-  Toolbar: { display: ["close"] },
-  loop: true,
-  dragToClose: true,
-  animated: true
-});
-
-// SCRIPT SOUS-MENU DU MENU
+// Menu déroulant mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 
