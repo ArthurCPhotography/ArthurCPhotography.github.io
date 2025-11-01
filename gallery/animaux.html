@@ -16,6 +16,7 @@ body {
   color: #222;
 }
 
+/* ----- MENU ----- */
 nav {
   position: fixed;
   top: 0;
@@ -38,28 +39,33 @@ nav li { margin: 0 20px; }
 nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
 nav a:hover { color: #1e90ff; }
 
+/* ----- HEADER ----- */
 header { padding: 100px 20px 40px; text-align: center; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* Grille uniforme 4 colonnes */
+/* ----- GALERIE MOSAÏQUE ----- */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
+  column-count: 4;       /* 4 colonnes */
+  column-gap: 15px;      /* espace entre colonnes */
   padding: 20px 40px;
 }
-.gallery a img {
+.gallery a {
+  display: inline-block;
   width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
+  margin-bottom: 15px;
+}
+.gallery img {
+  width: 100%;
+  height: auto;          /* garde la proportion naturelle */
   border-radius: 12px;
   transition: transform 0.3s ease;
 }
-.gallery a img:hover {
+.gallery img:hover {
   transform: scale(1.03);
 }
 
+/* ----- FOOTER ----- */
 footer {
   background: #f0f0f0;
   color: #777;
@@ -68,12 +74,12 @@ footer {
   margin-top: 40px;
 }
 
-/* Responsive */
+/* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); }
+  .gallery { column-count: 2; }
 }
 @media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; }
+  .gallery { column-count: 1; }
   nav li { margin: 0 10px; }
 }
 </style>
@@ -106,10 +112,12 @@ footer {
   <a href="../images/animaux/Photo4-animaux.jpg" data-fancybox="gallery-animaux" data-caption="Zèbre">
     <img src="../images/animaux/Photo4-animaux.jpg" alt="Zèbre">
   </a>
+  <!-- Ajoute d'autres images si nécessaire -->
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
+<!-- JS Fancybox -->
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
