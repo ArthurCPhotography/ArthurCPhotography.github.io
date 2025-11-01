@@ -47,16 +47,18 @@ nav a:hover {
   color: #1e90ff;
 }
 
-/* ----- SOUS-MENU AVEC ANIMATION OUVERTE/FERMÉE ----- */
+/* ----- SOUS-MENU (VERTICAL) AVEC EFFET DE GLISSEMENT ----- */
 nav li ul {
   position: absolute;
   top: 100%;
   left: 0;
   background: #f8f8f8;
-  padding: 10px 0;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  min-width: 160px;
+  overflow: hidden;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
   opacity: 0;
   transform: translateY(-10px);
   pointer-events: none;
@@ -69,16 +71,17 @@ nav li:hover ul {
   pointer-events: auto;
 }
 nav li ul li {
-  margin: 0;
+  width: 100%;
 }
 nav li ul li a {
   padding: 10px 15px;
   font-weight: normal;
+  text-align: left;
 }
 nav li ul li a:hover {
   background: #eaeaea;
   color: #000;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* ----- HEADER ----- */
