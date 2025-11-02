@@ -62,26 +62,31 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 /* ----- GALERIE GRID ----- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colonnes grand écran */
-  gap: 10px;
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur grand écran */
+  gap: 10px; /* espacement constant horizontal et vertical */
   padding: 20px 40px;
 }
-.gallery a { display: block; }
 
-.img-wrapper { width: 100%; overflow: hidden; }
-
-/* ----- HOVER STYLE COMME SUR INDEX ----- */
-.img-wrapper img {
-  width: 100%;
+/* ----- EFFET HOVER COMME INDEX ----- */
+.gallery a {
   display: block;
-  object-fit: cover;
+  overflow: hidden;       /* cache le débordement lors du zoom */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
 }
-.img-wrapper img:hover {
-  transform: scale(1.03);
+.gallery a img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.gallery a:hover {
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.gallery a:hover img {
+  transform: scale(1.03);
 }
 
 /* ----- FOOTER ----- */
@@ -112,29 +117,31 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
   </ul>
 </nav>
 
+<!-- HEADER -->
 <header>
   <h1>Galerie Animaux</h1>
   <p>Photographe — Nature & Faune</p>
 </header>
 
+<!-- GALERIE -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200"></div>
+    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
   </a>
   <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300"></div>
+    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300">
   </a>
   <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250"></div>
+    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
   </a>
   <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220"></div>
+    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220">
   </a>
   <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280"></div>
+    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
   </a>
   <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240"></div>
+    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
   </a>
 </section>
 
@@ -142,14 +149,14 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox avec scrollbar fixe
+// Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
   dragToClose: true,
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false // empêche Fancybox de modifier padding/scroll
+  hideScrollbar: false
 });
 
 // Menu mobile
