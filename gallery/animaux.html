@@ -71,24 +71,29 @@
     transform: translate(-50%, 0);
     pointer-events: auto;
   }
+  nav li ul li { width: 100%; }
   nav li ul li a {
+    display: block;
+    width: 100%;
     padding: 10px 16px;
+    font-weight: normal;
     text-align: center;
     color: #222;
     border-radius: 6px;
   }
   nav li ul li a:hover { background: #eaeaea; color: #000; }
 
+  /* Désactivation du clic sur Galerie */
   .no-click { cursor: default; pointer-events: none; }
-  nav li:hover > a.no-click { color: #1e90ff; }
-  .no-click.active { color: #1e90ff; }
+  nav li:hover > a.no-click { color: #1e90ff; } /* PC */
+  .no-click.active { color: #1e90ff; }          /* Mobile */
 
   /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE ----- */
+  /* ----- GALERIE 4 COLONNES ----- */
   .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -100,22 +105,21 @@
     display: block;
     overflow: hidden;
     border-radius: 12px;
-    position: relative;
-    aspect-ratio: 4 / 3; /* ratio par défaut pour les paysages */
   }
 
-  /* Portrait : double hauteur + ratio vertical */
-  .gallery a.portrait {
-    grid-row: span 2;
-    aspect-ratio: 3 / 4;
-  }
-
+  /* Image standard (paysage) */
   .gallery img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
+
+  /* Image portrait */
+  .gallery a.portrait {
+    grid-row: span 2;
+  }
+
   .gallery img:hover { transform: scale(1.05); }
 
   /* ----- FOOTER ----- */
@@ -156,64 +160,72 @@
   </ul>
 </nav>
 
+<!-- HEADER -->
 <header>
   <h1>Galerie Animaux</h1>
   <p>Photographe — Nature & Faune</p>
 </header>
 
+<!-- GALERIE -->
 <section class="gallery">
-
-  <!-- Images en ordre chronologique -->
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle">
+  <!-- 1 -->
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
     <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
   </a>
 
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Lion" class="portrait">
-    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Lion">
+  <!-- 2 (portrait) -->
+  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux en portrait." class="portrait">
+    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait">
   </a>
 
-  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran" class="portrait">
+  <!-- 3 (portrait) -->
+  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes au bord de l’eau." class="portrait">
     <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran">
   </a>
 
-  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre">
+  <!-- 4 -->
+  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
     <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
   </a>
 
-  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène">
+  <!-- 5 -->
+  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse observant la plaine.">
     <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
   </a>
 
-  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin">
+  <!-- 6 -->
+  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
     <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
   </a>
-
 </section>
 
+<!-- FOOTER -->
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
-  loop: true,
+  Thumbs: false,
   dragToClose: true,
   animated: true,
-  caption: function(fancybox, slide) {
+  caption: function(fancybox, carousel, slide) {
     return slide.caption;
   }
 });
 
-// Menu mobile
+// Script menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
+
 galerie.addEventListener('click', (e) => {
   e.stopPropagation();
   submenu.classList.toggle('show');
   galerie.classList.toggle('active');
 });
+
 document.addEventListener('click', (e) => {
-  if (!submenu.contains(e.target) && !galerie.contains(e.target)) {
+  if (!submenu.contains(e.target)) {
     submenu.classList.remove('show');
     galerie.classList.remove('active');
   }
