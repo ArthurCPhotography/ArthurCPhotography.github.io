@@ -35,6 +35,7 @@
   nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
   nav a:hover { color: #1e90ff; }
 
+  /* ----- SOUS-MENU ----- */
   nav li ul {
     position: absolute; top: 100%; left: 50%; transform: translate(-50%, -8px);
     background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -47,15 +48,17 @@
   nav li ul li a { display: block; width: 100%; padding: 10px 16px; font-weight: normal; text-align: center; color: #222; border-radius: 6px; }
   nav li ul li a:hover { background: #eaeaea; color: #000; }
 
+  /* Désactivation du clic sur Galerie */
   .no-click { cursor: default; pointer-events: none; }
   nav li:hover > a.no-click { color: #1e90ff; }
   .no-click.active { color: #1e90ff; }
 
+  /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE ----- */
+  /* ----- GALERIE 4 COLONNES ----- */
   .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -80,14 +83,17 @@
 
   .gallery img:hover { transform: scale(1.05); }
 
+  /* ----- FOOTER ----- */
   footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
+  /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
+<!-- NAVIGATION -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
@@ -105,11 +111,13 @@
   </ul>
 </nav>
 
+<!-- HEADER -->
 <header>
   <h1>Galerie Animaux</h1>
   <p>Photographe — Nature & Faune</p>
 </header>
 
+<!-- GALERIE -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil." data-height="200">
     <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
@@ -136,6 +144,7 @@
   </a>
 </section>
 
+<!-- FOOTER -->
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
