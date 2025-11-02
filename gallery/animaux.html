@@ -63,28 +63,31 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 .gallery {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur grand écran */
-  gap: 10px; /* espacement constant horizontal et vertical */
+  gap: 10px; /* espacement horizontal et vertical constant */
   padding: 20px 40px;
 }
 
 /* ----- EFFET HOVER COMME INDEX ----- */
 .gallery a {
   display: block;
-  overflow: hidden;       /* cache le débordement lors du zoom */
+  overflow: hidden;          /* cache le débordement pour le zoom */
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: box-shadow 0.3s ease;
 }
+
 .gallery a img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;              /* s’adapte à la hauteur réelle de l’image */
   display: block;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
+
 .gallery a:hover {
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
+
 .gallery a:hover img {
   transform: scale(1.03);
 }
@@ -126,22 +129,22 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 <!-- GALERIE -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
-    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
+    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
   </a>
   <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux.">
-    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300">
+    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait">
   </a>
   <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
-    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
+    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran">
   </a>
   <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220">
+    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
   </a>
   <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
   </a>
   <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
   </a>
 </section>
 
@@ -172,12 +175,6 @@ document.addEventListener('click', e => {
     submenu.classList.remove('show');
     galerie.classList.remove('active');
   }
-});
-
-// Hauteurs individuelles
-document.querySelectorAll('.gallery img').forEach(img => {
-  const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
-  img.style.height = h + 'px';
 });
 </script>
 
