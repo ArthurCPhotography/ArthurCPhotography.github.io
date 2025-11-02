@@ -61,7 +61,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   margin: 20px 40px;
 }
 
-/* Chaque lien image */
 .gallery a {
   display: block;
   margin-bottom: 10px; /* écart vertical constant */
@@ -84,7 +83,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-/* Responsive Masonry : on ajuste la largeur des items via JS */
+/* Responsive Masonry */
 @media (max-width: 1024px) { .gallery { margin: 20px 20px; } }
 @media (max-width: 600px) { .gallery { margin: 20px 10px; } }
 </style>
@@ -179,21 +178,23 @@ document.addEventListener('click', e => {
   }
 });
 
-// Appliquer les hauteurs individuelles
+// Hauteurs individuelles
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
 
-// Masonry JS
+// Masonry JS avec largeur fixe
 window.addEventListener('load', () => {
   const grid = document.querySelector('.gallery');
   const msnry = new Masonry(grid, {
     itemSelector: 'a',
-    columnWidth: grid.offsetWidth / 4, // 4 colonnes fixes
+    columnWidth: 280, // largeur fixe des colonnes
     gutter: 10,
     fitWidth: true
   });
+
+  window.addEventListener('resize', () => msnry.layout());
 });
 </script>
 
