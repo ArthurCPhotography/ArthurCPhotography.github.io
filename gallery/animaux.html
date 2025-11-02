@@ -62,11 +62,10 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 20px 40px;
+    grid-auto-flow: dense; /* <- permet de réduire les espaces blancs */
   }
 
-  .gallery a {
-    display: block;
-  }
+  .gallery a { display: block; }
 
   .img-wrapper {
     width: 100%;
