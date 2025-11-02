@@ -30,74 +30,37 @@
     padding: 15px 0;
     z-index: 1000;
   }
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    align-items: center;
-  }
+  nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; }
   nav li { position: relative; margin: 0 20px; }
-  nav a {
-    color: #222;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    display: block;
-  }
+  nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
   nav a:hover { color: #1e90ff; }
 
-  /* ----- SOUS-MENU ----- */
   nav li ul {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translate(-50%, -8px);
-    background: #f8f8f8;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    padding: 6px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.28s ease, transform 0.28s ease;
-    z-index: 1001;
-    white-space: nowrap;
+    position: absolute; top: 100%; left: 50%; transform: translate(-50%, -8px);
+    background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column; width: fit-content; padding: 6px;
+    opacity: 0; pointer-events: none; transition: opacity 0.28s ease, transform 0.28s ease;
+    z-index: 1001; white-space: nowrap;
   }
-  nav li:hover ul {
-    opacity: 1;
-    transform: translate(-50%, 0);
-    pointer-events: auto;
-  }
+  nav li:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
   nav li ul li { width: 100%; }
-  nav li ul li a {
-    display: block;
-    width: 100%;
-    padding: 10px 16px;
-    font-weight: normal;
-    text-align: center;
-    color: #222;
-    border-radius: 6px;
-  }
+  nav li ul li a { display: block; width: 100%; padding: 10px 16px; font-weight: normal; text-align: center; color: #222; border-radius: 6px; }
   nav li ul li a:hover { background: #eaeaea; color: #000; }
 
-  /* Désactivation du clic sur Galerie */
   .no-click { cursor: default; pointer-events: none; }
-  nav li:hover > a.no-click { color: #1e90ff; } /* PC */
-  .no-click.active { color: #1e90ff; }          /* Mobile */
+  nav li:hover > a.no-click { color: #1e90ff; }
+  .no-click.active { color: #1e90ff; }
 
-  /* ----- HEADER ----- */
   header { padding: 100px 20px 40px; }
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE 4 COLONNES ----- */
+  /* ----- GALERIE ----- */
   .gallery {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    grid-auto-rows: 10px; /* unité de base pour le calcul */
+    gap: 10px; /* espacement constant */
     padding: 20px 40px;
   }
 
@@ -105,9 +68,9 @@
     display: block;
     overflow: hidden;
     border-radius: 12px;
+    height: auto;
   }
 
-  /* Image standard (paysage) */
   .gallery img {
     width: 100%;
     height: 100%;
@@ -115,34 +78,16 @@
     transition: transform 0.3s ease;
   }
 
-  /* Image portrait */
-  .gallery a.portrait {
-    grid-row: span 2;
-  }
-
   .gallery img:hover { transform: scale(1.05); }
 
-  /* ----- FOOTER ----- */
-  footer {
-    background: #f0f0f0;
-    color: #777;
-    padding: 20px;
-    font-size: 0.9em;
-    margin-top: 40px;
-  }
+  footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-  /* ----- RESPONSIVE ----- */
-  @media (max-width: 1024px) {
-    .gallery { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (max-width: 600px) {
-    .gallery { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav>
   <ul>
     <li><a href="../index.html">Accueil</a></li>
@@ -160,46 +105,37 @@
   </ul>
 </nav>
 
-<!-- HEADER -->
 <header>
   <h1>Galerie Animaux</h1>
   <p>Photographe — Nature & Faune</p>
 </header>
 
-<!-- GALERIE -->
 <section class="gallery">
-  <!-- 1 -->
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil." data-height="200">
     <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne">
   </a>
 
-  <!-- 2 (portrait) -->
-  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux en portrait." class="portrait">
+  <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux." data-height="300">
     <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait">
   </a>
 
-  <!-- 3 (portrait) -->
-  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes au bord de l’eau." class="portrait">
+  <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes." data-height="250">
     <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran">
   </a>
 
-  <!-- 4 -->
-  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
+  <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane." data-height="220">
     <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre">
   </a>
 
-  <!-- 5 -->
-  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse observant la plaine.">
+  <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse." data-height="280">
     <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène">
   </a>
 
-  <!-- 6 -->
-  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
+  <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense." data-height="240">
     <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin">
   </a>
 </section>
 
-<!-- FOOTER -->
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
@@ -209,26 +145,28 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Thumbs: false,
   dragToClose: true,
   animated: true,
-  caption: function(fancybox, carousel, slide) {
-    return slide.caption;
-  }
+  caption: function(fancybox, carousel, slide) { return slide.caption; }
 });
 
 // Script menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
-
-galerie.addEventListener('click', (e) => {
+galerie.addEventListener('click', e => {
   e.stopPropagation();
   submenu.classList.toggle('show');
   galerie.classList.toggle('active');
 });
-
-document.addEventListener('click', (e) => {
+document.addEventListener('click', e => {
   if (!submenu.contains(e.target)) {
     submenu.classList.remove('show');
     galerie.classList.remove('active');
   }
+});
+
+// Ajuste la hauteur individuelle de chaque image selon data-height
+document.querySelectorAll('.gallery a').forEach(a => {
+  const height = a.dataset.height ? parseInt(a.dataset.height) : 200;
+  a.style.gridRow = `span ${Math.ceil(height / 10)}`;
 });
 </script>
 
