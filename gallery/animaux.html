@@ -56,17 +56,16 @@ header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE CSS COLUMNS ----- */
+/* ----- GALERIE 4 COLONNES FIXES ----- */
 .gallery {
-  column-count: 4; /* 4 colonnes fixes sur grand écran */
-  column-gap: 10px; /* espacement horizontal constant */
-  max-width: 4 * 280px + 30px; /* ajuste la largeur totale si nécessaire */
+  column-gap: 10px;      /* espacement horizontal constant */
+  width: 4*280px + 30px; /* largeur totale = 4 colonnes + gaps */
   margin: 20px auto;
 }
 
 .gallery a {
   display: inline-block;
-  width: 100%;
+  width: 280px; /* largeur fixe */
   margin-bottom: 10px; /* espacement vertical constant */
 }
 
@@ -87,9 +86,9 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-/* ----- RESPONSIVE ----- */
-@media (max-width: 1024px) { .gallery { column-count: 2; } }
-@media (max-width: 600px) { .gallery { column-count: 1; } }
+/* Responsive */
+@media (max-width: 1024px) { .gallery a { width: 45%; } }
+@media (max-width: 600px) { .gallery a { width: 100%; } }
 </style>
 </head>
 <body>
