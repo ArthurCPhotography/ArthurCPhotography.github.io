@@ -10,6 +10,9 @@
 <style>
 *, *::before, *::after { box-sizing: border-box; }
 
+/* ----- SCROLLBAR TOUJOURS VISIBLE ----- */
+html { overflow-y: scroll; }
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -63,28 +66,25 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   gap: 10px; /* espacement horizontal et vertical constant */
   padding: 20px 40px;
 }
-
 .gallery a { display: block; }
 
-.img-wrapper {
-  width: 100%;
-  overflow: hidden;
-}
+.img-wrapper { width: 100%; overflow: hidden; }
 
 /* ----- HOVER STYLE COMME SUR INDEX ----- */
 .img-wrapper img {
   width: 100%;
   display: block;
   object-fit: cover;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .img-wrapper img:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
+/* ----- FOOTER ----- */
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
 /* ----- RESPONSIVE ----- */
@@ -124,7 +124,7 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <!-- GALERIE -->
 <section class="gallery">
-  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
+  <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle">
     <div class="img-wrapper">
       <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
     </div>
@@ -161,22 +161,13 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox avec correction du décalage menu
+// Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
   dragToClose: true,
   animated: true,
-  caption: function(fancybox, carousel, slide) { return slide.caption; },
-  on: {
-    init: (fancybox) => {
-      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
-      document.body.style.paddingRight = scrollBarWidth + "px";
-    },
-    destroy: (fancybox) => {
-      document.body.style.paddingRight = "0";
-    }
-  }
+  caption: function(fancybox, carousel, slide) { return slide.caption; }
 });
 
 // Menu mobile
