@@ -56,14 +56,18 @@ header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE MASONRY ----- */
+/* ----- GALERIE CSS COLUMNS ----- */
 .gallery {
-  margin: 20px 40px;
+  column-count: 4; /* 4 colonnes fixes sur grand écran */
+  column-gap: 10px; /* espacement horizontal constant */
+  max-width: 4 * 280px + 30px; /* ajuste la largeur totale si nécessaire */
+  margin: 20px auto;
 }
 
 .gallery a {
-  display: block;
-  margin-bottom: 10px; /* écart vertical constant */
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px; /* espacement vertical constant */
 }
 
 .img-wrapper {
@@ -83,9 +87,9 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-/* Responsive Masonry */
-@media (max-width: 1024px) { .gallery { margin: 20px 20px; } }
-@media (max-width: 600px) { .gallery { margin: 20px 10px; } }
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) { .gallery { column-count: 2; } }
+@media (max-width: 600px) { .gallery { column-count: 1; } }
 </style>
 </head>
 <body>
@@ -152,7 +156,6 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
-<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script>
 // Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
@@ -182,19 +185,6 @@ document.addEventListener('click', e => {
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
-});
-
-// Masonry JS avec largeur fixe
-window.addEventListener('load', () => {
-  const grid = document.querySelector('.gallery');
-  const msnry = new Masonry(grid, {
-    itemSelector: 'a',
-    columnWidth: 280, // largeur fixe des colonnes
-    gutter: 10,
-    fitWidth: true
-  });
-
-  window.addEventListener('resize', () => msnry.layout());
 });
 </script>
 
