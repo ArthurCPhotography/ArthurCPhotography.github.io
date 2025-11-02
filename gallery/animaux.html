@@ -56,16 +56,18 @@
   h1 { font-size: 2.5em; margin-bottom: 10px; }
   p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-  /* ----- GALERIE ----- */
+  /* ----- GALERIE TYPE MASONRY ----- */
   .gallery {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+    column-count: 4;          /* 4 colonnes */
+    column-gap: 10px;         /* écart horizontal constant */
     padding: 20px 40px;
-    grid-auto-flow: dense; /* <- permet de réduire les espaces blancs */
   }
 
-  .gallery a { display: block; }
+  .gallery a {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 10px;      /* écart vertical constant */
+  }
 
   .img-wrapper {
     width: 100%;
@@ -76,16 +78,16 @@
   .img-wrapper img {
     width: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
     display: block;
+    transition: transform 0.3s ease;
   }
 
   .img-wrapper img:hover { transform: scale(1.05); }
 
   footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-  @media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
+  @media (max-width: 1024px) { .gallery { column-count: 2; } }
+  @media (max-width: 600px) { .gallery { column-count: 1; } }
 </style>
 </head>
 <body>
