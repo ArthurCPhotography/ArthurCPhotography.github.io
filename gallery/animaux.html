@@ -62,34 +62,26 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 /* ----- GALERIE GRID ----- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colonnes sur grand écran */
-  gap: 10px; /* espacement horizontal et vertical constant */
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes grand écran */
+  gap: 10px;
   padding: 20px 40px;
 }
+.gallery a { display: block; }
 
-/* ----- EFFET HOVER COMME INDEX ----- */
-.gallery a {
-  display: block;
-  overflow: hidden;          /* cache le débordement pour le zoom */
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: box-shadow 0.3s ease;
-}
+.img-wrapper { width: 100%; overflow: hidden; }
 
-.gallery a img {
+/* ----- HOVER STYLE COMME SUR INDEX ----- */
+.img-wrapper img {
   width: 100%;
-  height: auto;              /* s’adapte à la hauteur naturelle */
   display: block;
   object-fit: cover;
-  transition: transform 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.gallery a:hover {
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-.gallery a:hover img {
+.img-wrapper img:hover {
   transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
 /* ----- FOOTER ----- */
@@ -120,31 +112,29 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
   </ul>
 </nav>
 
-<!-- HEADER -->
 <header>
   <h1>Galerie Animaux</h1>
   <p>Photographe — Nature & Faune</p>
 </header>
 
-<!-- GALERIE -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
-    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200"></div>
   </a>
   <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux.">
-    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300"></div>
   </a>
   <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
-    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250"></div>
   </a>
   <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220"></div>
   </a>
   <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280"></div>
   </a>
   <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240"></div>
   </a>
 </section>
 
@@ -152,14 +142,14 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox
+// Fancybox avec scrollbar fixe
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
   dragToClose: true,
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false
+  hideScrollbar: false // empêche Fancybox de modifier padding/scroll
 });
 
 // Menu mobile
@@ -179,12 +169,8 @@ document.addEventListener('click', e => {
 
 // Hauteurs individuelles
 document.querySelectorAll('.gallery img').forEach(img => {
-  const h = img.dataset.height ? parseInt(img.dataset.height) : null;
-  if (h) {
-    img.style.height = h + 'px';
-  } else {
-    img.style.height = 'auto';
-  }
+  const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
+  img.style.height = h + 'px';
 });
 </script>
 
