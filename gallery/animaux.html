@@ -161,13 +161,22 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox
+// Fancybox avec correction du décalage menu
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
   dragToClose: true,
   animated: true,
-  caption: function(fancybox, carousel, slide) { return slide.caption; }
+  caption: function(fancybox, carousel, slide) { return slide.caption; },
+  on: {
+    init: (fancybox) => {
+      const scrollBarWidth = window.innerWidth - document.documentElement.clientWidth;
+      document.body.style.paddingRight = scrollBarWidth + "px";
+    },
+    destroy: (fancybox) => {
+      document.body.style.paddingRight = "0";
+    }
+  }
 });
 
 // Menu mobile
