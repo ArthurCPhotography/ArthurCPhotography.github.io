@@ -66,18 +66,22 @@
 
   .gallery a {
     display: block;
+  }
+
+  .img-wrapper {
+    width: 100%;
     overflow: hidden;
     border-radius: 12px;
   }
 
-  .gallery img {
+  .img-wrapper img {
     width: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
     display: block;
   }
 
-  .gallery img:hover { transform: scale(1.05); }
+  .img-wrapper img:hover { transform: scale(1.05); }
 
   footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
@@ -113,29 +117,40 @@
 
 <!-- GALERIE -->
 <section class="gallery">
-  <!-- Chaque image a sa hauteur individuelle via data-height -->
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
-    <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200">
+    </div>
   </a>
 
   <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux.">
-    <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300">
+    </div>
   </a>
 
   <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
-    <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
+    </div>
   </a>
 
   <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-    <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220">
+    </div>
   </a>
 
   <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-    <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    </div>
   </a>
 
   <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-    <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    <div class="img-wrapper">
+      <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    </div>
   </a>
 </section>
 
@@ -167,7 +182,7 @@ document.addEventListener('click', e => {
   }
 });
 
-// Applique la hauteur individuelle sur les images
+// Applique la hauteur individuelle sur chaque image
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
