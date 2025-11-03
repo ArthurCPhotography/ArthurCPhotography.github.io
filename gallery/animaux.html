@@ -9,7 +9,10 @@
 
 <style>
 *, *::before, *::after { box-sizing: border-box; }
+
+/* ----- SCROLLBAR TOUJOURS VISIBLE ----- */
 html { overflow-y: scroll; }
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -34,6 +37,7 @@ nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: ce
 nav li { position: relative; margin: 0 20px; }
 nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
 nav a:hover { color: #1e90ff; }
+
 nav li ul {
   position: absolute; top: 100%; left: 50%; transform: translate(-50%, -8px);
   background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -45,6 +49,7 @@ nav li:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: aut
 nav li ul li { width: 100%; }
 nav li ul li a { display: block; width: 100%; padding: 10px 16px; font-weight: normal; text-align: center; color: #222; border-radius: 6px; }
 nav li ul li a:hover { background: #eaeaea; color: #000; }
+
 .no-click { cursor: default; pointer-events: none; }
 nav li:hover > a.no-click { color: #1e90ff; }
 .no-click.active { color: #1e90ff; }
@@ -57,20 +62,25 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 /* ----- GALERIE GRID ----- */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 colonnes fixes */
+  grid-template-columns: repeat(4, 1fr); /* 4 colonnes */
   gap: 10px;
   padding: 20px 40px;
 }
 .gallery a { display: block; }
-.img-wrapper { width: 100%; overflow: hidden; }
 
-/* ----- IMAGE HOVER ----- */
+.img-wrapper {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Image prend toute la largeur et hauteur du wrapper */
 .img-wrapper img {
   width: 100%;
-  display: block;
+  height: 100%;
   object-fit: cover;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: block;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 .img-wrapper img:hover {
@@ -111,24 +121,25 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
   <p>Photographe — Nature & Faune</p>
 </header>
 
+<!-- ----- GALERIE ----- -->
 <section class="gallery">
   <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne sur l’eau au coucher du soleil.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="200"></div>
+    <div class="img-wrapper" data-height="250"><img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne"></div>
   </a>
   <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cygne majestueux.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait" data-height="300"></div>
+    <div class="img-wrapper" data-height="300"><img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne portrait"></div>
   </a>
   <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250"></div>
+    <div class="img-wrapper" data-height="220"><img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran"></div>
   </a>
   <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="220"></div>
+    <div class="img-wrapper" data-height="260"><img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre"></div>
   </a>
   <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280"></div>
+    <div class="img-wrapper" data-height="280"><img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène"></div>
   </a>
   <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-    <div class="img-wrapper"><img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240"></div>
+    <div class="img-wrapper" data-height="240"><img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin"></div>
   </a>
 </section>
 
@@ -136,7 +147,7 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox
+// Fancybox avec scrollbar fixe
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -161,10 +172,10 @@ document.addEventListener('click', e => {
   }
 });
 
-// Hauteur individuelle des images
-document.querySelectorAll('.gallery img').forEach(img => {
-  const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
-  img.style.height = h + 'px';
+// Applique la hauteur définie dans data-height
+document.querySelectorAll('.img-wrapper').forEach(wrapper => {
+  const h = wrapper.dataset.height ? parseInt(wrapper.dataset.height) : 200;
+  wrapper.style.height = h + 'px';
 });
 </script>
 
