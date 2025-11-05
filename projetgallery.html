@@ -169,69 +169,31 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 /* ============================================================
-   PROTECTION GALERIE & FANCYBOX
+   PROTECTION GALERIE & FANCYBOX - PC & MOBILE
    ============================================================ */
 
-// Appliquer protection sur les miniatures de la galerie
-function ensureGalleryOverlay(wrapper) {
-  if (wrapper.querySelector('.__img-protect-overlay')) return;
-  const link = wrapper.querySelector('a');
-  const img = wrapper.querySelector('img');
-  if (!img || !link) return;
-
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
-
-  const overlay = document.createElement('div');
-  overlay.className = '__img-protect-overlay';
-  Object.assign(overlay.style, {
-    position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-    background: 'transparent', zIndex: 10, cursor: 'pointer'
-  });
-
-  // clic = ouverture fancybox
-  overlay.addEventListener('click', () => link.click());
-
-  // blocage appui long sur mobile
-  let pressTimer = null;
-  const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
-  const cancel = () => { clearTimeout(pressTimer); };
-  overlay.addEventListener('touchstart', start, { passive: false });
-  overlay.addEventListener('touchend', cancel);
-  overlay.addEventListener('touchmove', cancel);
-  overlay.addEventListener('contextmenu', e => e.preventDefault());
-
-  if (getComputedStyle(wrapper).position === 'static') wrapper.style.position = 'relative';
-  wrapper.appendChild(overlay);
-}
-
-// Appliquer protection à toute la galerie
+// Protection des miniatures de la galerie
 function protectGallery() {
-  document.querySelectorAll('.gallery .img-wrapper').forEach(ensureGalleryOverlay);
-}
+  document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
+    if (wrapper.querySelector('.__img-protect-overlay')) return;
 
-// Fancybox - protection pour toutes les images
-function applyProtection(fancybox) {
-  if (!fancybox || !fancybox.Carousel) return;
+    const link = wrapper.querySelector('a');
+    const img = wrapper.querySelector('img');
+    if (!img || !link) return;
 
-  const protectSlide = () => {
-    const container = fancybox.$container;
-    if (!container) return;
-    const img = container.querySelector('img');
-    if (!img) return;
-
+    // Bloquer clic droit et drag
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    const oldOverlay = container.querySelector('.__fancybox-protect-overlay');
-    if (oldOverlay) oldOverlay.remove();
-
+    // Overlay pour appui long sur mobile tout en permettant clic pour Fancybox
     const overlay = document.createElement('div');
-    overlay.className = '__fancybox-protect-overlay';
+    overlay.className = '__img-protect-overlay';
     Object.assign(overlay.style, {
       position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-      background: 'transparent', zIndex: 20
+      background: 'transparent', zIndex: 10, cursor: 'pointer'
     });
+
+    overlay.addEventListener('click', () => link.click());
 
     let pressTimer = null;
     const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
@@ -241,15 +203,56 @@ function applyProtection(fancybox) {
     overlay.addEventListener('touchmove', cancel);
     overlay.addEventListener('contextmenu', e => e.preventDefault());
 
-    if (getComputedStyle(img.parentNode).position === 'static') img.parentNode.style.position = 'relative';
-    img.parentNode.appendChild(overlay);
-  };
-
-  protectSlide();
-  fancybox.Carousel.on('change', protectSlide);
+    if (getComputedStyle(wrapper).position === 'static') wrapper.style.position = 'relative';
+    wrapper.appendChild(overlay);
+  });
 }
 
-// Appliquer protection à la galerie
+// Protection dans Fancybox pour toutes les images
+function protectFancybox(fancybox) {
+  if (!fancybox || !fancybox.Carousel) return;
+
+  const applyProtection = () => {
+    setTimeout(() => { // attendre que l'image soit chargée
+      const container = fancybox.$container;
+      if (!container) return;
+      const img = container.querySelector('img');
+      if (!img) return;
+
+      // Bloquer clic droit et drag
+      img.addEventListener('contextmenu', e => e.preventDefault());
+      img.addEventListener('dragstart', e => e.preventDefault());
+
+      // Supprimer overlay précédent
+      const oldOverlay = container.querySelector('.__fancybox-protect-overlay');
+      if (oldOverlay) oldOverlay.remove();
+
+      // Ajouter nouvel overlay pour appui long
+      const overlay = document.createElement('div');
+      overlay.className = '__fancybox-protect-overlay';
+      Object.assign(overlay.style, {
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        background: 'transparent', zIndex: 20
+      });
+
+      let pressTimer = null;
+      const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
+      const cancel = () => { clearTimeout(pressTimer); };
+      overlay.addEventListener('touchstart', start, { passive: false });
+      overlay.addEventListener('touchend', cancel);
+      overlay.addEventListener('touchmove', cancel);
+      overlay.addEventListener('contextmenu', e => e.preventDefault());
+
+      if (getComputedStyle(img.parentNode).position === 'static') img.parentNode.style.position = 'relative';
+      img.parentNode.appendChild(overlay);
+    }, 50);
+  };
+
+  applyProtection();
+  fancybox.Carousel.on('change', applyProtection);
+}
+
+// Appliquer protection aux miniatures
 protectGallery();
 
 // Initialiser Fancybox avec protection
@@ -261,8 +264,8 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   caption: (f, c, s) => s.caption,
   hideScrollbar: false,
   on: {
-    ready: applyProtection,
-    done: applyProtection
+    ready: protectFancybox,
+    done: protectFancybox
   }
 });
 
@@ -286,6 +289,7 @@ document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
+
 </script>
 
 </body>
