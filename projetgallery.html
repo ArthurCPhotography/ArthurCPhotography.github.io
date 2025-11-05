@@ -168,37 +168,35 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Protéger les miniatures de la galerie tout en permettant l'ouverture de Fancybox
+// Protection des miniatures tout en laissant Fancybox fonctionner
+document.querySelectorAll('.gallery a').forEach(link => {
+  
+  const img = link.querySelector('img');
 
-document.querySelectorAll('.gallery img').forEach(img => {
-
-  // Bloquer clic droit et drag sur desktop
+  // Desktop : bloquer clic droit et drag sur l'image
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Bloquer l'appui long sur mobile sans bloquer le tap
+  // Mobile : blocage appui long
   let pressTimer;
 
   img.addEventListener('touchstart', e => {
     pressTimer = setTimeout(() => {
-      // Si l'utilisateur reste appuyé > 600ms, on bloque le menu contextuel / enregistrement
+      // Appui long détecté, empêcher l'enregistrement
       e.preventDefault();
-    }, 600); // 600ms = durée de l'appui long
+    }, 600); // durée de l'appui long
   }, { passive: false });
 
   img.addEventListener('touchend', e => {
-    clearTimeout(pressTimer); // Tap court = Fancybox s'ouvre
+    clearTimeout(pressTimer); // tap court = Fancybox s'ouvre normalement
   });
 
   img.addEventListener('touchmove', e => {
-    clearTimeout(pressTimer); // Si l'utilisateur fait glisser, annuler
+    clearTimeout(pressTimer); // annuler si mouvement (scroll)
   });
 
 });
 </script>
-
-
-
 
 </body>
 </html>
