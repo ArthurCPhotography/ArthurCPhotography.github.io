@@ -71,12 +71,12 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* wrapper se transforme */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition fluide */
   box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* ombre initiale */
 }
 
 .img-wrapper:hover {
-  transform: scale(1.03); /* léger zoom du wrapper */
+  transform: translateY(-3px); /* léger “soulèvement” du wrapper */
   box-shadow: 0 6px 20px rgba(0,0,0,0.2); /* ombre plus prononcée */
 }
 
@@ -85,7 +85,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   display: block;
   object-fit: cover;
   border-radius: 12px;
-  transition: transform 0.3s ease; /* on conserve pour smoothness, mais pas de zoom supplémentaire */
+  transition: none; /* aucune transformation sur l'image */
 }
 
 /* ----- FOOTER ----- */
