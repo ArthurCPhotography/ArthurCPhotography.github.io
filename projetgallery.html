@@ -168,7 +168,20 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox - protection dans la lightbox
+// Fonction pour bloquer appui long sur mobile sans bloquer le tap
+function blockLongPress(img) {
+  let timer;
+  img.addEventListener('touchstart', e => {
+    timer = setTimeout(() => e.preventDefault(), 600); // 600ms = appui long
+  }, { passive: false });
+  img.addEventListener('touchend', e => {
+    clearTimeout(timer);
+  });
+  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit desktop
+  img.addEventListener('dragstart', e => e.preventDefault());   // drag & drop desktop
+}
+
+// Fancybox - protection
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -179,42 +192,15 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   on: {
     done: (fancybox, slide) => {
       const image = fancybox.$container.querySelector('.fancybox__image');
-      if (image) {
-        // Clic droit et drag
-        image.addEventListener('contextmenu', e => e.preventDefault());
-        image.addEventListener('dragstart', e => e.preventDefault());
-
-        // Appui long mobile : overlay temporaire pour bloquer menu contextuel
-        let touchTimer;
-        image.addEventListener('touchstart', e => {
-          touchTimer = setTimeout(() => e.preventDefault(), 500); // 500ms = appui long
-        }, { passive: false });
-
-        image.addEventListener('touchend', e => {
-          clearTimeout(touchTimer);
-        });
-      }
+      if (image) blockLongPress(image);
     }
   }
 });
 
-// Protéger les miniatures de la galerie
+// Galerie - protection
 document.querySelectorAll('.gallery a').forEach(link => {
   const img = link.querySelector('img');
-
-  // Clic droit et drag
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
-
-  // Appui long mobile : bloque menu contextuel, mais laisse le tap ouvrir Fancybox
-  let touchTimer;
-  img.addEventListener('touchstart', e => {
-    touchTimer = setTimeout(() => e.preventDefault(), 500);
-  }, { passive: false });
-
-  img.addEventListener('touchend', e => {
-    clearTimeout(touchTimer);
-  });
+  blockLongPress(img);
 });
 
 // Menu mobile
@@ -238,6 +224,7 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 </script>
+
 
 </body>
 </html>
