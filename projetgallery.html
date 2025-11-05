@@ -199,13 +199,24 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-// Protection basique des images (clic droit + drag)
-document.querySelectorAll('.gallery img').forEach(img => {
+// Protection des images (galerie + Fancybox)
+function protectImage(img) {
   img.addEventListener('contextmenu', e => {
     e.preventDefault();
     alert("⚠️ Image protégée © Arthur C Photography");
   });
   img.addEventListener('dragstart', e => e.preventDefault());
+}
+
+// Protège les miniatures de la page
+document.querySelectorAll('.gallery img').forEach(protectImage);
+
+// Protège les images ouvertes dans Fancybox
+document.addEventListener('DOMContentLoaded', () => {
+  Fancybox.on('Carousel.change', (fancybox, carousel, slide) => {
+    const image = fancybox.$container.querySelector('.fancybox__image');
+    if (image) protectImage(image);
+  });
 });
 </script>
 
