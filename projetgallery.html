@@ -215,41 +215,43 @@ function protectFancybox(fancybox) {
     const img = container.querySelector('img');
     if (!img) return;
 
-    // bloquer clic droit et drag
+    // Bloquer clic droit et drag
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    // overlay pour blocage appui long sur mobile
-    const parent = img.parentNode;
-    if (!parent.querySelector('.__fancybox-protect-overlay')) {
-      const overlay = document.createElement('div');
-      overlay.className = '__fancybox-protect-overlay';
-      Object.assign(overlay.style, {
-        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-        background: 'transparent', zIndex: 20
-      });
+    // Supprimer overlay précédent si présent
+    const oldOverlay = container.querySelector('.__fancybox-protect-overlay');
+    if (oldOverlay) oldOverlay.remove();
 
-      let pressTimer = null;
-      const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
-      const cancel = () => { clearTimeout(pressTimer); };
-      overlay.addEventListener('touchstart', start, { passive: false });
-      overlay.addEventListener('touchend', cancel);
-      overlay.addEventListener('touchmove', cancel);
-      overlay.addEventListener('contextmenu', e => e.preventDefault());
+    // Créer overlay pour bloquer appui long sur mobile
+    const overlay = document.createElement('div');
+    overlay.className = '__fancybox-protect-overlay';
+    Object.assign(overlay.style, {
+      position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+      background: 'transparent', zIndex: 20
+    });
 
-      if (getComputedStyle(parent).position === 'static') parent.style.position = 'relative';
-      parent.appendChild(overlay);
-    }
+    let pressTimer = null;
+    const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
+    const cancel = () => { clearTimeout(pressTimer); };
+    overlay.addEventListener('touchstart', start, { passive: false });
+    overlay.addEventListener('touchend', cancel);
+    overlay.addEventListener('touchmove', cancel);
+    overlay.addEventListener('contextmenu', e => e.preventDefault());
+
+    if (getComputedStyle(img.parentNode).position === 'static') img.parentNode.style.position = 'relative';
+    img.parentNode.appendChild(overlay);
   };
 
-  // appliquer sur la slide actuelle
+  // Appliquer protection sur la slide actuelle
   applyProtection();
 
-  // appliquer à chaque changement de slide
+  // Appliquer protection à chaque changement de slide
   if (fancybox.Carousel && fancybox.Carousel.on) {
     fancybox.Carousel.on('change', applyProtection);
   }
 }
+
 
 // appliquer protection à la galerie
 protectGallery();
