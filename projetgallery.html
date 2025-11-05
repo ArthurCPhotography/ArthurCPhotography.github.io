@@ -212,10 +212,8 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures de la galerie tout en permettant le tap pour ouvrir Fancybox
-document.querySelectorAll('.gallery a').forEach(link => {
-  const img = link.querySelector('img');
-
+/ Protéger uniquement les images de la galerie
+document.querySelectorAll('.gallery a img').forEach(img => {
   // Bloquer clic droit et drag
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
