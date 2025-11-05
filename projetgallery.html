@@ -73,6 +73,7 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   border-radius: 12px;
 }
 
+/* Images */
 .img-wrapper img {
   width: 100%;
   display: block;
@@ -84,16 +85,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 .img-wrapper:hover img {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-}
-
-/* Overlay invisible pour bloquer appui long sur mobile */
-.img-overlay {
-  position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  z-index: 2;
 }
 
 /* ----- FOOTER ----- */
@@ -141,37 +132,31 @@ footer {
   <div class="img-wrapper">
     <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
       <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="250">
-      <div class="img-overlay"></div>
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
       <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne majestueux" data-height="200">
-      <div class="img-overlay"></div>
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
       <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
-      <div class="img-overlay"></div>
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
       <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="300">
-      <div class="img-overlay"></div>
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
       <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
-      <div class="img-overlay"></div>
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
       <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
-      <div class="img-overlay"></div>
     </a>
   </div>
 </section>
@@ -199,18 +184,8 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
         image.addEventListener('contextmenu', e => e.preventDefault());
         image.addEventListener('dragstart', e => e.preventDefault());
         // Bloquer appui long sur mobile
-        const overlay = document.createElement('div');
-        overlay.style.position = 'absolute';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.zIndex = '2';
-        overlay.style.background = 'transparent';
-        image.parentNode.appendChild(overlay);
-
-        overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-        overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
       }
     }
   }
@@ -241,15 +216,11 @@ document.querySelectorAll('.gallery img').forEach(img => {
 document.querySelectorAll('.gallery img').forEach(img => {
   img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
   img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
-
-  // Ajouter overlay pour mobile
-  const overlay = img.nextElementSibling; // la div.img-overlay
-  if (overlay) {
-    overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-    overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-  }
+  img.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // appui long mobile
+  img.addEventListener('touchend', e => e.preventDefault(), { passive: false });
 });
 </script>
+
 
 </body>
 </html>
