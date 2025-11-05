@@ -178,11 +178,14 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   hideScrollbar: false,
   on: {
     done: (fancybox, slide) => {
-      // Protection activée dès que l'image Fancybox est affichée
       const image = fancybox.$container.querySelector('.fancybox__image');
       if (image) {
+        // Bloquer clic droit et drag
         image.addEventListener('contextmenu', e => e.preventDefault());
         image.addEventListener('dragstart', e => e.preventDefault());
+        // Bloquer appui long sur mobile
+        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
       }
     }
   }
