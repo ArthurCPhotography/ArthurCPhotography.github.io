@@ -168,57 +168,35 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox - Protection totale dans la lightbox
-Fancybox.bind("[data-fancybox='gallery-animaux']", {
-  Toolbar: { display: ["close"] },
-  Thumbs: false,
-  dragToClose: true,
-  animated: true,
-  caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false,
-  on: {
-    done: (fancybox, slide) => {
-      const image = fancybox.$container.querySelector('.fancybox__image');
-      if (image) {
-        // Bloquer clic droit et drag
-        image.addEventListener('contextmenu', e => e.preventDefault());
-        image.addEventListener('dragstart', e => e.preventDefault());
-        // Bloquer appui long sur mobile
-        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-      }
-    }
-  }
-});
+// Protéger les miniatures de la galerie tout en permettant l'ouverture de Fancybox
 
-// Menu mobile
-const galerie = document.querySelector('.no-click');
-const submenu = galerie.nextElementSibling;
-galerie.addEventListener('click', e => {
-  e.stopPropagation();
-  submenu.classList.toggle('show');
-  galerie.classList.toggle('active');
-});
-document.addEventListener('click', e => {
-  if (!submenu.contains(e.target)) {
-    submenu.classList.remove('show');
-    galerie.classList.remove('active');
-  }
-});
-
-// Appliquer hauteur individuelle
 document.querySelectorAll('.gallery img').forEach(img => {
-  const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
-  img.style.height = h + 'px';
-});
 
-// Protéger les miniatures de la galerie (clic droit et drag seulement)
-document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
-  img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
-  // Ne pas bloquer touchstart/touchend pour permettre l'ouverture de Fancybox sur mobile
+  // Bloquer clic droit et drag sur desktop
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+
+  // Bloquer l'appui long sur mobile sans bloquer le tap
+  let pressTimer;
+
+  img.addEventListener('touchstart', e => {
+    pressTimer = setTimeout(() => {
+      // Si l'utilisateur reste appuyé > 600ms, on bloque le menu contextuel / enregistrement
+      e.preventDefault();
+    }, 600); // 600ms = durée de l'appui long
+  }, { passive: false });
+
+  img.addEventListener('touchend', e => {
+    clearTimeout(pressTimer); // Tap court = Fancybox s'ouvre
+  });
+
+  img.addEventListener('touchmove', e => {
+    clearTimeout(pressTimer); // Si l'utilisateur fait glisser, annuler
+  });
+
 });
 </script>
+
 
 
 
