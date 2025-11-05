@@ -2,9 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="robots" content="noindex, nofollow"> <!-- 🔒 Empêche indexation et suivi -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le monde animal</title>
+<title>Le monde animal - Arthur C Photography</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
@@ -74,15 +73,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   border-radius: 12px;
 }
 
-/* Superposition invisible anti-clic / anti-sélection */
-.img-wrapper::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: transparent;
-  z-index: 2;
-}
-
 /* Images */
 .img-wrapper img {
   width: 100%;
@@ -90,7 +80,6 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  pointer-events: none; /* Empêche le clic direct */
 }
 
 .img-wrapper:hover img {
@@ -179,7 +168,7 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// --- Fancybox ---
+// Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -189,7 +178,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   hideScrollbar: false
 });
 
-// --- Menu mobile ---
+// Menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 galerie.addEventListener('click', e => {
@@ -204,22 +193,19 @@ document.addEventListener('click', e => {
   }
 });
 
-// --- Hauteurs personnalisées ---
+// Hauteurs personnalisées
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
 
-// --- Protection des images ---
-document.addEventListener('contextmenu', e => {
-  if (e.target.tagName === 'IMG') {
+// Protection basique des images (clic droit + drag)
+document.querySelectorAll('.gallery img').forEach(img => {
+  img.addEventListener('contextmenu', e => {
     e.preventDefault();
-    alert("⚠️ Images protégées © Arthur C Photography");
-  }
-});
-
-document.addEventListener('dragstart', e => {
-  if (e.target.tagName === 'IMG') e.preventDefault();
+    alert("⚠️ Image protégée © Arthur C Photography");
+  });
+  img.addEventListener('dragstart', e => e.preventDefault());
 });
 </script>
 
