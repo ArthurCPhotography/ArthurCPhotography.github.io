@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le monde animal - Arthur C Photography</title>
+<title>Galerie Animaux - Arthur C Photography</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
@@ -19,7 +19,7 @@ body {
   text-align: center;
 }
 
-/* ----- MENU FIXE ----- */
+/* Menu fixe */
 nav {
   position: fixed;
   top: 0;
@@ -35,7 +35,6 @@ nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: ce
 nav li { position: relative; margin: 0 20px; }
 nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
 nav a:hover { color: #1e90ff; }
-
 nav li ul {
   position: absolute; top: 100%; left: 50%; transform: translate(-50%, -8px);
   background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -47,57 +46,46 @@ nav li:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: aut
 nav li ul li { width: 100%; }
 nav li ul li a { display: block; width: 100%; padding: 10px 16px; font-weight: normal; text-align: center; color: #222; border-radius: 6px; }
 nav li ul li a:hover { background: #eaeaea; color: #000; }
-
 .no-click { cursor: default; pointer-events: none; }
 nav li:hover > a.no-click { color: #1e90ff; }
 .no-click.active { color: #1e90ff; }
 
-/* ----- HEADER ----- */
+/* Header */
 header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE 4 COLONNES ----- */
+/* Galerie 4 colonnes */
 .gallery {
   column-count: 4;
   column-gap: 10px;
   padding: 20px 40px;
 }
-
 .img-wrapper {
   display: inline-block;
   width: 100%;
   margin-bottom: 10px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
 }
-
-/* Images */
 .img-wrapper img {
   width: 100%;
   display: block;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.img-wrapper:hover img {
-  transform: scale(1.03);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  /* Protection desktop/mobile */
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  user-select: none;
+  pointer-events: none; /* bloque drag/drop et clic droit */
 }
+.img-wrapper a img { pointer-events: auto; } /* permet Fancybox de fonctionner */
+.img-wrapper img:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
 
-/* ----- FOOTER ----- */
-footer {
-  background: #f0f0f0;
-  color: #777;
-  padding: 20px;
-  font-size: 0.9em;
-  margin-top: 40px;
-  border-top: 1px solid #ddd;
-}
+/* Footer */
+footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-/* ----- RESPONSIVE ----- */
+/* Responsive */
 @media (max-width: 1024px) { .gallery { column-count: 2; } }
 @media (max-width: 600px) { .gallery { column-count: 1; } }
 </style>
@@ -123,7 +111,7 @@ footer {
 </nav>
 
 <header>
-  <h1>Le monde animal</h1>
+  <h1>Galerie du monde animal</h1>
   <p>Quand la nature se laisse apprivoiser par la lumière</p>
 </header>
 
@@ -131,40 +119,27 @@ footer {
 <section class="gallery">
   <div class="img-wrapper">
     <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
-      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="250">
+      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne 1" data-height="250">
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
-      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne majestueux" data-height="200">
+      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne 2" data-height="200">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
+    <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
       <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
-      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="300">
-    </a>
-  </div>
-  <div class="img-wrapper">
-    <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
-      <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
-    </a>
-  </div>
-  <div class="img-wrapper">
-    <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
-      <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
+      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="400">
     </a>
   </div>
 </section>
 
-<footer>
-  © 2025 Arthur C Photography — Tous droits réservés.<br>
-  Toute reproduction ou utilisation sans autorisation est strictement interdite.
-</footer>
+<footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
@@ -175,17 +150,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   dragToClose: true,
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false,
-  on: {
-    done: (fancybox, slide) => {
-      // Protection activée dès que l'image Fancybox est affichée
-      const image = fancybox.$container.querySelector('.fancybox__image');
-      if (image) {
-        image.addEventListener('contextmenu', e => e.preventDefault());
-        image.addEventListener('dragstart', e => e.preventDefault());
-      }
-    }
-  }
+  hideScrollbar: false
 });
 
 // Menu mobile
@@ -203,19 +168,20 @@ document.addEventListener('click', e => {
   }
 });
 
-// Appliquer hauteur individuelle
+// Appliquer hauteur individuelle aux images
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures sur la page
-document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
+// Protection avancée des images Fancybox et galerie
+document.addEventListener('contextmenu', e => {
+  if(e.target.closest('.gallery img') || e.target.closest('.fancybox__image')) e.preventDefault();
 });
+document.addEventListener('touchstart', e => {
+  if(e.target.closest('.gallery img') || e.target.closest('.fancybox__image')) e.preventDefault();
+}, { passive: false });
 </script>
-
 
 </body>
 </html>
