@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Le monde animal</title>
+<title>Le monde animal - Arthur C Photography</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
@@ -57,41 +57,49 @@ header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE GRID 4 COLONNES ----- */
+/* ----- GALERIE 4 COLONNES ----- */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  column-count: 4;
+  column-gap: 10px;
   padding: 20px 40px;
 }
 
 .img-wrapper {
+  display: inline-block;
   width: 100%;
+  margin-bottom: 10px;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
 }
 
+/* Images */
 .img-wrapper img {
   width: 100%;
   display: block;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  -webkit-user-drag: none;
-  user-select: none;
 }
 
-.img-wrapper img:hover {
+.img-wrapper:hover img {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
 /* ----- FOOTER ----- */
-footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
+footer {
+  background: #f0f0f0;
+  color: #777;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+}
 
 /* ----- RESPONSIVE ----- */
-@media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .gallery { column-count: 2; } }
+@media (max-width: 600px) { .gallery { column-count: 1; } }
 </style>
 </head>
 <body>
@@ -115,7 +123,7 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 </nav>
 
 <header>
-  <h1>Galerie du monde animal</h1>
+  <h1>Le monde animal</h1>
   <p>Quand la nature se laisse apprivoiser par la lumière</p>
 </header>
 
@@ -123,37 +131,40 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
 <section class="gallery">
   <div class="img-wrapper">
     <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
-      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne 1" data-height="250">
+      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="250">
     </a>
   </div>
   <div class="img-wrapper">
     <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
-      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne 2" data-height="200">
+      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne majestueux" data-height="200">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
+    <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
       <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
-      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="400">
+    <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
+      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="300">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
+    <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
       <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
     </a>
   </div>
   <div class="img-wrapper">
-    <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
+    <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
       <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
     </a>
   </div>
 </section>
 
-<footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
+<footer>
+  © 2025 Arthur C Photography — Tous droits réservés.<br>
+  Toute reproduction ou utilisation sans autorisation est strictement interdite.
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
@@ -166,23 +177,12 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   caption: (fancybox, carousel, slide) => slide.caption,
   hideScrollbar: false,
   on: {
-    ready: (fancybox) => {
-      // Ajouter overlay pour empêcher le clic droit / long press
-      const slide = fancybox.getSlide();
-      if (!slide) return;
-      const img = slide.$el.querySelector('img');
-      if (img) {
-        const overlay = document.createElement('div');
-        overlay.style.position = 'absolute';
-        overlay.style.top = 0;
-        overlay.style.left = 0;
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.zIndex = 9999;
-        overlay.addEventListener('contextmenu', e => e.preventDefault());
-        overlay.addEventListener('touchstart', e => e.preventDefault());
-        img.parentNode.style.position = 'relative';
-        img.parentNode.appendChild(overlay);
+    done: (fancybox, slide) => {
+      // Protection activée dès que l'image Fancybox est affichée
+      const image = fancybox.$container.querySelector('.fancybox__image');
+      if (image) {
+        image.addEventListener('contextmenu', e => e.preventDefault());
+        image.addEventListener('dragstart', e => e.preventDefault());
       }
     }
   }
@@ -207,10 +207,15 @@ document.addEventListener('click', e => {
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
-  img.addEventListener('contextmenu', e => e.preventDefault());  // empêche clic droit galerie
-  img.addEventListener('touchstart', e => e.preventDefault());   // empêche long press mobile
+});
+
+// Protéger les miniatures sur la page
+document.querySelectorAll('.gallery img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
 });
 </script>
+
 
 </body>
 </html>
