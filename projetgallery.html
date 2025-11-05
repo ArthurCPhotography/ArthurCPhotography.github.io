@@ -181,10 +181,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
       // Protection activée dès que l'image Fancybox est affichée
       const image = fancybox.$container.querySelector('.fancybox__image');
       if (image) {
-        image.addEventListener('contextmenu', e => {
-          e.preventDefault();
-          alert("⚠️ Image protégée © Arthur C Photography");
-        });
+        image.addEventListener('contextmenu', e => e.preventDefault());
         image.addEventListener('dragstart', e => e.preventDefault());
       }
     }
@@ -214,10 +211,7 @@ document.querySelectorAll('.gallery img').forEach(img => {
 
 // Protéger les miniatures sur la page
 document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => {
-    e.preventDefault();
-    alert("⚠️ Image protégée © Arthur C Photography");
-  });
+  img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 });
 </script>
