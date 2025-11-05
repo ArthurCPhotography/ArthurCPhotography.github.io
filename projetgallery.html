@@ -168,7 +168,6 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox - Protection totale dans la lightbox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -176,17 +175,25 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
   hideScrollbar: false,
+
   on: {
-    done: (fancybox, slide) => {
-      const image = fancybox.$container.querySelector('.fancybox__image');
-      if (image) {
-        // Bloquer clic droit et drag
-        image.addEventListener('contextmenu', e => e.preventDefault());
-        image.addEventListener('dragstart', e => e.preventDefault());
-        // Bloquer appui long sur mobile
-        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-      }
+    // Dès que la Fancybox est prête
+    ready: (fancybox) => {
+      const applyProtection = () => {
+        const image = fancybox.$container.querySelector('.fancybox__image');
+        if (image) {
+          image.addEventListener('contextmenu', e => e.preventDefault());
+          image.addEventListener('dragstart', e => e.preventDefault());
+          image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+          image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+        }
+      };
+
+      // Protection sur la première image
+      applyProtection();
+
+      // Protection sur les images suivantes quand on change de diapo
+      fancybox.Carousel.on('change', applyProtection);
     }
   }
 });
@@ -212,11 +219,10 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures de la galerie (clic droit et drag seulement)
+// Protéger les miniatures (clic droit + drag)
 document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
-  img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
-  // Ne pas bloquer touchstart/touchend pour permettre l'ouverture de Fancybox sur mobile
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
 });
 </script>
 
