@@ -71,22 +71,25 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* transition fluide */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* ombre initiale */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
+/* Survol : wrapper zoom légèrement, ombre plus prononcée */
 .img-wrapper:hover {
-  transform: translateY(-3px); /* léger “soulèvement” du wrapper */
-  box-shadow: 0 6px 20px rgba(0,0,0,0.2); /* ombre plus prononcée */
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
+/* Image : pas de transformation, juste ajustement au conteneur */
 .img-wrapper img {
   width: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: cover; /* garde l’image bien cadrée */
   border-radius: 12px;
-  transition: none; /* aucune transformation sur l'image */
+  transition: transform 0.3s ease; /* transition fluide mais pas de zoom interne */
 }
+
 
 /* ----- FOOTER ----- */
 footer {
