@@ -212,10 +212,12 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures sur la page
+// Protéger les miniatures de la galerie
 document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
+  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
+  img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
+  img.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // appui long mobile
+  img.addEventListener('touchend', e => e.preventDefault(), { passive: false });
 });
 </script>
 
