@@ -59,8 +59,9 @@ p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
 /* ----- GALERIE 4 COLONNES ----- */
 .gallery {
-  column-count: 4;
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   padding: 20px 40px;
 }
 
