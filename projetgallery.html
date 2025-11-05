@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Galerie Animaux - Arthur C Photography</title>
+<title>Le monde animal</title>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
 
@@ -19,7 +19,7 @@ body {
   text-align: center;
 }
 
-/* Menu fixe */
+/* ----- MENU FIXE ----- */
 nav {
   position: fixed;
   top: 0;
@@ -35,6 +35,7 @@ nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: ce
 nav li { position: relative; margin: 0 20px; }
 nav a { color: #222; text-decoration: none; font-weight: bold; padding: 8px 12px; display: block; }
 nav a:hover { color: #1e90ff; }
+
 nav li ul {
   position: absolute; top: 100%; left: 50%; transform: translate(-50%, -8px);
   background: #f8f8f8; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -46,48 +47,51 @@ nav li:hover ul { opacity: 1; transform: translate(-50%, 0); pointer-events: aut
 nav li ul li { width: 100%; }
 nav li ul li a { display: block; width: 100%; padding: 10px 16px; font-weight: normal; text-align: center; color: #222; border-radius: 6px; }
 nav li ul li a:hover { background: #eaeaea; color: #000; }
+
 .no-click { cursor: default; pointer-events: none; }
 nav li:hover > a.no-click { color: #1e90ff; }
 .no-click.active { color: #1e90ff; }
 
-/* Header */
+/* ----- HEADER ----- */
 header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* Galerie 4 colonnes */
+/* ----- GALERIE GRID 4 COLONNES ----- */
 .gallery {
-  column-count: 4;
-  column-gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
   padding: 20px 40px;
 }
+
 .img-wrapper {
-  display: inline-block;
   width: 100%;
-  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
 }
+
 .img-wrapper img {
   width: 100%;
   display: block;
   object-fit: cover;
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-  /* Protection desktop/mobile */
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
   user-select: none;
-  pointer-events: none; /* bloque drag/drop et clic droit */
 }
-.img-wrapper a img { pointer-events: auto; } /* permet Fancybox de fonctionner */
-.img-wrapper img:hover { transform: scale(1.03); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
 
-/* Footer */
+.img-wrapper img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+/* ----- FOOTER ----- */
 footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; margin-top: 40px; }
 
-/* Responsive */
-@media (max-width: 1024px) { .gallery { column-count: 2; } }
-@media (max-width: 600px) { .gallery { column-count: 1; } }
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) { .gallery { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .gallery { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -137,6 +141,16 @@ footer { background: #f0f0f0; color: #777; padding: 20px; font-size: 0.9em; marg
       <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="400">
     </a>
   </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
+      <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Afrique du Sud - Parc Kruger - 2024">
+      <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    </a>
+  </div>
 </section>
 
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
@@ -150,7 +164,28 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   dragToClose: true,
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false
+  hideScrollbar: false,
+  on: {
+    ready: (fancybox) => {
+      // Ajouter overlay pour empêcher le clic droit / long press
+      const slide = fancybox.getSlide();
+      if (!slide) return;
+      const img = slide.$el.querySelector('img');
+      if (img) {
+        const overlay = document.createElement('div');
+        overlay.style.position = 'absolute';
+        overlay.style.top = 0;
+        overlay.style.left = 0;
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.zIndex = 9999;
+        overlay.addEventListener('contextmenu', e => e.preventDefault());
+        overlay.addEventListener('touchstart', e => e.preventDefault());
+        img.parentNode.style.position = 'relative';
+        img.parentNode.appendChild(overlay);
+      }
+    }
+  }
 });
 
 // Menu mobile
@@ -168,19 +203,13 @@ document.addEventListener('click', e => {
   }
 });
 
-// Appliquer hauteur individuelle aux images
+// Appliquer hauteur individuelle
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
+  img.addEventListener('contextmenu', e => e.preventDefault());  // empêche clic droit galerie
+  img.addEventListener('touchstart', e => e.preventDefault());   // empêche long press mobile
 });
-
-// Protection avancée des images Fancybox et galerie
-document.addEventListener('contextmenu', e => {
-  if(e.target.closest('.gallery img') || e.target.closest('.fancybox__image')) e.preventDefault();
-});
-document.addEventListener('touchstart', e => {
-  if(e.target.closest('.gallery img') || e.target.closest('.fancybox__image')) e.preventDefault();
-}, { passive: false });
 </script>
 
 </body>
