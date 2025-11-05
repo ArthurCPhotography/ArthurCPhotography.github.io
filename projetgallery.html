@@ -169,7 +169,7 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 /* ============================================================
-   PROTECTION GALERIE & FANCYBOX - toutes images
+   PROTECTION GALERIE & FANCYBOX
    ============================================================ */
 
 function ensureGalleryOverlay(wrapper) {
@@ -209,17 +209,17 @@ function protectGallery() {
 }
 
 function protectFancybox(fancybox) {
-  const apply = () => {
+  const applyProtection = () => {
     const container = fancybox.$container;
     if (!container) return;
     const img = container.querySelector('img');
     if (!img) return;
 
-    // Bloquer clic droit / drag sur l'image fancybox
+    // bloquer clic droit et drag
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    // Overlay pour bloquer appui long sur mobile
+    // overlay pour blocage appui long sur mobile
     const parent = img.parentNode;
     if (!parent.querySelector('.__fancybox-protect-overlay')) {
       const overlay = document.createElement('div');
@@ -232,7 +232,6 @@ function protectFancybox(fancybox) {
       let pressTimer = null;
       const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
       const cancel = () => { clearTimeout(pressTimer); };
-
       overlay.addEventListener('touchstart', start, { passive: false });
       overlay.addEventListener('touchend', cancel);
       overlay.addEventListener('touchmove', cancel);
@@ -243,15 +242,19 @@ function protectFancybox(fancybox) {
     }
   };
 
-  apply();
-  // Appliquer protection à chaque changement de slide
-  if (fancybox.Carousel?.on) fancybox.Carousel.on('change', apply);
+  // appliquer sur la slide actuelle
+  applyProtection();
+
+  // appliquer à chaque changement de slide
+  if (fancybox.Carousel && fancybox.Carousel.on) {
+    fancybox.Carousel.on('change', applyProtection);
+  }
 }
 
 // appliquer protection à la galerie
 protectGallery();
 
-// initialiser Fancybox avec protection
+// initialiser Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -265,7 +268,7 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   }
 });
 
-// ----- Menu mobile -----
+// menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 galerie.addEventListener('click', e => {
@@ -280,7 +283,7 @@ document.addEventListener('click', e => {
   }
 });
 
-// ----- Hauteur dynamique -----
+// hauteur dynamique
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
