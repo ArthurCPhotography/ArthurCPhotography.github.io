@@ -218,19 +218,25 @@ document.querySelectorAll('.gallery a img').forEach(img => {
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Bloquer appui long sur mobile (touch & hold)
-  let touchTimer;
+  // Protection appui long sans bloquer Fancybox
+document.querySelectorAll('.gallery a img').forEach(img => {
+  // Bloquer clic droit et drag
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+
+  // Appui long mobile
+  let longPressTimer;
   img.addEventListener('touchstart', e => {
-    touchTimer = setTimeout(() => {
-      e.preventDefault(); // empêche l'appui long
-    }, 500); // seuil 500ms pour long press
+    longPressTimer = setTimeout(() => {
+      // Bloque uniquement l'appui long (empêche menu enregistrer)
+      e.preventDefault();
+    }, 600); // seuil long press 600ms
   }, { passive: false });
 
   img.addEventListener('touchend', e => {
-    clearTimeout(touchTimer); // tap rapide reste possible
+    clearTimeout(longPressTimer); // tap rapide = ok
   });
 });
 </script>
-
 </body>
 </html>
