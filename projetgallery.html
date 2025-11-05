@@ -172,13 +172,13 @@ footer {
    PROTECTION GALERIE & FANCYBOX
    ============================================================ */
 
+// Appliquer protection sur les miniatures de la galerie
 function ensureGalleryOverlay(wrapper) {
   if (wrapper.querySelector('.__img-protect-overlay')) return;
   const link = wrapper.querySelector('a');
   const img = wrapper.querySelector('img');
   if (!img || !link) return;
 
-  // bloquer clic droit / drag sur miniatures
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
@@ -191,7 +191,8 @@ function ensureGalleryOverlay(wrapper) {
 
   // clic = ouverture fancybox
   overlay.addEventListener('click', () => link.click());
-  // blocage appui long
+
+  // blocage appui long sur mobile
   let pressTimer = null;
   const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
   const cancel = () => { clearTimeout(pressTimer); };
@@ -204,26 +205,27 @@ function ensureGalleryOverlay(wrapper) {
   wrapper.appendChild(overlay);
 }
 
+// Appliquer protection à toute la galerie
 function protectGallery() {
   document.querySelectorAll('.gallery .img-wrapper').forEach(ensureGalleryOverlay);
 }
 
-function protectFancybox(fancybox) {
-  const applyProtection = () => {
+// Fancybox - protection pour toutes les images
+function applyProtection(fancybox) {
+  if (!fancybox || !fancybox.Carousel) return;
+
+  const protectSlide = () => {
     const container = fancybox.$container;
     if (!container) return;
     const img = container.querySelector('img');
     if (!img) return;
 
-    // Bloquer clic droit et drag
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    // Supprimer overlay précédent si présent
     const oldOverlay = container.querySelector('.__fancybox-protect-overlay');
     if (oldOverlay) oldOverlay.remove();
 
-    // Créer overlay pour bloquer appui long sur mobile
     const overlay = document.createElement('div');
     overlay.className = '__fancybox-protect-overlay';
     Object.assign(overlay.style, {
@@ -243,20 +245,14 @@ function protectFancybox(fancybox) {
     img.parentNode.appendChild(overlay);
   };
 
-  // Appliquer protection sur la slide actuelle
-  applyProtection();
-
-  // Appliquer protection à chaque changement de slide
-  if (fancybox.Carousel && fancybox.Carousel.on) {
-    fancybox.Carousel.on('change', applyProtection);
-  }
+  protectSlide();
+  fancybox.Carousel.on('change', protectSlide);
 }
 
-
-// appliquer protection à la galerie
+// Appliquer protection à la galerie
 protectGallery();
 
-// initialiser Fancybox
+// Initialiser Fancybox avec protection
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -265,12 +261,12 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   caption: (f, c, s) => s.caption,
   hideScrollbar: false,
   on: {
-    ready: protectFancybox,
-    done: protectFancybox
+    ready: applyProtection,
+    done: applyProtection
   }
 });
 
-// menu mobile
+// Menu mobile
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 galerie.addEventListener('click', e => {
@@ -285,11 +281,12 @@ document.addEventListener('click', e => {
   }
 });
 
-// hauteur dynamique
+// Hauteur dynamique des images
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
+
 </script>
 
 </body>
