@@ -168,40 +168,75 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Protection mobile et desktop
-document.querySelectorAll('.gallery a').forEach(link => {
+// Fancybox - Protection totale dans la lightbox
+Fancybox.bind("[data-fancybox='gallery-animaux']", {
+  Toolbar: { display: ["close"] },
+  Thumbs: false,
+  dragToClose: true,
+  animated: true,
+  caption: (fancybox, carousel, slide) => slide.caption,
+  hideScrollbar: false,
+  on: {
+    done: (fancybox, slide) => {
+      const image = fancybox.$container.querySelector('.fancybox__image');
+      if (image) {
+        image.addEventListener('contextmenu', e => e.preventDefault());
+        image.addEventListener('dragstart', e => e.preventDefault());
+        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+      }
+    }
+  }
+});
 
-  const img = link.querySelector('img');
+// Menu mobile
+const galerie = document.querySelector('.no-click');
+const submenu = galerie.nextElementSibling;
+galerie.addEventListener('click', e => {
+  e.stopPropagation();
+  submenu.classList.toggle('show');
+  galerie.classList.toggle('active');
+});
+document.addEventListener('click', e => {
+  if (!submenu.contains(e.target)) {
+    submenu.classList.remove('show');
+    galerie.classList.remove('active');
+  }
+});
 
-  // Desktop : clic droit et drag
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
+// Appliquer hauteur individuelle
+document.querySelectorAll('.gallery img').forEach(img => {
+  const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
+  img.style.height = h + 'px';
+});
 
-  // Mobile : overlay transparent
-  const overlay = document.createElement('div');
-  overlay.style.position = 'absolute';
-  overlay.style.top = 0;
-  overlay.style.left = 0;
-  overlay.style.width = '100%';
-  overlay.style.height = '100%';
-  overlay.style.zIndex = 2; // au-dessus de l'image
-  overlay.style.background = 'transparent';
-  overlay.style.touchAction = 'none'; // empêche menu contextuel mobile
-  link.style.position = 'relative';
-  link.appendChild(overlay);
+// ---------- Nouvelle protection pour la galerie ----------
+document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
+    const link = wrapper.querySelector('a');
 
-  // On laisse le tap passer au parent pour Fancybox
-  overlay.addEventListener('click', e => {
-    link.click(); // déclenche Fancybox normalement
-  });
+    // Créer un overlay invisible
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.zIndex = '2';
+    overlay.style.background = 'transparent';
+    
+    // Bloquer clic droit et appui long
+    overlay.addEventListener('contextmenu', e => e.preventDefault());
+    overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+    overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+    
+    // Clic normal ouvre Fancybox
+    overlay.addEventListener('click', e => link.click());
 
-  overlay.addEventListener('contextmenu', e => e.preventDefault());
-  overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-  overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-
+    // Ajouter overlay à l'img-wrapper
+    wrapper.style.position = 'relative'; // nécessaire pour que overlay couvre l'image
+    wrapper.appendChild(overlay);
 });
 </script>
-
 
 </body>
 </html>
