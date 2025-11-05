@@ -168,7 +168,7 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox - Protection totale dans la lightbox
+// Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -212,31 +212,15 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-/ Protéger uniquement les images de la galerie
-document.querySelectorAll('.gallery a img').forEach(img => {
-  // Bloquer clic droit et drag
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
-
-  // Protection appui long sans bloquer Fancybox
-document.querySelectorAll('.gallery a img').forEach(img => {
-  // Bloquer clic droit et drag
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
-
-  // Appui long mobile
-  let longPressTimer;
-  img.addEventListener('touchstart', e => {
-    longPressTimer = setTimeout(() => {
-      // Bloque uniquement l'appui long (empêche menu enregistrer)
-      e.preventDefault();
-    }, 600); // seuil long press 600ms
-  }, { passive: false });
-
-  img.addEventListener('touchend', e => {
-    clearTimeout(longPressTimer); // tap rapide = ok
-  });
+// Protéger les miniatures de la galerie
+document.querySelectorAll('.gallery img').forEach(img => {
+  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
+  img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
+  img.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // appui long mobile
+  img.addEventListener('touchend', e => e.preventDefault(), { passive: false });
 });
 </script>
+
+
 </body>
 </html>
