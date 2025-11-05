@@ -169,7 +169,7 @@ footer {
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 /* ============================================================
-   PROTECTION GALERIE & FANCYBOX (corrigé)
+   PROTECTION GALERIE & FANCYBOX - toutes images
    ============================================================ */
 
 function ensureGalleryOverlay(wrapper) {
@@ -178,7 +178,7 @@ function ensureGalleryOverlay(wrapper) {
   const img = wrapper.querySelector('img');
   if (!img || !link) return;
 
-  // Bloquer clic droit / drag sur miniatures
+  // bloquer clic droit / drag sur miniatures
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
@@ -189,10 +189,9 @@ function ensureGalleryOverlay(wrapper) {
     background: 'transparent', zIndex: 10, cursor: 'pointer'
   });
 
-  // Clic = ouverture Fancybox
+  // clic = ouverture fancybox
   overlay.addEventListener('click', () => link.click());
-
-  // Blocage appui long sur mobile
+  // blocage appui long
   let pressTimer = null;
   const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
   const cancel = () => { clearTimeout(pressTimer); };
@@ -209,36 +208,50 @@ function protectGallery() {
   document.querySelectorAll('.gallery .img-wrapper').forEach(ensureGalleryOverlay);
 }
 
-// 🔒 Protection complète des images dans Fancybox
-function protectFancyboxImages(fancybox) {
-  const container = fancybox.$container;
-  if (!container) return;
+function protectFancybox(fancybox) {
+  const apply = () => {
+    const container = fancybox.$container;
+    if (!container) return;
+    const img = container.querySelector('img');
+    if (!img) return;
 
-  const slides = container.querySelectorAll('.fancybox__slide img');
-  slides.forEach(img => {
-    if (img.dataset.protected) return; // éviter doublons
-    img.dataset.protected = "true";
-
-    // Bloquer clic droit et drag
+    // Bloquer clic droit / drag sur l'image fancybox
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    // Blocage appui long
-    let pressTimer = null;
-    const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
-    const cancel = () => { clearTimeout(pressTimer); };
-    img.addEventListener('touchstart', start, { passive: false });
-    img.addEventListener('touchend', cancel);
-    img.addEventListener('touchmove', cancel);
-  });
+    // Overlay pour bloquer appui long sur mobile
+    const parent = img.parentNode;
+    if (!parent.querySelector('.__fancybox-protect-overlay')) {
+      const overlay = document.createElement('div');
+      overlay.className = '__fancybox-protect-overlay';
+      Object.assign(overlay.style, {
+        position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
+        background: 'transparent', zIndex: 20
+      });
+
+      let pressTimer = null;
+      const start = ev => { pressTimer = setTimeout(() => ev.preventDefault && ev.preventDefault(), 600); };
+      const cancel = () => { clearTimeout(pressTimer); };
+
+      overlay.addEventListener('touchstart', start, { passive: false });
+      overlay.addEventListener('touchend', cancel);
+      overlay.addEventListener('touchmove', cancel);
+      overlay.addEventListener('contextmenu', e => e.preventDefault());
+
+      if (getComputedStyle(parent).position === 'static') parent.style.position = 'relative';
+      parent.appendChild(overlay);
+    }
+  };
+
+  apply();
+  // Appliquer protection à chaque changement de slide
+  if (fancybox.Carousel?.on) fancybox.Carousel.on('change', apply);
 }
 
-/* ----- Application globale ----- */
-
-// Protéger les miniatures
+// appliquer protection à la galerie
 protectGallery();
 
-// Initialiser Fancybox
+// initialiser Fancybox avec protection
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -247,10 +260,8 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   caption: (f, c, s) => s.caption,
   hideScrollbar: false,
   on: {
-    ready: protectFancyboxImages,
-    done: protectFancyboxImages,
-    closing: protectFancyboxImages,
-    "Carousel.change": protectFancyboxImages
+    ready: protectFancybox,
+    done: protectFancybox
   }
 });
 
