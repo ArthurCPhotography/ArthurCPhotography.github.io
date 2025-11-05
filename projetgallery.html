@@ -168,35 +168,40 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Protection des miniatures tout en laissant Fancybox fonctionner
+// Protection mobile et desktop
 document.querySelectorAll('.gallery a').forEach(link => {
-  
+
   const img = link.querySelector('img');
 
-  // Desktop : bloquer clic droit et drag sur l'image
+  // Desktop : clic droit et drag
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Mobile : blocage appui long
-  let pressTimer;
+  // Mobile : overlay transparent
+  const overlay = document.createElement('div');
+  overlay.style.position = 'absolute';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.zIndex = 2; // au-dessus de l'image
+  overlay.style.background = 'transparent';
+  overlay.style.touchAction = 'none'; // empêche menu contextuel mobile
+  link.style.position = 'relative';
+  link.appendChild(overlay);
 
-  img.addEventListener('touchstart', e => {
-    pressTimer = setTimeout(() => {
-      // Appui long détecté, empêcher l'enregistrement
-      e.preventDefault();
-    }, 600); // durée de l'appui long
-  }, { passive: false });
-
-  img.addEventListener('touchend', e => {
-    clearTimeout(pressTimer); // tap court = Fancybox s'ouvre normalement
+  // On laisse le tap passer au parent pour Fancybox
+  overlay.addEventListener('click', e => {
+    link.click(); // déclenche Fancybox normalement
   });
 
-  img.addEventListener('touchmove', e => {
-    clearTimeout(pressTimer); // annuler si mouvement (scroll)
-  });
+  overlay.addEventListener('contextmenu', e => e.preventDefault());
+  overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
+  overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
 
 });
 </script>
+
 
 </body>
 </html>
