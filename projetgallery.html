@@ -168,7 +168,7 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox - Protection totale dans la lightbox
+// Fancybox - protection dans la lightbox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -180,13 +180,41 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
     done: (fancybox, slide) => {
       const image = fancybox.$container.querySelector('.fancybox__image');
       if (image) {
+        // Clic droit et drag
         image.addEventListener('contextmenu', e => e.preventDefault());
         image.addEventListener('dragstart', e => e.preventDefault());
-        image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-        image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+
+        // Appui long mobile : overlay temporaire pour bloquer menu contextuel
+        let touchTimer;
+        image.addEventListener('touchstart', e => {
+          touchTimer = setTimeout(() => e.preventDefault(), 500); // 500ms = appui long
+        }, { passive: false });
+
+        image.addEventListener('touchend', e => {
+          clearTimeout(touchTimer);
+        });
       }
     }
   }
+});
+
+// Protéger les miniatures de la galerie
+document.querySelectorAll('.gallery a').forEach(link => {
+  const img = link.querySelector('img');
+
+  // Clic droit et drag
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+
+  // Appui long mobile : bloque menu contextuel, mais laisse le tap ouvrir Fancybox
+  let touchTimer;
+  img.addEventListener('touchstart', e => {
+    touchTimer = setTimeout(() => e.preventDefault(), 500);
+  }, { passive: false });
+
+  img.addEventListener('touchend', e => {
+    clearTimeout(touchTimer);
+  });
 });
 
 // Menu mobile
@@ -208,33 +236,6 @@ document.addEventListener('click', e => {
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
-});
-
-// ---------- Nouvelle protection pour la galerie ----------
-document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
-    const link = wrapper.querySelector('a');
-
-    // Créer un overlay invisible
-    const overlay = document.createElement('div');
-    overlay.style.position = 'absolute';
-    overlay.style.top = '0';
-    overlay.style.left = '0';
-    overlay.style.width = '100%';
-    overlay.style.height = '100%';
-    overlay.style.zIndex = '2';
-    overlay.style.background = 'transparent';
-    
-    // Bloquer clic droit et appui long
-    overlay.addEventListener('contextmenu', e => e.preventDefault());
-    overlay.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-    overlay.addEventListener('touchend', e => e.preventDefault(), { passive: false });
-    
-    // Clic normal ouvre Fancybox
-    overlay.addEventListener('click', e => link.click());
-
-    // Ajouter overlay à l'img-wrapper
-    wrapper.style.position = 'relative'; // nécessaire pour que overlay couvre l'image
-    wrapper.appendChild(overlay);
 });
 </script>
 
