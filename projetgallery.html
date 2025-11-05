@@ -168,7 +168,7 @@ footer {
 
 <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
-// Fancybox
+// Fancybox - Protection totale dans la lightbox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -212,14 +212,14 @@ document.querySelectorAll('.gallery img').forEach(img => {
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures de la galerie
+// Protéger les miniatures de la galerie (clic droit et drag seulement)
 document.querySelectorAll('.gallery img').forEach(img => {
   img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
   img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
-  img.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // appui long mobile
-  img.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+  // Ne pas bloquer touchstart/touchend pour permettre l'ouverture de Fancybox sur mobile
 });
 </script>
+
 
 
 </body>
