@@ -175,7 +175,20 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   dragToClose: true,
   animated: true,
   caption: (fancybox, carousel, slide) => slide.caption,
-  hideScrollbar: false
+  hideScrollbar: false,
+  on: {
+    done: (fancybox, slide) => {
+      // Protection activée dès que l'image Fancybox est affichée
+      const image = fancybox.$container.querySelector('.fancybox__image');
+      if (image) {
+        image.addEventListener('contextmenu', e => {
+          e.preventDefault();
+          alert("⚠️ Image protégée © Arthur C Photography");
+        });
+        image.addEventListener('dragstart', e => e.preventDefault());
+      }
+    }
+  }
 });
 
 // Menu mobile
@@ -193,32 +206,22 @@ document.addEventListener('click', e => {
   }
 });
 
-// Hauteurs personnalisées
+// Appliquer hauteur individuelle
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
 
-// Protection des images (galerie + Fancybox)
-function protectImage(img) {
+// Protéger les miniatures sur la page
+document.querySelectorAll('.gallery img').forEach(img => {
   img.addEventListener('contextmenu', e => {
     e.preventDefault();
     alert("⚠️ Image protégée © Arthur C Photography");
   });
   img.addEventListener('dragstart', e => e.preventDefault());
-}
-
-// Protège les miniatures de la page
-document.querySelectorAll('.gallery img').forEach(protectImage);
-
-// Protège les images ouvertes dans Fancybox
-document.addEventListener('DOMContentLoaded', () => {
-  Fancybox.on('Carousel.change', (fancybox, carousel, slide) => {
-    const image = fancybox.$container.querySelector('.fancybox__image');
-    if (image) protectImage(image);
-  });
 });
 </script>
+
 
 </body>
 </html>
