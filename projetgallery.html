@@ -166,7 +166,6 @@ footer {
   Toute reproduction ou utilisation sans autorisation est strictement interdite.
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 <script>
 // Fancybox
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
@@ -178,12 +177,11 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   hideScrollbar: false,
   on: {
     done: (fancybox, slide) => {
+      // Protection activée dès que l'image Fancybox est affichée
       const image = fancybox.$container.querySelector('.fancybox__image');
       if (image) {
-        // Bloquer clic droit et drag
         image.addEventListener('contextmenu', e => e.preventDefault());
         image.addEventListener('dragstart', e => e.preventDefault());
-        // Bloquer appui long sur mobile
         image.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
         image.addEventListener('touchend', e => e.preventDefault(), { passive: false });
       }
@@ -206,18 +204,21 @@ document.addEventListener('click', e => {
   }
 });
 
-// Appliquer hauteur individuelle
+// Appliquer hauteur individuelle aux images
 document.querySelectorAll('.gallery img').forEach(img => {
   const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
   img.style.height = h + 'px';
 });
 
-// Protéger les miniatures sur la page
+// Protéger les images de la galerie
 document.querySelectorAll('.gallery img').forEach(img => {
-  img.addEventListener('contextmenu', e => e.preventDefault());
-  img.addEventListener('dragstart', e => e.preventDefault());
+  img.addEventListener('contextmenu', e => e.preventDefault()); // clic droit
+  img.addEventListener('dragstart', e => e.preventDefault());    // drag & drop
+  img.addEventListener('touchstart', e => e.preventDefault(), { passive: false }); // appui long mobile
+  img.addEventListener('touchend', e => e.preventDefault(), { passive: false });
 });
 </script>
+
 
 
 </body>
