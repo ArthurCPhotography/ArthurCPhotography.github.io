@@ -215,20 +215,21 @@ document.querySelectorAll('.gallery img').forEach(img => {
 // Protéger les miniatures de la galerie tout en permettant le tap pour ouvrir Fancybox
 document.querySelectorAll('.gallery a').forEach(link => {
   const img = link.querySelector('img');
+
   // Bloquer clic droit et drag
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Bloquer appui long sur mobile mais permettre le simple tap
+  // Bloquer appui long sur mobile (touch & hold)
   let touchTimer;
   img.addEventListener('touchstart', e => {
     touchTimer = setTimeout(() => {
-      e.preventDefault(); // bloque l'appui long seulement si maintenu longtemps
-    }, 500); // 500ms seuil de long press
+      e.preventDefault(); // empêche l'appui long
+    }, 500); // seuil 500ms pour long press
   }, { passive: false });
 
   img.addEventListener('touchend', e => {
-    clearTimeout(touchTimer); // si tap rapide, Fancybox fonctionne
+    clearTimeout(touchTimer); // tap rapide reste possible
   });
 });
 </script>
