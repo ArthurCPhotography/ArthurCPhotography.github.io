@@ -202,6 +202,9 @@
 <footer>© 2025 Arthur C Photography — Tous droits réservés</footer>
 
 <script>
+// -----------------------------
+// MENU MOBILE
+// -----------------------------
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
 
@@ -217,20 +220,18 @@ document.addEventListener('click', (e) => {
     galerie.classList.remove('active');
   }
 });
- 
-// -----------------------------
-// PROTECTION DES IMAGES DE LA GALERIE (clic droit / drag / appui long)
-// -----------------------------
-document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
-  const link = wrapper.querySelector('a');
-  const img = wrapper.querySelector('img');
-  if (!img || !link) return;
 
-  // Empêcher le clic droit et le glisser sur l'image
+// -----------------------------
+// PROTECTION DES IMAGES INDEX (clic droit / drag / appui long)
+// -----------------------------
+document.querySelectorAll('.gallery a img').forEach(img => {
+  const link = img.closest('a');
+
+  // Empêcher clic droit et glisser
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Créer une couche transparente au-dessus de chaque image
+  // Créer une couche transparente par-dessus
   const overlay = document.createElement('div');
   overlay.style.position = 'absolute';
   overlay.style.top = 0;
@@ -241,11 +242,13 @@ document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   overlay.style.cursor = 'pointer';
   overlay.style.zIndex = 10;
 
-  // Clic déclenche Fancybox si besoin
-  overlay.addEventListener('click', () => link.click());
-  overlay.addEventListener('contextmenu', e => e.preventDefault());
+  // Clic ouvre le lien s’il existe
+  if (link) {
+    overlay.addEventListener('click', () => link.click());
+  }
 
-  // Blocage appui long sur mobile
+  // Bloquer clic droit et appui long
+  overlay.addEventListener('contextmenu', e => e.preventDefault());
   let pressTimer;
   const start = ev => { pressTimer = setTimeout(() => ev.preventDefault(), 600); };
   const cancel = () => clearTimeout(pressTimer);
@@ -253,14 +256,15 @@ document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   overlay.addEventListener('touchend', cancel);
   overlay.addEventListener('touchmove', cancel);
 
-  // S'assure que le wrapper est en position relative
-  if (getComputedStyle(wrapper).position === 'static')
-    wrapper.style.position = 'relative';
+  // S’assurer que le parent est bien en position relative
+  const parent = img.parentElement;
+  if (getComputedStyle(parent).position === 'static')
+    parent.style.position = 'relative';
 
-  // Ajoute la protection
-  wrapper.appendChild(overlay);
+  parent.appendChild(overlay);
 });
 </script>
+
 
 </body>
 </html>
