@@ -1,5 +1,8 @@
+/* ----- RESET ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 /* ----- STYLE SPÉCIFIQUE À LA PAGE LÉGALE ----- */
-
 /* On cible uniquement le contenu principal */
 main {
   text-align: left;
