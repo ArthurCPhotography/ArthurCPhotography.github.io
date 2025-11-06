@@ -7,16 +7,29 @@ fetch('nav.html')
     const galerie = document.querySelector('.no-click');
     const submenu = galerie.nextElementSibling;
 
+    // Clic sur "Galerie"
     galerie.addEventListener('click', (e) => {
+      e.preventDefault();
       e.stopPropagation();
-      submenu.classList.toggle('show');
-      galerie.classList.toggle('active'); // texte bleu mobile
+
+      const isOpen = submenu.classList.toggle('show');
+      galerie.classList.toggle('active', isOpen); // texte bleu quand ouvert
     });
 
+    // Clique ailleurs → fermer menu
     document.addEventListener('click', (e) => {
       if (!submenu.contains(e.target) && !galerie.contains(e.target)) {
         submenu.classList.remove('show');
         galerie.classList.remove('active');
       }
+    });
+
+    // ----- SURVOL (PC) -----
+    galerie.parentElement.addEventListener('mouseenter', () => {
+      galerie.classList.add('active');
+    });
+
+    galerie.parentElement.addEventListener('mouseleave', () => {
+      galerie.classList.remove('active');
     });
   });
