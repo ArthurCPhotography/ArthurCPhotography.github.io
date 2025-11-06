@@ -16,7 +16,7 @@
     text-align: center;
   }
 
-  /* ----- MENU FIXE IDENTIQUE À L'INDEX ----- */
+  /* ----- MENU FIXE ----- */
   nav {
     position: fixed;
     top: 0;
@@ -48,7 +48,7 @@
   }
   nav a:hover { color: #1e90ff; }
 
-  /* Sous-menu */
+  /* ----- SOUS-MENU ----- */
   nav li ul {
     position: absolute;
     top: 100%;
@@ -186,7 +186,7 @@
   © 2025 Arthur C Photography — Tous droits réservés | <a href="legal.html">Mentions légales</a>
 </footer>
 
-<!-- SCRIPT MENU MOBILE -->
+<!-- SCRIPT MENU MOBILE IDENTIQUE À L'INDEX -->
 <script>
 const galerie = document.querySelector('.no-click');
 const submenu = galerie.nextElementSibling;
@@ -194,7 +194,7 @@ const submenu = galerie.nextElementSibling;
 galerie.addEventListener('click', (e) => {
   e.stopPropagation();
   submenu.classList.toggle('show');
-  galerie.classList.toggle('active');
+  galerie.classList.toggle('active'); // Texte bleu mobile
 });
 
 document.addEventListener('click', (e) => {
