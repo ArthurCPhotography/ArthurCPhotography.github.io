@@ -218,43 +218,46 @@ document.addEventListener('click', (e) => {
   }
 });
  
- // -----------------------------
-// PROTECTION CONTRE LE CLIC DROIT / DRAG / MOBILE LONG PRESS
+// -----------------------------
+// PROTECTION DES IMAGES DE LA GALERIE (clic droit / drag / appui long)
 // -----------------------------
 document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   const link = wrapper.querySelector('a');
   const img = wrapper.querySelector('img');
   if (!img || !link) return;
 
-  // Empêche le clic droit et le glisser
+  // Empêcher le clic droit et le glisser sur l'image
   img.addEventListener('contextmenu', e => e.preventDefault());
   img.addEventListener('dragstart', e => e.preventDefault());
 
-  // Crée une couche invisible pour intercepter les interactions
+  // Créer une couche transparente au-dessus de chaque image
   const overlay = document.createElement('div');
-  Object.assign(overlay.style, {
-    position: 'absolute',
-    top: 0, left: 0,
-    width: '100%', height: '100%',
-    background: 'transparent',
-    zIndex: 10,
-    cursor: 'pointer'
-  });
+  overlay.style.position = 'absolute';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'transparent';
+  overlay.style.cursor = 'pointer';
+  overlay.style.zIndex = 10;
 
+  // Clic déclenche Fancybox si besoin
   overlay.addEventListener('click', () => link.click());
   overlay.addEventListener('contextmenu', e => e.preventDefault());
 
-  // Empêche le maintien appuyé sur mobile
+  // Blocage appui long sur mobile
   let pressTimer;
   const start = ev => { pressTimer = setTimeout(() => ev.preventDefault(), 600); };
-  const cancel = () => { clearTimeout(pressTimer); };
+  const cancel = () => clearTimeout(pressTimer);
   overlay.addEventListener('touchstart', start, { passive: false });
   overlay.addEventListener('touchend', cancel);
   overlay.addEventListener('touchmove', cancel);
 
+  // S'assure que le wrapper est en position relative
   if (getComputedStyle(wrapper).position === 'static')
     wrapper.style.position = 'relative';
 
+  // Ajoute la protection
   wrapper.appendChild(overlay);
 });
 </script>
