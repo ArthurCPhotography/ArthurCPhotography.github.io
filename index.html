@@ -217,6 +217,46 @@ document.addEventListener('click', (e) => {
     galerie.classList.remove('active');
   }
 });
+ 
+ // -----------------------------
+// PROTECTION CONTRE LE CLIC DROIT / DRAG / MOBILE LONG PRESS
+// -----------------------------
+document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
+  const link = wrapper.querySelector('a');
+  const img = wrapper.querySelector('img');
+  if (!img || !link) return;
+
+  // Empêche le clic droit et le glisser
+  img.addEventListener('contextmenu', e => e.preventDefault());
+  img.addEventListener('dragstart', e => e.preventDefault());
+
+  // Crée une couche invisible pour intercepter les interactions
+  const overlay = document.createElement('div');
+  Object.assign(overlay.style, {
+    position: 'absolute',
+    top: 0, left: 0,
+    width: '100%', height: '100%',
+    background: 'transparent',
+    zIndex: 10,
+    cursor: 'pointer'
+  });
+
+  overlay.addEventListener('click', () => link.click());
+  overlay.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Empêche le maintien appuyé sur mobile
+  let pressTimer;
+  const start = ev => { pressTimer = setTimeout(() => ev.preventDefault(), 600); };
+  const cancel = () => { clearTimeout(pressTimer); };
+  overlay.addEventListener('touchstart', start, { passive: false });
+  overlay.addEventListener('touchend', cancel);
+  overlay.addEventListener('touchmove', cancel);
+
+  if (getComputedStyle(wrapper).position === 'static')
+    wrapper.style.position = 'relative';
+
+  wrapper.appendChild(overlay);
+});
 </script>
 
 </body>
