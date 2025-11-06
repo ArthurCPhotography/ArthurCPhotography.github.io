@@ -57,44 +57,39 @@ header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
 p { color: #555; font-size: 1.2em; margin-bottom: 40px; }
 
-/* ----- GALERIE (effet identique à l'index) ----- */
+/* ----- GALERIE 4 COLONNES ----- */
 .gallery {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
+  column-count: 4;
+  column-gap: 10px;
   padding: 20px 40px;
 }
 
-/* Wrapper avec ombre et zoom léger */
 .img-wrapper {
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 10px;
   position: relative;
   overflow: hidden;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+/* Survol : wrapper zoom légèrement, ombre plus prononcée */
 .img-wrapper:hover {
   transform: scale(1.03);
   box-shadow: 0 6px 20px rgba(0,0,0,0.2);
 }
 
-/* Image */
+/* Image : pas de transformation, juste ajustement au conteneur */
 .img-wrapper img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  object-fit: cover; /* garde l’image bien cadrée */
   border-radius: 12px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease; /* transition fluide mais pas de zoom interne */
 }
 
-/* Responsive */
-@media (max-width: 1024px) {
-  .gallery { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 600px) {
-  .gallery { grid-template-columns: 1fr; }
-}
 
 /* ----- FOOTER ----- */
 footer {
@@ -105,6 +100,10 @@ footer {
   margin-top: 40px;
   border-top: 1px solid #ddd;
 }
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1024px) { .gallery { column-count: 2; } }
+@media (max-width: 600px) { .gallery { column-count: 1; } }
 </style>
 </head>
 <body>
@@ -176,6 +175,8 @@ footer {
 // -----------------------------
 // PROTECTION GALERIE & FANCYBOX
 // -----------------------------
+
+// Protection des miniatures dans la galerie
 document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   const link = wrapper.querySelector('a');
   const img = wrapper.querySelector('img');
@@ -185,18 +186,30 @@ document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   img.addEventListener('dragstart', e => e.preventDefault());
 
   const overlay = document.createElement('div');
-  Object.assign(overlay.style, {
-    position: 'absolute',
-    top: 0, left: 0,
-    width: '100%', height: '100%',
-    background: 'transparent',
-    zIndex: 10,
-    cursor: 'pointer'
-  });
+  overlay.style.position = 'absolute';
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = '100%';
+  overlay.style.height = '100%';
+  overlay.style.background = 'transparent';
+  overlay.style.zIndex = 10;
+  overlay.style.cursor = 'pointer';
 
+  // clic = ouverture Fancybox
   overlay.addEventListener('click', () => link.click());
   overlay.addEventListener('contextmenu', e => e.preventDefault());
 
+  // zoom au hover
+  overlay.addEventListener('mouseover', () => {
+    img.style.transform = 'scale(1.03)';
+    img.style.boxShadow = '0 6px 20px rgba(0,0,0,0.2)';
+  });
+  overlay.addEventListener('mouseout', () => {
+    img.style.transform = '';
+    img.style.boxShadow = '';
+  });
+
+  // blocage appui long sur mobile
   let pressTimer;
   const start = ev => { pressTimer = setTimeout(() => ev.preventDefault(), 600); };
   const cancel = () => { clearTimeout(pressTimer); };
@@ -208,7 +221,7 @@ document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
   wrapper.appendChild(overlay);
 });
 
-// Fancybox
+// Initialisation Fancybox avec protection sur toutes les slides
 Fancybox.bind("[data-fancybox='gallery-animaux']", {
   Toolbar: { display: ["close"] },
   Thumbs: false,
@@ -222,13 +235,16 @@ Fancybox.bind("[data-fancybox='gallery-animaux']", {
   }
 });
 
+// Fonction de protection des images dans Fancybox
 function protectSlide(fancybox) {
   const applyProtection = () => {
     const slide = fancybox.Carousel.slides[fancybox.Carousel.page];
     if (!slide) return;
+
     const img = slide.$el.querySelector('img');
     if (!img) return;
 
+    // supprimer overlay précédent
     const existing = slide.$el.querySelector('.__fancybox-protect-overlay');
     if (existing) existing.remove();
 
@@ -236,8 +252,7 @@ function protectSlide(fancybox) {
     overlay.className = '__fancybox-protect-overlay';
     Object.assign(overlay.style, {
       position: 'absolute', top: 0, left: 0,
-      width: '100%', height: '100%',
-      background: 'transparent', zIndex: 20
+      width: '100%', height: '100%', background: 'transparent', zIndex: 20
     });
 
     overlay.addEventListener('contextmenu', e => e.preventDefault());
