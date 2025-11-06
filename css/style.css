@@ -119,6 +119,22 @@ footer {
   margin-top: 40px;
 }
 
+/* ----- GALERIE : lien inactif ----- */
+.no-click {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Texte bleu quand actif (mobile ou hover PC) */
+.no-click.active {
+  color: #1e90ff !important;
+}
+
+/* PC : au survol */
+nav li:hover > a.no-click {
+  color: #1e90ff;
+}
+
 /* ----- RESPONSIVE ----- */
 @media (max-width: 1024px) {
   .gallery { grid-template-columns: repeat(2, 1fr); }
