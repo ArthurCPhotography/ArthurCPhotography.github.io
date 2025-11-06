@@ -1,37 +1,30 @@
 /* ----- PAGE MENTIONS LÉGALES ----- */
 
-/* Structure générale */
+/* Garde la charte graphique générale mais aligne à gauche */
 body {
-  text-align: left;          /* aligne le texte à gauche */
-  margin: 120px auto 60px;   /* espace sous le menu fixe */
-  max-width: 900px;          /* largeur lisible */
-  line-height: 1.6;          /* améliore la lisibilité */
-  padding: 0 20px;           /* évite que le texte colle aux bords */
+  text-align: left;
+  margin: 120px auto 60px;  /* espace sous le menu fixe + marge bas */
+  max-width: 900px;         /* largeur confortable pour lecture */
+  padding: 0 20px;
+  line-height: 1.6;
 }
 
-/* Titre principal */
+/* Titre principal en gris, cohérent avec le site */
 h1 {
-  color: #555;               /* gris pour le titre */
-  font-size: 2em;
+  color: #777;
+  font-size: 2.2em;
   margin-bottom: 20px;
   text-align: left;
 }
 
-/* Sous-titres */
-h2, h3 {
-  color: #333;
-  margin-top: 30px;
-  margin-bottom: 10px;
-}
-
-/* Paragraphes */
+/* Paragraphes et autres textes */
 p {
-  color: #444;
+  color: #222;
   font-size: 1em;
   margin-bottom: 15px;
 }
 
-/* Liens */
+/* Liens du texte */
 a {
   color: #1e90ff;
   text-decoration: none;
@@ -39,17 +32,4 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-/* Listes éventuelles */
-ul, ol {
-  margin-left: 20px;
-}
-
-/* Pied de page */
-footer {
-  margin-top: 60px;
-  font-size: 0.9em;
-  color: #777;
-  text-align: center;
 }
