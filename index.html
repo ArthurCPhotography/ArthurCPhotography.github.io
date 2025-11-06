@@ -146,13 +146,25 @@
   .gallery a:nth-child(4) { margin-top: 60px; }
 
   /* ----- FOOTER ----- */
-  footer {
-    background: #f0f0f0;
-    color: #777;
-    padding: 20px;
-    font-size: 0.9em;
-    margin-top: 40px;
-  }
+footer {
+  background: #f0f0f0;
+  color: #777;
+  padding: 20px;
+  font-size: 0.9em;
+  margin-top: 40px;
+}
+
+/* Lien dans le footer */
+footer a {
+  color: #777;           /* même gris que le texte */
+  text-decoration: none; /* pas de soulignement par défaut */
+}
+
+footer a:hover {
+  color: #1e90ff;        /* bleu au survol */
+  text-decoration: underline; /* soulignement au survol */
+}
+
 
   /* ----- RESPONSIVE ----- */
   @media (max-width: 1024px) {
