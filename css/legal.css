@@ -1,5 +1,55 @@
-<style>
-  body {
-    text-align: left;
-  }
-</style>
+/* ----- PAGE MENTIONS LÉGALES ----- */
+
+/* Structure générale */
+body {
+  text-align: left;          /* aligne le texte à gauche */
+  margin: 120px auto 60px;   /* espace sous le menu fixe */
+  max-width: 900px;          /* largeur lisible */
+  line-height: 1.6;          /* améliore la lisibilité */
+  padding: 0 20px;           /* évite que le texte colle aux bords */
+}
+
+/* Titre principal */
+h1 {
+  color: #555;               /* gris pour le titre */
+  font-size: 2em;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Sous-titres */
+h2, h3 {
+  color: #333;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+/* Paragraphes */
+p {
+  color: #444;
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+/* Liens */
+a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Listes éventuelles */
+ul, ol {
+  margin-left: 20px;
+}
+
+/* Pied de page */
+footer {
+  margin-top: 60px;
+  font-size: 0.9em;
+  color: #777;
+  text-align: center;
+}
