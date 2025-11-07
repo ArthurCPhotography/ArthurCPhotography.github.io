@@ -1,33 +1,28 @@
-/* ----- COOKIE BANNER ----- */
-.cookie-banner {
+#cookie-banner {
   position: fixed;
-  bottom: 0;
+  bottom: 0; /* ou top: 0; si tu veux en haut */
   left: 0;
   width: 100%;
-  background: #222;
-  color: #fff;
+  background: #f8f8f8;
+  color: #222;
   text-align: center;
-  padding: 15px 10px;
-  font-size: 0.9em;
-  display: none; /* caché par défaut */
+  padding: 15px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
   z-index: 2000;
 }
-
-.cookie-banner p {
+#cookie-banner p {
   margin: 0 0 10px 0;
 }
-
-.cookie-buttons button {
+#cookie-banner button {
+  margin: 0 5px;
+  padding: 6px 12px;
+  border: none;
   background: #1e90ff;
   color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 15px;
-  margin: 0 5px;
+  border-radius: 4px;
   cursor: pointer;
-  font-weight: bold;
 }
-
-.cookie-buttons button:hover {
-  opacity: 0.9;
+#cookie-banner button#decline-cookies {
+  background: #ccc;
+  color: #222;
 }
