@@ -46,14 +46,6 @@ fetch('nav.html')
   gtag('config', 'G-XXXXXXX'); // ← même ID ici
 })();
 
-<!-- Banniere cookies -->
-<div id="cookie-banner" style="position:fixed;bottom:0;width:100%;background:#222;color:#fff;padding:10px;text-align:center;z-index:9999;">
-  Ce site utilise Google Analytics pour améliorer son contenu. 
-  <button id="accept-cookies">Accepter</button>
-  <button id="refuse-cookies">Refuser</button>
-</div>
-
-<script>
 document.addEventListener("DOMContentLoaded", function() {
   const banner = document.getElementById('cookie-banner');
   const acceptBtn = document.getElementById('accept-cookies');
@@ -89,4 +81,3 @@ document.addEventListener("DOMContentLoaded", function() {
     ga('send', 'pageview');
   }
 });
-
