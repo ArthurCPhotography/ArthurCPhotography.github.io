@@ -1,0 +1,33 @@
+/* ----- COOKIE BANNER ----- */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #222;
+  color: #fff;
+  text-align: center;
+  padding: 15px 10px;
+  font-size: 0.9em;
+  display: none; /* caché par défaut */
+  z-index: 2000;
+}
+
+.cookie-banner p {
+  margin: 0 0 10px 0;
+}
+
+.cookie-buttons button {
+  background: #1e90ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 15px;
+  margin: 0 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.cookie-buttons button:hover {
+  opacity: 0.9;
+}
