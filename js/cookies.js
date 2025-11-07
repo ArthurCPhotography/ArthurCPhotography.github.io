@@ -1,3 +1,16 @@
+// ----- GOOGLE ANALYTICS -----
+(function() {
+  const gtagScript = document.createElement('script');
+  gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"; // ← remplace G-XXXXXXX par ton vrai ID Analytics
+  gtagScript.async = true;
+  document.head.appendChild(gtagScript);
+
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXX'); // ← même ID ici
+})();
+
 // cookies.js
 (function() {
   const banner = document.getElementById('cookie-banner');
