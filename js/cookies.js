@@ -1,5 +1,5 @@
 // ----- COOKIES.JS -----
-// Version test + attente dynamique de la bannière
+// Version test + sans flash
 (function() {
   const GA_ID = 'G-TEST1234AB'; // ID test
   const TEST_MODE = true;       // true = mock GA, false = réel
@@ -12,7 +12,7 @@
     document.cookie = "_ga_mock=1; path=/; max-age=" + (365*24*60*60);
   }
 
-  // Fonction pour charger GA réel (si nécessaire)
+  // Fonction pour charger GA réel
   function loadGA_real() {
     if (window.__ga_loaded) return;
     window.__ga_loaded = true;
@@ -30,33 +30,29 @@
 
   const loadGA = TEST_MODE ? loadGA_mock : loadGA_real;
 
-  // Fonction qui attend que la bannière existe
+  // Attendre que la bannière existe
   function waitForBanner(callback) {
     const interval = setInterval(() => {
       const banner = document.getElementById('cookie-banner');
       const acceptBtn = document.getElementById('accept-cookies');
-      const refuseBtn = document.getElementById('decline-cookies'); // correspond à ton HTML
+      const refuseBtn = document.getElementById('decline-cookies');
       if (banner && acceptBtn && refuseBtn) {
         clearInterval(interval);
         callback(banner, acceptBtn, refuseBtn);
       }
-    }, 200); // vérifie toutes les 200ms
-    // Timeout sécurité 10s
+    }, 200);
     setTimeout(() => clearInterval(interval), 10000);
   }
 
-  // Fonction principale
   function initCookies(banner, acceptBtn, refuseBtn) {
     const consent = localStorage.getItem('cookiesConsent');
-    if (consent === 'accepted') {
-      loadGA();
-      banner.style.display = 'none';
-    } else if (consent === 'refused') {
-      banner.style.display = 'none';
-    } else {
+
+    // Afficher la bannière uniquement si pas encore de consentement
+    if (!consent) {
       banner.style.display = 'flex';
     }
 
+    // Accepter
     acceptBtn.addEventListener('click', () => {
       console.log("➡️ Bouton 'Accepter' cliqué");
       localStorage.setItem('cookiesConsent', 'accepted');
@@ -64,14 +60,22 @@
       banner.style.display = 'none';
     });
 
+    // Refuser
     refuseBtn.addEventListener('click', () => {
       console.log("❌ Consentement refusé");
       localStorage.setItem('cookiesConsent', 'refused');
       banner.style.display = 'none';
     });
+
+    // Si déjà accepté/refusé, cacher immédiatement
+    if (consent === 'accepted') {
+      loadGA();
+      banner.style.display = 'none';
+    } else if (consent === 'refused') {
+      banner.style.display = 'none';
+    }
   }
 
-  // Lancer l’attente une fois DOM prêt
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => waitForBanner(initCookies));
   } else {
