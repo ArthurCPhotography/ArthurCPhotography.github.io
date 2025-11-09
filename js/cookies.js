@@ -1,6 +1,6 @@
 // js/cookies.js
 (function() {
-  const GA_ID = 'G-XXXXXXX'; // <-- Remplace par ton ID GA4
+  const GA_ID = 'G-TEST1234AB'; // <-- Remplace par ton ID GA4
   const BANNER_SELECTOR = '#cookie-banner';
   const ACCEPT_SELECTOR = '#accept-cookies';
   const REFUSE_SELECTOR = '#refuse-cookies';
