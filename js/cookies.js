@@ -1,52 +1,80 @@
 // ----- COOKIES.JS -----
+// Version test + attente dynamique de la bannière
 (function() {
-  // Attendre que le DOM soit chargé
-  document.addEventListener("DOMContentLoaded", function() {
-    const banner = document.getElementById('cookie-banner');
-    const acceptBtn = document.getElementById('accept-cookies');
-    const refuseBtn = document.getElementById('decline-cookies'); // corrigé ici ✅
+  const GA_ID = 'G-TEST1234AB'; // ID test
+  const TEST_MODE = true;       // true = mock GA, false = réel
 
-    if (!banner) {
-      console.warn("⚠️ Bannière cookies introuvable dans le DOM.");
-      return;
-    }
+  // Fonction pour simuler GA
+  function loadGA_mock() {
+    if (window.__ga_loaded) return;
+    window.__ga_loaded = true;
+    console.log("✅ Google Analytics simulé (G-TEST1234AB) activé !");
+    document.cookie = "_ga_mock=1; path=/; max-age=" + (365*24*60*60);
+  }
 
-    // Fonction simulant le chargement de Google Analytics
-    function loadGA() {
-      console.log("✅ Google Analytics simulé (G-TEST1234AB) activé !");
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-TEST1234AB'); // ID fictif pour test
-    }
+  // Fonction pour charger GA réel (si nécessaire)
+  function loadGA_real() {
+    if (window.__ga_loaded) return;
+    window.__ga_loaded = true;
+    const gtagScript = document.createElement('script');
+    gtagScript.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    gtagScript.async = true;
+    document.head.appendChild(gtagScript);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    window.gtag = gtag;
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+    console.log("📊 GA réel chargé !");
+  }
 
-    // Vérifier le consentement existant
+  const loadGA = TEST_MODE ? loadGA_mock : loadGA_real;
+
+  // Fonction qui attend que la bannière existe
+  function waitForBanner(callback) {
+    const interval = setInterval(() => {
+      const banner = document.getElementById('cookie-banner');
+      const acceptBtn = document.getElementById('accept-cookies');
+      const refuseBtn = document.getElementById('decline-cookies'); // correspond à ton HTML
+      if (banner && acceptBtn && refuseBtn) {
+        clearInterval(interval);
+        callback(banner, acceptBtn, refuseBtn);
+      }
+    }, 200); // vérifie toutes les 200ms
+    // Timeout sécurité 10s
+    setTimeout(() => clearInterval(interval), 10000);
+  }
+
+  // Fonction principale
+  function initCookies(banner, acceptBtn, refuseBtn) {
     const consent = localStorage.getItem('cookiesConsent');
     if (consent === 'accepted') {
-      console.log("🍪 Consentement déjà accepté");
       loadGA();
       banner.style.display = 'none';
     } else if (consent === 'refused') {
-      console.log("🚫 Consentement déjà refusé");
       banner.style.display = 'none';
+    } else {
+      banner.style.display = 'flex';
     }
 
-    // Gestion des clics
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', function() {
-        console.log("➡️ Bouton 'Accepter' cliqué");
-        localStorage.setItem('cookiesConsent', 'accepted');
-        loadGA();
-        banner.style.display = 'none';
-      });
-    }
+    acceptBtn.addEventListener('click', () => {
+      console.log("➡️ Bouton 'Accepter' cliqué");
+      localStorage.setItem('cookiesConsent', 'accepted');
+      loadGA();
+      banner.style.display = 'none';
+    });
 
-    if (refuseBtn) {
-      refuseBtn.addEventListener('click', function() {
-        console.log("❌ Consentement refusé");
-        localStorage.setItem('cookiesConsent', 'refused');
-        banner.style.display = 'none';
-      });
-    }
-  });
+    refuseBtn.addEventListener('click', () => {
+      console.log("❌ Consentement refusé");
+      localStorage.setItem('cookiesConsent', 'refused');
+      banner.style.display = 'none';
+    });
+  }
+
+  // Lancer l’attente une fois DOM prêt
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => waitForBanner(initCookies));
+  } else {
+    waitForBanner(initCookies);
+  }
 })();
