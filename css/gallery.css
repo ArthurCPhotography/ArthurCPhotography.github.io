@@ -9,8 +9,6 @@ body {
   text-align: center;
 }
 
-<div id="nav-placeholder"></div>
-
 /* ----- HEADER ----- */
 header { padding: 100px 20px 40px; }
 h1 { font-size: 2.5em; margin-bottom: 10px; }
