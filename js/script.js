@@ -1,5 +1,8 @@
-fetch('nav.html')
-  .then(response => response.text())
+fetch('/nav.html') // chemin absolu depuis la racine
+  .then(response => {
+    if (!response.ok) throw new Error('Nav non trouvée : ' + response.status);
+    return response.text();
+  })
   .then(data => {
     document.getElementById('nav-placeholder').innerHTML = data;
 
@@ -32,4 +35,5 @@ fetch('nav.html')
     galerie.parentElement.addEventListener('mouseleave', () => {
       galerie.classList.remove('active');
     });
-  });
+  })
+  .catch(err => console.error(err));
