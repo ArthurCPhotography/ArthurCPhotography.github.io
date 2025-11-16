@@ -3,6 +3,11 @@
   box-sizing: border-box;
 }
 
+/* ----- FIX POUR LE MENU NAV ----- */
+html {
+  overflow-y: scroll; /* toujours afficher la scrollbar pour toutes les pages */
+}
+
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
@@ -15,7 +20,8 @@ body {
 nav {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;       /* largeur = largeur complète de la fenêtre, scrollbar incluse */
+  box-sizing: border-box;
   background: #f8f8f8;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   display: flex;
@@ -46,9 +52,6 @@ nav a {
 }
 
 nav a:hover {
-  color: #1e90ff;
-}
-.no-click.active {
   color: #1e90ff;
 }
 
@@ -97,6 +100,22 @@ nav li ul li a:hover {
   color: #000;
 }
 
+/* ----- GALERIE : lien inactif ----- */
+.no-click {
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Texte bleu quand actif (mobile ou hover PC) */
+.no-click.active {
+  color: #1e90ff !important;
+}
+
+/* PC : au survol */
+nav li:hover > a.no-click {
+  color: #1e90ff;
+}
+
 /* ----- HEADER ----- */
 header {
   padding: 100px 20px 40px;
@@ -120,22 +139,6 @@ footer {
   padding: 20px;
   font-size: 0.9em;
   margin-top: 40px;
-}
-
-/* ----- GALERIE : lien inactif ----- */
-.no-click {
-  cursor: default;
-  pointer-events: none;
-}
-
-/* Texte bleu quand actif (mobile ou hover PC) */
-.no-click.active {
-  color: #1e90ff !important;
-}
-
-/* PC : au survol */
-nav li:hover > a.no-click {
-  color: #1e90ff;
 }
 
 /* ----- RESPONSIVE ----- */
