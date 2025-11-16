@@ -1,3 +1,7 @@
+/* ----- RESET ----- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 /* ----- GALERIE 4 COLONNES ----- */
 .gallery {
   column-count: 4;
