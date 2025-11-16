@@ -1,49 +1,67 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Maintenance - Arthur C Photography</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: #f8f8f8;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
-    h1 {
-      font-size: 2.2em;
-      margin-bottom: 10px;
-    }
-    p {
-      font-size: 1.2em;
-      color: #555;
-      max-width: 500px;
-    }
-    a {
-      margin-top: 20px;
-      display: inline-block;
-      background: #1e90ff;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-    a:hover {
-      background: #187bcd;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le monde animal - Arthur C Visuals</title>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" />
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/gallery.css">
+<link rel="stylesheet" href="css/cookies.css">
+
 </head>
 <body>
-  <h1>Site en maintenance</h1>
-  <p>Cette section est temporairement indisponible. Revenez bientôt !</p>
-  <a href="../index.html">Retour à l’accueil</a>
+
+<div id="nav-placeholder"></div>
+
+<header>
+  <h1>Le monde animal</h1>
+  <p>Quand la nature se laisse apprivoiser par la lumière</p>
+</header>
+
+<!-- GALERIE -->
+<section class="gallery">
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo1-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
+      <img src="../images/animaux/thumbs/Photo1-animaux.JPG" alt="Cygne" data-height="250">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo2-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Grand-Est - Réserve naturelle - 2025">
+      <img src="../images/animaux/thumbs/Photo2-animaux.JPG" alt="Cygne majestueux" data-height="200">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo3-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Cormoran séchant ses ailes.">
+      <img src="../images/animaux/thumbs/Photo3-animaux.JPG" alt="Cormoran" data-height="250">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo4-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Zèbre dans la savane.">
+      <img src="../images/animaux/thumbs/Photo4-animaux.JPG" alt="Zèbre" data-height="300">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo5-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Hyène curieuse.">
+      <img src="../images/animaux/thumbs/Photo5-animaux.JPG" alt="Hyène" data-height="280">
+    </a>
+  </div>
+  <div class="img-wrapper">
+    <a href="../images/animaux/Photo6-animaux.JPG" data-fancybox="gallery-animaux" data-caption="Babouin au regard intense.">
+      <img src="../images/animaux/thumbs/Photo6-animaux.JPG" alt="Babouin" data-height="240">
+    </a>
+  </div>
+</section>
+
+<footer>
+ © 2025 Arthur C Visuals — Tous droits réservés | <a href="legal.html">Mentions légales & Politique de confidentialité</a>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
+<script src="js/script.js"></script>
+<script src="js/gallery.js"></script>
+<script src="js/cookies.js"></script>
+  
 </body>
 </html>
