@@ -1,18 +1,12 @@
 document.addEventListener("DOMContentLoaded", function() {
-
-  // -----------------------------
-  // PROTECTION GALERIE & FANCYBOX
-  // -----------------------------
   document.querySelectorAll('.gallery .img-wrapper').forEach(wrapper => {
     const link = wrapper.querySelector('a');
     const img = wrapper.querySelector('img');
     if (!img || !link) return;
 
-    // Empêche clic droit et drag
     img.addEventListener('contextmenu', e => e.preventDefault());
     img.addEventListener('dragstart', e => e.preventDefault());
 
-    // Overlay invisible pour clic et zoom hover
     const overlay = document.createElement('div');
     overlay.style.position = 'absolute';
     overlay.style.top = 0;
@@ -46,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
     wrapper.appendChild(overlay);
   });
 
-  // Initialisation Fancybox
   Fancybox.bind("[data-fancybox='gallery-animaux']", {
     Toolbar: { display: ["close"] },
     Thumbs: false,
@@ -97,12 +90,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
 
-  // -----------------------------
-  // HAUTEUR DYNAMIQUE DES MINIATURES
-  // -----------------------------
   document.querySelectorAll('.gallery img').forEach(img => {
     const h = img.dataset.height ? parseInt(img.dataset.height) : 200;
     img.style.height = h + 'px';
   });
-
 });
